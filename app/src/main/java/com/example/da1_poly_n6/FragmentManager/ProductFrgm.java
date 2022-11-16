@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.da1_poly_n6.R;
 
 public class ProductFrgm extends Fragment {
+    //thang
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
