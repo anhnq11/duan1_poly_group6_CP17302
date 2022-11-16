@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.da1_poly_n6.FragmentManager.AccounFrgm;
+import com.example.da1_poly_n6.FragmentManager.AccountFrgm;
 import com.example.da1_poly_n6.FragmentManager.HomeFrgm;
 import com.example.da1_poly_n6.FragmentManager.ProductFrgm;
 import com.example.da1_poly_n6.FragmentManager.StoreFrgm;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
 
             case R.id.pageTaiKhoan:
-                fragment = new AccounFrgm();
+                fragment = new AccountFrgm();
                 loadFragment(fragment);
                 return true;
         }
