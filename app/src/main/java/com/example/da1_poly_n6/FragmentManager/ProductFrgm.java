@@ -21,6 +21,8 @@ import com.example.da1_poly_n6.R;
 import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
+    //thang
+
     private TextView filter;
     private TextView close;
     private RecyclerView recycle_caphe;
