@@ -1,6 +1,8 @@
 package com.example.da1_poly_n6.FragmentManager;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,24 +12,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
+
 import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
     //thang
 
     private TextView filter;
-    private TextView close;
     private RecyclerView recycle_caphe;
     private AdapterSanPham adapterSanPham;
     private ArrayList<SanPham> arrayList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +47,6 @@ public class ProductFrgm extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recycle_caphe = view.findViewById(R.id.recycle_coffe);
         filter = view.findViewById(R.id.id_filter);
-        close = view.findViewById(R.id.tv_close);
 
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +58,18 @@ public class ProductFrgm extends Fragment {
     }
 
     private void dialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.dialog_filter, null);
         Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(alertLayout);
-        dialog.findViewById(R.id.tv_close).setOnClickListener(new View.OnClickListener() {
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_filters);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+            return;
+        dialog.setCancelable(false);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        ImageView img = dialog.findViewById(R.id.id_close);
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
