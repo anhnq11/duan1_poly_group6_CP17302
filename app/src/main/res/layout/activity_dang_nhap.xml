@@ -13,18 +13,9 @@
     <ImageView
         android:layout_width="175dp"
         android:layout_height="254dp"
-        android:src="@drawable/img_logo" />
+        android:src="@drawable/img" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Poly Coffee"
-        android:textColor="#E9A800"
-        android:textSize="42dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/ct_font_bold"
-        />
+
 
     <TextView
         android:layout_width="wrap_content"
