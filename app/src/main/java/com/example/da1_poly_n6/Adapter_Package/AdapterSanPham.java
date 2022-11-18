@@ -1,6 +1,7 @@
 package com.example.da1_poly_n6.Adapter_Package;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.da1_poly_n6.FragmentManager.ProductFrgm;
+import com.example.da1_poly_n6.GioHangActivity;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
@@ -44,6 +49,13 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         SanPham sanPham = arrayList.get(position);
         holder.TenSanPham.setText(sanPham.getTenSanPham());
         holder.GiaTien.setText(String.valueOf(sanPham.getDonGia()));
+        holder.add_sanpham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
     }
 
     @Override

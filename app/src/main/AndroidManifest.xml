@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DA1_Poly_N6">
         <activity
+            android:name=".GioHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentManager.GioHangActivity"
+            android:exported="false" />
+        <activity
             android:name=".DangNhapAct"
             android:exported="false" />
         <activity
@@ -23,8 +29,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
