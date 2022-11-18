@@ -69,13 +69,12 @@ public class DangNhapAct extends AppCompatActivity {
                         intent.putExtra("userName", userName);
 //                        intent.putExtra("fullName", list.get(0).getHoTen());
                         Toast.makeText(DangNhapAct.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
+                        startActivity(new Intent(DangNhapAct.this, MainActivity.class));
                     }
                     else {
                         Toast.makeText(DangNhapAct.this, "Tên đăng nhập hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
                     }
 //                }
-                startActivity(new Intent(DangNhapAct.this, MainActivity.class));
             }
         });
 

@@ -6,7 +6,6 @@
         <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/ct_font_medium</item>
-        <item name="android:layout_marginLeft">20dp</item>
     </style>
 
     <style name="edt_TextBox1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
