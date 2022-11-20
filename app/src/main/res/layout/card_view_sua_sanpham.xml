@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="15dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/cardview_sua_sanPham"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/card"
+        android:padding="5dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:id="@+id/img_sanpham"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bac_xiu" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:text="Bạc sỉu"
+            android:id="@+id/ten_sanpham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ct_font_medium"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/sua_sanpham"
+            android:layout_toRightOf="@+id/cardview_img"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/gia_sanpham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:text="29.000đ"
+            android:fontFamily="@font/ct_font_medium"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/sua_sanpham"
+            android:layout_toRightOf="@+id/cardview_img"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:id="@+id/sua_sanpham"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_bacham" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
