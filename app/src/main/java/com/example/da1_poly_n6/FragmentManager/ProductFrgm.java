@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
     //thang
-
     private TextView filter;
     private RecyclerView recycle_caphe;
     private AdapterSanPham adapterSanPham;
