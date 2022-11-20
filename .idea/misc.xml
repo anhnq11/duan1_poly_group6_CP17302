@@ -3,25 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/bo_tron_edt.xml" value="0.219" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/bottom_nav_color.xml" value="0.238" />
-        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_main.xml" value="0.3578125" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ct_button.xml" value="0.238" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ct_dialog.xml" value="0.1635" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ct_edittext.xml" value="0.238" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ic_filter.xml" value="0.219" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ic_remove.xml" value="0.1635" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/ic_search.xml" value="0.219" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/drawable/item_layout.xml" value="0.1635" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_dang_nhap.xml" value="0.2" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_gio_hang.xml" value="0.264" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_mhchao.xml" value="0.2" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/card_view_sanpham.xml" value="0.259375" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/cardview_sp_home.xml" value="0.5504201680672269" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_filters.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_notifi.xml" value="0.6357466063348416" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_accoun_frgm.xml" value="0.371875" />
-        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_home_frgm.xml" value="0.371875" />
-        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_product_frgm.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_chi_tiet_s_p_frgm.xml" value="0.264" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_home_frgm.xml" value="0.264" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_product_frgm.xml" value="0.33" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_store_frgm.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/testlayout.xml" value="0.259375" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/menu/menu.xml" value="0.371875" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable-v24/bo_goc_duoi.xml" value="0.3555" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/background_dialog.xml" value="0.3555" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/bo_tron_edt.xml" value="0.2955" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/ct_edittext.xml" value="0.356" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/ic_visibility_off.xml" value="0.356" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/item_layout.xml" value="0.3555" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/activity_dang_nhap.xml" value="0.22" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/activity_mhchao.xml" value="0.18802083333333333" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/card_view_sanpham.xml" value="0.33" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_filter.xml" value="0.25" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_filters.xml" value="0.25" />
-        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_product_frgm.xml" value="0.25" />
       </map>
     </option>
   </component>
