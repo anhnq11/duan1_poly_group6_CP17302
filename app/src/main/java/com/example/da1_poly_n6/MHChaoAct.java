@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.da1_poly_n6.Package_Activity.ImageProducts;
+
 public class MHChaoAct extends AppCompatActivity {
 
     @Override

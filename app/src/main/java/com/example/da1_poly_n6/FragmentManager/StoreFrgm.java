@@ -15,82 +15,77 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.da1_poly_n6.Adapter_Package.AdapterGioHang;
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StoreFrgm#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StoreFrgm extends Fragment {
 
-    Dialog myDialog;
-
-
-
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StoreFrgm() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StoreFrgm.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StoreFrgm newInstance(String param1, String param2) {
-        StoreFrgm fragment = new StoreFrgm();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-
-        }
-
-
-    }
+    private RecyclerView recycle_gioHang;
+    private Button btnThanhToan;
+    private AdapterGioHang adapterGioHang;
+    private ArrayList<SanPham> arrayList = new ArrayList<>();
+    private Button btn_accept;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_store_frgm, container, false);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recycle_gioHang = view.findViewById(R.id.recycle_giohang);
+        btnThanhToan = view.findViewById(R.id.btn_thanhToan);
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog();
+            }
+        });
+        createData();
 
     }
 
+    private void dialog() {
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_thanh_toan);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btn_accept = dialog.findViewById(R.id.btn_accept);
+        btn_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
+    private void createData() {
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
 
+        adapterGioHang = new AdapterGioHang(getActivity());
+        adapterGioHang.setData(arrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recycle_gioHang.setLayoutManager(linearLayoutManager);
+        recycle_gioHang.setAdapter(adapterGioHang);
+        adapterGioHang.notifyDataSetChanged();
+    }
 
 }

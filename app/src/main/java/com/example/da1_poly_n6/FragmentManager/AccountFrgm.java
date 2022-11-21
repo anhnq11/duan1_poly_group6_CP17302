@@ -1,5 +1,6 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.da1_poly_n6.Package_Activity.ImageProducts;
 import com.example.da1_poly_n6.R;
 
 public class AccountFrgm extends Fragment {

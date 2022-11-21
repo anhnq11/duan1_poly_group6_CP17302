@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,11 +29,11 @@ import com.example.da1_poly_n6.R;
 import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
-    //thang
     private TextView filter;
     private RecyclerView recycle_caphe;
     private AdapterSanPham adapterSanPham;
     private ArrayList<SanPham> arrayList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
