@@ -15,10 +15,11 @@
         >
 
         <ImageView
+            android:id="@+id/btnBackUserInfo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_to_back"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             />
 
         <TextView
@@ -27,7 +28,7 @@
             android:textColor="@color/black"
             android:textAlignment="center"
             android:text="Thông Tin Cá Nhân"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:fontFamily="@font/ct_font_bold"
             android:layout_marginRight="30dp"
 
