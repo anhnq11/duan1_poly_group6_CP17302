@@ -6,12 +6,12 @@ public class SanPham {
     String MaLoai;
     String TenSanPham;
     String MaSize;
-    float DonGia;
+    double DonGia;
     int SoLuongBan;
     int AnhSanPham;
     String MoTa;
 
-    public SanPham(int maSanPham, String maLoai, String tenSanPham, String maSize, float donGia, int soLuongBan, int anhSanPham, String moTa) {
+    public SanPham(int maSanPham, String maLoai, String tenSanPham, String maSize, double donGia, int soLuongBan, int anhSanPham, String moTa) {
         MaSanPham = maSanPham;
         MaLoai = maLoai;
         TenSanPham = tenSanPham;
@@ -49,11 +49,11 @@ public class SanPham {
         MaSize = maSize;
     }
 
-    public float getDonGia() {
+    public double getDonGia() {
         return DonGia;
     }
 
-    public void setDonGia(float donGia) {
+    public void setDonGia(double donGia) {
         DonGia = donGia;
     }
 

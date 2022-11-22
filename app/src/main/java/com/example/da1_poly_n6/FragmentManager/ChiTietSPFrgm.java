@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
@@ -34,7 +36,13 @@ public class ChiTietSPFrgm extends Fragment {
         txtChiTietMoTaSP.setText(sanPham.getMoTa());
 
 
-//        Button btnChiTietAddToCart = view.findViewById(R.id.btnChiTietAddToCart);
+        EditText btnChiTietAddToCart = view.findViewById(R.id.btnChiTietAddToCart);
+        btnChiTietAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

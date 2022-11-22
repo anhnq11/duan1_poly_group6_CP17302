@@ -161,31 +161,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/userFrgmSuaSP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="3dp"
-            >
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_edit_24"
-                />
-
-            <TextView
-                style="@style/edt_Label"
-                android:textColor="@color/black"
-                android:text="Sửa sản phẩm"
-                android:layout_marginLeft="10dp"
-                android:paddingBottom="3dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/userFrgmThemLSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

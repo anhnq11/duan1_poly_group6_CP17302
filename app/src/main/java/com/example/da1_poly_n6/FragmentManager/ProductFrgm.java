@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,11 +28,11 @@ import com.example.da1_poly_n6.R;
 import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
+    //thang
     private TextView filter;
     private RecyclerView recycle_caphe;
     private AdapterSanPham adapterSanPham;
-    private ArrayList<SanPham> arrayList = new ArrayList<>();
-
+    private ArrayList<SanPham> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,15 +65,15 @@ public class ProductFrgm extends Fragment {
     }
 
     private void createData() {
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        list.add(new SanPham(1, "L1", "Bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa."));
+        list.add(new SanPham(1, "L1", "Cà phê đen", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
+        list.add(new SanPham(1, "L1", "Cà phê", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
+        list.add(new SanPham(1, "L1", "Cà phê sữa", "L", 29000, 1, R.drawable.bac_xiu, "Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị."));
+        list.add(new SanPham(1, "L1", "Latte Đá", "L", 29000, 1, R.drawable.bac_xiu, "Một sự kết hợp tinh tế giữa vị đắng cà phê Espresso nguyên chất hòa quyện cùng vị sữa nóng ngọt ngào, bên trên là một lớp kem mỏng nhẹ tạo nên một tách cà phê hoàn hảo về hương vị lẫn nhãn quan."));
+        list.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa."));
 
         adapterSanPham = new AdapterSanPham(getActivity());
-        adapterSanPham.setData(arrayList);
+        adapterSanPham.setData(list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycle_caphe.setLayoutManager(linearLayoutManager);

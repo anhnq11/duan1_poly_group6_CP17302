@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterGioHang;
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
@@ -29,11 +31,8 @@ import java.util.ArrayList;
 public class StoreFrgm extends Fragment {
 
     private RecyclerView recycle_gioHang;
-    private Button btnThanhToan;
     private AdapterGioHang adapterGioHang;
-    private ArrayList<SanPham> arrayList = new ArrayList<>();
-    private Button btn_accept;
-
+    private ArrayList<SanPham> list = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,14 +44,14 @@ public class StoreFrgm extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recycle_gioHang = view.findViewById(R.id.recycle_giohang);
-        btnThanhToan = view.findViewById(R.id.btn_thanhToan);
-        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+        EditText btnGioHangTT = view.findViewById(R.id.btnGioHangTT);
+        btnGioHangTT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog();
             }
         });
-        createData();
+//        createData();
 
     }
 
@@ -61,10 +60,19 @@ public class StoreFrgm extends Fragment {
         dialog.setContentView(R.layout.dialog_thanh_toan);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        btn_accept = dialog.findViewById(R.id.btn_accept);
-        btn_accept.setOnClickListener(new View.OnClickListener() {
+        EditText btnHoaDonHuy = dialog.findViewById(R.id.btnHoaDonHuy);
+        EditText btnHoaDonXN = dialog.findViewById(R.id.btnHoaDonXN);
+        btnHoaDonHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        btnHoaDonXN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -72,15 +80,12 @@ public class StoreFrgm extends Fragment {
     }
 
     private void createData() {
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
-        arrayList.add(new SanPham(1, "L1", "Cà phê bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Ngon tuyệt"));
+        list.add(new SanPham(1, "L1", "Bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa."));
+        list.add(new SanPham(1, "L1", "Cà phê đen", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
+        list.add(new SanPham(1, "L1", "Cà phê", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
 
         adapterGioHang = new AdapterGioHang(getActivity());
-        adapterGioHang.setData(arrayList);
+        adapterGioHang.setData(list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycle_gioHang.setLayoutManager(linearLayoutManager);

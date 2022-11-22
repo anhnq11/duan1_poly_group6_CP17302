@@ -60,12 +60,12 @@
             android:textSize="15dp" />
 
         <ImageView
-            android:layout_marginRight="20dp"
             android:id="@+id/sua_sanpham"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
             android:src="@drawable/ic_bacham" />
     </RelativeLayout>
 

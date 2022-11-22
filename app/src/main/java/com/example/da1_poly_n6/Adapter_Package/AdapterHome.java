@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +46,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(sanPham);
+                loadFragment(new ChiTietSPFrgm(sanPham));
             }
         });
     }
@@ -66,9 +68,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder>{
         }
     }
 
-    private void loadFragment(SanPham sanPham) {
+    private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, new ChiTietSPFrgm(sanPham));
+        transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

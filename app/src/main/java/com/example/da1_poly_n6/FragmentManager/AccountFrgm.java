@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.da1_poly_n6.DangNhapAct;
+import com.example.da1_poly_n6.MainActivity;
 import com.example.da1_poly_n6.Package_Activity.ImageProducts;
 import com.example.da1_poly_n6.R;
 
@@ -27,7 +30,6 @@ public class AccountFrgm extends Fragment {
         LinearLayout userFrgmTKDoanhThu = view.findViewById(R.id.userFrgmTKDoanhThu);
         LinearLayout userFrgmTKNhanVien = view.findViewById(R.id.userFrgmTKNhanVien);
         LinearLayout userFrgmThemSP = view.findViewById(R.id.userFrgmThemSP);
-        LinearLayout userFrgmSuaSP = view.findViewById(R.id.userFrgmSuaSP);
         LinearLayout userFrgmThemLSP = view.findViewById(R.id.userFrgmThemLSP);
         LinearLayout userFrgmThemNhanVien = view.findViewById(R.id.userFrgmThemNhanVien);
         LinearLayout userFrgmDangXuat = view.findViewById(R.id.userFrgmDangXuat);
@@ -69,13 +71,6 @@ public class AccountFrgm extends Fragment {
             }
         });
 
-        userFrgmSuaSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         userFrgmThemLSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +88,10 @@ public class AccountFrgm extends Fragment {
         userFrgmDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), DangNhapAct.class);
+                Toast.makeText(getContext(), "Đăng xuất!", Toast.LENGTH_SHORT).show();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 

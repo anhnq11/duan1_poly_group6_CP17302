@@ -54,19 +54,37 @@
             android:text="29.000đ"
             android:fontFamily="@font/ct_font_medium"
             android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/add_sanpham"
+            android:layout_toLeftOf="@+id/boxicon"
             android:layout_toRightOf="@+id/cardview_img"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
-        <ImageView
-            android:layout_marginRight="20dp"
-            android:id="@+id/add_sanpham"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+        <LinearLayout
+            android:id="@+id/boxicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/plus" />
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/add_sanpham"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_add_circle"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/info_sanpham"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_bacham" />
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

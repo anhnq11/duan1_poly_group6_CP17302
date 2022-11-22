@@ -72,6 +72,7 @@
             android:id="@+id/edtMatKhau"
             style="@style/edt_TextBox1"
             android:hint="Nhập Mật Khẩu"
+            android:inputType="textPassword"
             android:layout_marginTop="5dp"
             android:drawableEnd="@drawable/ic_visibility_off"
             />
