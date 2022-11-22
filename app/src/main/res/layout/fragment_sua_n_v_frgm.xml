@@ -74,7 +74,7 @@
                 <EditText
                     android:id="@+id/edtAddNVTen"
                     style="@style/edt_TextBox2"
-                    android:hint="Họ và tên"
+                    android:hint="Name"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
@@ -97,7 +97,7 @@
                 <EditText
                     android:id="@+id/edtAddNVNamsinh"
                     style="@style/edt_TextBox2"
-                    android:hint="Năm sinh"
+                    android:hint="Date"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
@@ -119,7 +119,7 @@
                 <EditText
                     android:id="@+id/edtAddNVSdt"
                     style="@style/edt_TextBox2"
-                    android:hint="Số điện thoại"
+                    android:hint="PhoneNumber"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
@@ -134,7 +134,7 @@
                 <EditText
                     android:id="@+id/edtAddNVTendangnhap"
                     style="@style/edt_TextBox2"
-                    android:hint="Tên đăng nhập"
+                    android:hint="UserName"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
@@ -148,7 +148,7 @@
                 <EditText
                     android:id="@+id/edtAddNVMatkhau"
                     style="@style/edt_TextBox2"
-                    android:hint="Mật khẩu"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"

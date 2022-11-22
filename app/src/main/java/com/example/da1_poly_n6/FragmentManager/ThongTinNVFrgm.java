@@ -32,7 +32,7 @@ public class ThongTinNVFrgm extends Fragment {
         btnBackTTNV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new ThongTinNVFrgm());
+                loadFragment(new TKNhanVienFrgm());
             }
         });
 
