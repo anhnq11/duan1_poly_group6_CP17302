@@ -2,10 +2,12 @@ package com.example.da1_poly_n6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -76,9 +78,10 @@ public class DangNhapAct extends AppCompatActivity {
                     }
 //                }
             }
+
         });
 
-
+        closeKeyboard();
     }
 
     public List<Object> readAccount(){
@@ -89,5 +92,13 @@ public class DangNhapAct extends AppCompatActivity {
         list.add(sharedPreferences.getString("passWord", ""));
         list.add(sharedPreferences.getBoolean("saveAcc", false));
         return list;
+    }
+    // ẩn bàn phím
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
