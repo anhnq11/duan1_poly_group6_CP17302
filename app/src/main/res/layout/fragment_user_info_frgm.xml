@@ -7,30 +7,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@color/gray2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        >
+        android:paddingBottom="5dp">
 
         <ImageView
             android:id="@+id/btnBackUserInfo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_to_back"
             android:layout_marginLeft="15dp"
-            />
+            android:src="@drawable/ic_to_back" />
 
         <TextView
             style="@style/edt_Label"
             android:layout_width="match_parent"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:text="Thông Tin Cá Nhân"
-            android:textSize="25dp"
-            android:fontFamily="@font/ct_font_bold"
             android:layout_marginRight="30dp"
+            android:fontFamily="@font/ct_font_bold"
+            android:text="Thông Tin Cá Nhân"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25dp"
 
             />
 
@@ -39,118 +37,113 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        >
+        android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_account_circle_24"
-                />
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
             <TextView
                 android:id="@+id/userInfoUserName"
                 style="@style/edt_Label"
-                android:textColor="@color/black"
-                android:text="Admin"
                 android:layout_marginLeft="10dp"
                 android:paddingBottom="3dp"
-                />
+                android:text="Admin"
+                android:textColor="@color/black" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_account_circle_24"
-                />
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
             <TextView
                 android:id="@+id/userInfoFullName"
                 style="@style/edt_Label"
-                android:textColor="@color/black"
-                android:text="AdminName"
                 android:layout_marginLeft="10dp"
                 android:paddingBottom="3dp"
-                />
+                android:text="AdminName"
+                android:textColor="@color/black" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
 
         <LinearLayout
             android:id="@+id/userInfoSDT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_phone"
-                />
+                android:src="@drawable/ic_phone" />
 
             <TextView
                 style="@style/edt_Label"
-                android:textColor="@color/black"
-                android:text="0123456789"
                 android:layout_marginLeft="10dp"
                 android:paddingBottom="3dp"
-                />
+                android:text="0123456789"
+                android:textColor="@color/black" />
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
         <LinearLayout
             android:id="@+id/userInfoBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginBottom="3dp"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_calendar"
-                />
+                android:src="@drawable/ic_calendar" />
 
             <TextView
                 style="@style/edt_Label"
-                android:textColor="@color/black"
-                android:text="2000"
                 android:layout_marginLeft="10dp"
                 android:paddingBottom="3dp"
-                />
+                android:text="2000"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
 
-
-
     </LinearLayout>
-
 
 
 </LinearLayout>
