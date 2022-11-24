@@ -40,19 +40,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //Bảng thể loại
-        String createTableTheLoai = "CREATE TABLE TheLoai(\n" +
-                "MaLoai TEXT,\n" +
-                "TenLoai TEXT\n" +
-                ");";
+        String createTableTheLoai = "CREATE TABLE THELOAI(maLoai INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenLoai TEXT);";
         db.execSQL(createTableTheLoai);
 
-        //Bảng size sản phầm
-        String createTableSize = "CREATE TABLE Size(\n" +
-                "MaSize TEXT,\n" +
-                "TenSize TEXT\n" +
-                ");";
-        db.execSQL(createTableSize);
 
     }
 
