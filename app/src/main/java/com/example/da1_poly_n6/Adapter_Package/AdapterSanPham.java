@@ -1,6 +1,8 @@
 package com.example.da1_poly_n6.Adapter_Package;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,10 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         SanPham sanPham = arrayList.get(position);
         holder.TenSanPham.setText(sanPham.getTenSanPham());
         holder.GiaTien.setText(String.valueOf(sanPham.getPrice()));
+        byte[] productsImage = sanPham.getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
+        holder.img_SanPham.setImageBitmap(bitmap);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +86,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
-        private ImageView add_sanpham, info_sanpham;
+        private ImageView add_sanpham, info_sanpham,img_SanPham;
         private TextView TenSanPham;
         private TextView GiaTien;
 
@@ -89,6 +95,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
             cardView = itemView.findViewById(R.id.cardview_sanPham);
             info_sanpham = itemView.findViewById(R.id.info_sanpham);
             add_sanpham = itemView.findViewById(R.id.add_sanpham);
+            img_SanPham = itemView.findViewById(R.id.img_sanpham);
             TenSanPham = itemView.findViewById(R.id.ten_sanpham);
             GiaTien = itemView.findViewById(R.id.gia_sanpham);
         }

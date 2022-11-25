@@ -1,6 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
 import android.app.Dialog;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
+import com.example.da1_poly_n6.DAOModel.DAOSanPham;
+import com.example.da1_poly_n6.Database.DbHelper;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
@@ -33,6 +36,7 @@ public class ProductFrgm extends Fragment {
     private RecyclerView recycle_caphe;
     private AdapterSanPham adapterSanPham;
     private ArrayList<SanPham> list = new ArrayList<>();
+    DbHelper dbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +50,8 @@ public class ProductFrgm extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recycle_caphe = view.findViewById(R.id.recycle_coffe);
         filter = view.findViewById(R.id.id_filter);
-
+        adapterSanPham = new AdapterSanPham(getActivity());
+        dbHelper = new DbHelper(getActivity(), "DuAn1", null, 1);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +70,18 @@ public class ProductFrgm extends Fragment {
     }
 
     private void createData() {
+        Cursor cursor = dbHelper.getData("SELECT * FROM SanPham");
+        list.clear();
+        while (cursor.moveToNext()) {
+            byte[] image = cursor.getBlob(0);
+            String name = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String size = cursor.getString(3);
+            int maLoai = cursor.getInt(4);
+            String moTa = cursor.getString(5);
 
-        adapterSanPham = new AdapterSanPham(getActivity());
+            list.add(new SanPham(image, name, price, size, maLoai, moTa));
+        }
         adapterSanPham.setData(list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

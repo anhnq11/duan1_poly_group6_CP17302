@@ -1,14 +1,14 @@
 package com.example.da1_poly_n6.Model;
 
 public class SanPham {
-    int image;
+    byte [] image;
     String TenSanPham;
     Double Price;
     String Size;
     int MaLoai;
     String Mota;
 
-    public SanPham(int image, String tenSanPham, Double price, String size, int maLoai, String mota) {
+    public SanPham(byte [] image, String tenSanPham, Double price, String size, int maLoai, String mota) {
         this.image = image;
         TenSanPham = tenSanPham;
         Price = price;
@@ -17,14 +17,16 @@ public class SanPham {
         Mota = mota;
     }
 
+
     public SanPham() {
+
     }
 
-    public int getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

@@ -28,8 +28,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.da1_poly_n6.DAOModel.DAOSanPham;
 import com.example.da1_poly_n6.Database.DbHelper;
-import com.example.da1_poly_n6.Package_Activity.ImageProducts;
 import com.example.da1_poly_n6.R;
 
 import java.io.ByteArrayOutputStream;
@@ -39,15 +39,16 @@ import java.io.InputStream;
 public class ThemSPFrgm extends Fragment {
     private ImageView AddImg;
     private EditText edName, edPrice, edMoTa, edSize, btnAddSP, edMaLoai;
-
+    private DAOSanPham dao;
     final int REQUEST_CODE_GALLERY = 999;
-    public static DbHelper dbHelper;
+//    public static DbHelper dbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_them_s_p_frgm, container, false);
         //ánh xạ
+        dao = new DAOSanPham(getActivity());
         ImageView btnBackThemSP = view.findViewById(R.id.btnBackThemSP);
         AddImg = view.findViewById(R.id.add_image);
         edName = view.findViewById(R.id.edNameSP);
@@ -56,17 +57,8 @@ public class ThemSPFrgm extends Fragment {
         edSize = view.findViewById(R.id.edSize);
         edMaLoai = view.findViewById(R.id.edMaLoai);
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
-        //sql
-        dbHelper = new DbHelper(getActivity(), "DuAn1", null, 1);
-        dbHelper.queryData("CREATE TABLE SanPham(\n" +
-                "MaSanPham INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "image BLOG,\n" +
-                "TenSanPham TEXT,\n" +
-                "Price double,\n" +
-                "Size TEXT, \n" +
-                "MaLoai INTEGER REFERENCES THELOAI(maLoai),\n" +
-                "MoTa TEXT\n" +
-                ");");
+//        sql
+
         btnBackThemSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +78,7 @@ public class ThemSPFrgm extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    dbHelper.insertData(imageToByte(AddImg), edName.getText().toString(), Double.parseDouble(edPrice.getText().toString()
+                    dao.insertData(imageToByte(AddImg), edName.getText().toString(), Double.parseDouble(edPrice.getText().toString()
                     ), edSize.getText().toString(), Integer.parseInt(edMaLoai.getText().toString()), edMoTa.getText().toString());
                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     AddImg.setImageResource(R.drawable.bac_xiu);
@@ -102,7 +94,7 @@ public class ThemSPFrgm extends Fragment {
     private byte[] imageToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream);
         byte[] byteArray = outputStream.toByteArray();
         return byteArray;
     }
