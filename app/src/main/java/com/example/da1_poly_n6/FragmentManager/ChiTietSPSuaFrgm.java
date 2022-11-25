@@ -40,9 +40,9 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         EditText btnCTSPSuaXoa = view.findViewById(R.id.btnCTSPSuaXoa);
 
         txtCTSPSuaTenSp.setText(sanPham.getTenSanPham());
-        txtCTSPSuaGiaSP.setText(sanPham.getDonGia() + "");
+        txtCTSPSuaGiaSP.setText(sanPham.getPrice() + "");
         txtCTSPSuaLoaiSP.setText("Loại sản phẩm: " + sanPham.getMaLoai());
-        txtCTSPSuaMoTaSP.setText(sanPham.getMoTa());
+        txtCTSPSuaMoTaSP.setText(sanPham.getMota());
 
         btnCTSPSuaSua.setOnClickListener(new View.OnClickListener() {
             @Override

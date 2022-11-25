@@ -1,84 +1,31 @@
 package com.example.da1_poly_n6.Model;
 
 public class SanPham {
-
-    int MaSanPham;
-    String MaLoai;
+    int image;
     String TenSanPham;
-    String MaSize;
-    double DonGia;
-    int SoLuongBan;
-    int AnhSanPham;
-    String MoTa;
+    Double Price;
+    String Size;
+    int MaLoai;
+    String Mota;
 
-    public SanPham(int maSanPham, String maLoai, String tenSanPham, String maSize, double donGia, int soLuongBan, int anhSanPham, String moTa) {
-        MaSanPham = maSanPham;
-        MaLoai = maLoai;
+    public SanPham(int image, String tenSanPham, Double price, String size, int maLoai, String mota) {
+        this.image = image;
         TenSanPham = tenSanPham;
-        MaSize = maSize;
-        DonGia = donGia;
-        SoLuongBan = soLuongBan;
-        AnhSanPham = anhSanPham;
-        MoTa = moTa;
+        Price = price;
+        Size = size;
+        MaLoai = maLoai;
+        Mota = mota;
     }
 
     public SanPham() {
     }
 
-    public int getMaSanPham() {
-        return MaSanPham;
+    public int getImage() {
+        return image;
     }
 
-    public void setMaSanPham(int maSanPham) {
-        MaSanPham = maSanPham;
-    }
-
-    public String getMaLoai() {
-        return MaLoai;
-    }
-
-    public void setMaLoai(String maLoai) {
-        MaLoai = maLoai;
-    }
-
-    public String getMaSize() {
-        return MaSize;
-    }
-
-    public void setMaSize(String maSize) {
-        MaSize = maSize;
-    }
-
-    public double getDonGia() {
-        return DonGia;
-    }
-
-    public void setDonGia(double donGia) {
-        DonGia = donGia;
-    }
-
-    public int getSoLuongBan() {
-        return SoLuongBan;
-    }
-
-    public void setSoLuongBan(int soLuongBan) {
-        SoLuongBan = soLuongBan;
-    }
-
-    public int getAnhSanPham() {
-        return AnhSanPham;
-    }
-
-    public void setAnhSanPham(int anhSanPham) {
-        AnhSanPham = anhSanPham;
-    }
-
-    public String getMoTa() {
-        return MoTa;
-    }
-
-    public void setMoTa(String moTa) {
-        MoTa = moTa;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getTenSanPham() {
@@ -87,5 +34,37 @@ public class SanPham {
 
     public void setTenSanPham(String tenSanPham) {
         TenSanPham = tenSanPham;
+    }
+
+    public Double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(Double price) {
+        Price = price;
+    }
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String size) {
+        Size = size;
+    }
+
+    public int getMaLoai() {
+        return MaLoai;
+    }
+
+    public void setMaLoai(int maLoai) {
+        MaLoai = maLoai;
+    }
+
+    public String getMota() {
+        return Mota;
+    }
+
+    public void setMota(String mota) {
+        Mota = mota;
     }
 }

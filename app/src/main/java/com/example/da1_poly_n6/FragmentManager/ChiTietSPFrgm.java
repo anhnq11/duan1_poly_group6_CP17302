@@ -32,8 +32,8 @@ public class ChiTietSPFrgm extends Fragment {
         TextView txtChiTietMoTaSP = view.findViewById(R.id.txtChiTietMoTaSP);
 
         txtChiTietTenSpTextView.setText(sanPham.getTenSanPham());
-        txtChiTietGiaSP.setText(sanPham.getDonGia() + "");
-        txtChiTietMoTaSP.setText(sanPham.getMoTa());
+        txtChiTietGiaSP.setText(sanPham.getPrice() + "");
+        txtChiTietMoTaSP.setText(sanPham.getMota());
 
 
         EditText btnChiTietAddToCart = view.findViewById(R.id.btnChiTietAddToCart);

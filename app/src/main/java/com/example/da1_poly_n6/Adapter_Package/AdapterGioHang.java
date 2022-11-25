@@ -44,7 +44,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.UserView
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         SanPham sanPham = arrayList.get(position);
         holder.name.setText(sanPham.getTenSanPham());
-        holder.price.setText(String.valueOf(sanPham.getDonGia()));
+        holder.price.setText(String.valueOf(sanPham.getPrice()));
     }
 
     @Override

@@ -49,7 +49,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         SanPham sanPham = arrayList.get(position);
         holder.TenSanPham.setText(sanPham.getTenSanPham());
-        holder.GiaTien.setText(String.valueOf(sanPham.getDonGia()));
+        holder.GiaTien.setText(String.valueOf(sanPham.getPrice()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

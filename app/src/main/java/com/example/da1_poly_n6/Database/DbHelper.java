@@ -17,23 +17,28 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void queryData(String sql){
+    public void queryData(String sql) {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL(sql);
     }
 
-    public void insertData(byte[] image){
+    public void insertData(byte[] image, String TenSanPham, double Price, String Size, int MaLoai, String MoTa) {
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "INSERT INTO IMAGE_PRODUCTS VALUES (NULL, ?)";
+        String sql = "INSERT INTO SanPham VALUES (NULL, ?,?,?,?,?,?)";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindBlob(1, image);
+        statement.bindString(2, TenSanPham);
+        statement.bindDouble(3, Price);
+        statement.bindString(4, Size);
+        statement.bindLong(5, MaLoai);
+        statement.bindString(6, MoTa);
 
         statement.executeInsert();
     }
 
-    public Cursor getData(String sql){
+    public Cursor getData(String sql) {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);
     }
@@ -44,11 +49,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "tenLoai TEXT);";
         db.execSQL(createTableTheLoai);
 
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
+
 }

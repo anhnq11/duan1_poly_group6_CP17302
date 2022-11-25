@@ -80,9 +80,6 @@ public class StoreFrgm extends Fragment {
     }
 
     private void createData() {
-        list.add(new SanPham(1, "L1", "Bạc sỉu", "L", 29000, 1, R.drawable.bac_xiu, "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa."));
-        list.add(new SanPham(1, "L1", "Cà phê đen", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
-        list.add(new SanPham(1, "L1", "Cà phê", "L", 29000, 1, R.drawable.bac_xiu, "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng."));
 
         adapterGioHang = new AdapterGioHang(getActivity());
         adapterGioHang.setData(list);

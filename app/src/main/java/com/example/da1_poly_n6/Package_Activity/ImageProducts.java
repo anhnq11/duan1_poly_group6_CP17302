@@ -53,7 +53,7 @@ public class ImageProducts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    dbHelper.insertData(imageToByte(imgProducts));
+//                    dbHelper.insertData(imageToByte(imgProducts));
                     Toast.makeText(ImageProducts.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     imgProducts.setImageResource(R.mipmap.ic_launcher);
                 } catch (Exception e) {
