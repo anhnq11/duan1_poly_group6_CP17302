@@ -70,18 +70,9 @@ public class ProductFrgm extends Fragment {
     }
 
     private void createData() {
-        Cursor cursor = dbHelper.getData("SELECT * FROM SanPham");
+        DAOSanPham daoSanPham = new DAOSanPham(getActivity());
         list.clear();
-        while (cursor.moveToNext()) {
-            byte[] image = cursor.getBlob(0);
-            String name = cursor.getString(1);
-            double price = cursor.getDouble(2);
-            String size = cursor.getString(3);
-            int maLoai = cursor.getInt(4);
-            String moTa = cursor.getString(5);
-
-            list.add(new SanPham(image, name, price, size, maLoai, moTa));
-        }
+        list = (ArrayList<SanPham>) daoSanPham.getAllProduct();
         adapterSanPham.setData(list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

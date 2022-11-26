@@ -38,7 +38,7 @@ import java.io.InputStream;
 
 public class ThemSPFrgm extends Fragment {
     private ImageView AddImg;
-    private EditText edName, edPrice, edMoTa, edSize, btnAddSP, edMaLoai;
+    private EditText edName, edPrice, edMoTa, btnAddSP, edMaLoai;
     private DAOSanPham dao;
     final int REQUEST_CODE_GALLERY = 999;
 //    public static DbHelper dbHelper;
@@ -54,7 +54,6 @@ public class ThemSPFrgm extends Fragment {
         edName = view.findViewById(R.id.edNameSP);
         edPrice = view.findViewById(R.id.edPrice);
         edMoTa = view.findViewById(R.id.edMoTa);
-        edSize = view.findViewById(R.id.edSize);
         edMaLoai = view.findViewById(R.id.edMaLoai);
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
 //        sql
@@ -79,9 +78,9 @@ public class ThemSPFrgm extends Fragment {
             public void onClick(View v) {
                 try {
                     dao.insertData(imageToByte(AddImg), edName.getText().toString(), Double.parseDouble(edPrice.getText().toString()
-                    ), edSize.getText().toString(), Integer.parseInt(edMaLoai.getText().toString()), edMoTa.getText().toString());
+                    ), Integer.parseInt(edMaLoai.getText().toString()), edMoTa.getText().toString());
                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    AddImg.setImageResource(R.drawable.bac_xiu);
+//                    AddImg.setImageResource(R.drawable.bac_xiu);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
