@@ -30,12 +30,12 @@ public class DbHelper extends SQLiteOpenHelper {
         String createTableTheLoai = "CREATE TABLE THELOAI(maLoai INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "tenLoai TEXT);";
         db.execSQL(createTableTheLoai);
+
         String createTableSanPham = ("CREATE TABLE SanPham(\n" +
                 "MaSanPham INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "image BLOG,\n" +
                 "TenSanPham TEXT,\n" +
                 "Price double,\n" +
-                "Size TEXT, \n" +
                 "MaLoai INTEGER REFERENCES THELOAI(maLoai),\n" +
                 "MoTa TEXT\n" +
                 ");");

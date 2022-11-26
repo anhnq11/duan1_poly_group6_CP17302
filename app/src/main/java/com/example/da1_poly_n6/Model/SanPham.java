@@ -4,15 +4,13 @@ public class SanPham {
     byte [] image;
     String TenSanPham;
     Double Price;
-    String Size;
     int MaLoai;
     String Mota;
 
-    public SanPham(byte [] image, String tenSanPham, Double price, String size, int maLoai, String mota) {
+    public SanPham(byte [] image, String tenSanPham, Double price, int maLoai, String mota) {
         this.image = image;
         TenSanPham = tenSanPham;
         Price = price;
-        Size = size;
         MaLoai = maLoai;
         Mota = mota;
     }
@@ -44,14 +42,6 @@ public class SanPham {
 
     public void setPrice(Double price) {
         Price = price;
-    }
-
-    public String getSize() {
-        return Size;
-    }
-
-    public void setSize(String size) {
-        Size = size;
     }
 
     public int getMaLoai() {
