@@ -64,6 +64,20 @@ public class ProductFrgm extends Fragment {
                 RadioButton rdoSPGia = dialog.findViewById(R.id.rdoSPGia);
                 RadioButton rdoSPTL = dialog.findViewById(R.id.rdoSPTL);
 
+                switch (rdoCheck){
+                    case 0:{
+                        rdoSPAll.setChecked(true);
+                    }
+                    break;
+                    case 1:{
+                        rdoSPGia.setChecked(true);
+                    }
+                    break;
+                    case 2:{
+                        rdoSPTL.setChecked(true);
+                    }
+                }
+
                 rdoSPAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

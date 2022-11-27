@@ -174,7 +174,7 @@ public class ThemSPFrgm extends Fragment {
 
 //    Reset Edittext
     private void resetEdt(){
-/*        AddImg.setImageResource(0);*/
+        AddImg.setImageResource(R.drawable.img_add_img);
         edName.setText("");
         edName.setHintTextColor(Color.BLACK);
         edPrice.setText("");
