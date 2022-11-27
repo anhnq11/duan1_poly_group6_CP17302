@@ -7,13 +7,13 @@ public class User {
     String password;
     int maChucVu;
     String tenChucVu;
-    int SDT;
+    String SDT;
     int NamSinh;
 
     public User() {
     }
 
-    public User(int ID_User, String fullName, String username, String password, int maChucVu, String tenChucVu, int SDT, int namSinh) {
+    public User(int ID_User, String fullName, String username, String password, int maChucVu, String tenChucVu, String SDT, int namSinh) {
         this.ID_User = ID_User;
         FullName = fullName;
         this.username = username;
@@ -72,11 +72,11 @@ public class User {
         this.tenChucVu = tenChucVu;
     }
 
-    public int getSDT() {
+    public String getSDT() {
         return SDT;
     }
 
-    public void setSDT(int SDT) {
+    public void setSDT(String SDT) {
         this.SDT = SDT;
     }
 

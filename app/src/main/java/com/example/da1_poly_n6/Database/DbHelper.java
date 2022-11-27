@@ -33,7 +33,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createTableSanPham);
 // Bảng chức vụ
         String createTableChucVu = "CREATE Table ChucVu(\n" +
-                "MaChucVu INTEGER PRIMARY KEy,\n" +
+                "MaChucVu INTEGER PRIMARY KEY,\n" +
                 "TenChucVu TEXT\n" +
                 ");";
         db.execSQL(createTableChucVu);
@@ -45,7 +45,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "Username TEXT,\n" +
                 "ChucVu INTEGR REFERENCES ChucVu(machucvu),\n" +
                 "Password TEXT,\n" +
-                "SDT INTEGER,\n" +
+                "SDT TEXT,\n" +
                 "NamSinh INTEGER\n" +
                 ");";
         db.execSQL(tableUser);
@@ -54,7 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "MaHoaDon INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "MaUser INTEGER REFERENCES User(MaUser),\n" +
                 "TenKhachHang TEXT,\n" +
-                "SDT INTEGER,\n" +
+                "SDT TEXT,\n" +
                 "NgayLapHD DATE,\n" +
                 "MaGioHang INTEGER\n" +
                 ");";
@@ -73,11 +73,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "MaHoaDon INTEGER REFERENCES HoaDon(MaHoaDon),\n" +
                 "TenUser TEXT,\n" +
-                " TenKH TEXT,\n" +
-                " SDT INTEGER,\n" +
-                " MaSanPham INTEGER,\n" +
-                "  SoLuong INTEGER,\n" +
-                "  DonGia DOUBLE\n" +
+                "TenKH TEXT,\n" +
+                "SDT TEXT,\n" +
+                "MaSanPham INTEGER,\n" +
+                "SoLuong INTEGER,\n" +
+                "DonGia DOUBLE\n" +
                 ");";
         db.execSQL(tableLuuHoaDon);
     }

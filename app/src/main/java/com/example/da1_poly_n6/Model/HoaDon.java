@@ -5,11 +5,11 @@ import java.util.Date;
 public class HoaDon {
     int maUser;
     String tenKhachHang;
-    int SDT;
+    String SDT;
     Date NgayLapHD;
     int maGiohang;
 
-    public HoaDon(int maUser, String tenKhachHang, int SDT, Date ngayLapHD, int maGiohang) {
+    public HoaDon(int maUser, String tenKhachHang, String SDT, Date ngayLapHD, int maGiohang) {
         this.maUser = maUser;
         this.tenKhachHang = tenKhachHang;
         this.SDT = SDT;
@@ -36,11 +36,11 @@ public class HoaDon {
         this.tenKhachHang = tenKhachHang;
     }
 
-    public int getSDT() {
+    public String getSDT() {
         return SDT;
     }
 
-    public void setSDT(int SDT) {
+    public void setSDT(String SDT) {
         this.SDT = SDT;
     }
 
