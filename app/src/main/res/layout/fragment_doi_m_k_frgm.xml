@@ -60,6 +60,7 @@
                 />
 
             <EditText
+                android:id="@+id/edOldPass"
                 style="@style/edt_TextBox2"
                 android:hint="Nhập Mật Khẩu Cũ"
                 android:inputType="textPassword"
@@ -84,6 +85,7 @@
                 />
 
             <EditText
+                android:id="@+id/edNewPass"
                 style="@style/edt_TextBox2"
                 android:hint="Nhập Mật Khẩu Mới"
                 android:inputType="textPassword"
@@ -108,6 +110,7 @@
                 />
 
             <EditText
+                android:id="@+id/edConfirmPass"
                 style="@style/edt_TextBox2"
                 android:hint="Nhập Xác Nhận Mật Khẩu"
                 android:inputType="textPassword"
@@ -126,6 +129,7 @@
             >
 
             <EditText
+                android:id="@+id/btnCancel"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bo_tron_edt"
@@ -146,6 +150,7 @@
                 />
 
             <EditText
+                android:id="@+id/btnChange"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bo_tron_edt"

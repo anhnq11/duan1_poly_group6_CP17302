@@ -34,15 +34,20 @@ public class DAOUser {
     }
 
     // update User
-    public int update(User user) {
+    public int updatePass(User user) {
         ContentValues values = new ContentValues();
-        values.put("FullName", user.getFullName());
-        values.put("ChucVu", user.getTenChucVu());
+//        values.put("FullName", user.getFullName());
+//        values.put("ChucVu", user.getTenChucVu());
         values.put("Password", user.getPassword());
-        values.put("SDT", user.getSDT());
-        values.put("NamSinh", user.getNamSinh());
+//        values.put("SDT", user.getSDT());
+//        values.put("NamSinh", user.getNamSinh());
 
         return database.update("User", values, "MaUser=?", new String[]{String.valueOf(user.getID_User())});
+    }
+    public User getID(String id) {
+        String sql = "SELECT * FROM User WHERE MaUser=?";
+        List<User> list = getData(sql, id);
+        return list.get(0);
     }
 
     public List<User> getAllUser() {
