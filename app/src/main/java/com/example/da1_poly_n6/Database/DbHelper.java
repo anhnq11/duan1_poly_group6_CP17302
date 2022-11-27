@@ -41,6 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
 // Bảng User
         String tableUser = "CREATE Table User (\n" +
                 "MaUser INTEGER PRIMARY Key AUTOINCREMENT,\n" +
+                "FullName TEXT,\n" +
                 "Username TEXT,\n" +
                 "ChucVu INTEGR REFERENCES ChucVu(machucvu),\n" +
                 "Password TEXT,\n" +
