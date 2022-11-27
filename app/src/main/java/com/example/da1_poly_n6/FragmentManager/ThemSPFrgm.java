@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,7 +40,7 @@ import java.io.InputStream;
 
 public class ThemSPFrgm extends Fragment {
     private ImageView AddImg;
-    private EditText edName, edPrice, edMoTa, btnAddSP, edMaLoai;
+    private EditText edName, edPrice, edMoTa, btnAddSP,btnHuySP, edMaLoai;
     private DAOSanPham dao;
     final int REQUEST_CODE_GALLERY = 999;
 //    public static DbHelper dbHelper;
@@ -56,6 +58,8 @@ public class ThemSPFrgm extends Fragment {
         edMoTa = view.findViewById(R.id.edMoTa);
         edMaLoai = view.findViewById(R.id.edMaLoai);
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
+        btnHuySP = view.findViewById(R.id.btnHuySp);
+
 //        sql
 
         btnBackThemSP.setOnClickListener(new View.OnClickListener() {
@@ -77,14 +81,22 @@ public class ThemSPFrgm extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+                    checkValidate();
                     dao.insertData(imageToByte(AddImg), edName.getText().toString(), Double.parseDouble(edPrice.getText().toString()
                     ), Integer.parseInt(edMaLoai.getText().toString()), edMoTa.getText().toString());
                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-//                    AddImg.setImageResource(R.drawable.bac_xiu);
+                    //reset form-cuong
+                    resetEdt();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
+            }
+        });
+        btnHuySP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetEdt();
             }
         });
         return view;
@@ -131,6 +143,28 @@ public class ThemSPFrgm extends Fragment {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+    private void resetEdt(){
+/*        AddImg.setImageResource(0);*/
+        edName.setText("");
+        edPrice.setText("");
+        edMaLoai.setText("");
+        edMoTa.setText("");
+    }
+    private boolean checkValidate(){
+        if (edName.length()==0&&edPrice.length()==0&&edMaLoai.length()==0&&edMoTa.length()==0){
+           edName.setHintTextColor(Color.RED);
+            edPrice.setHintTextColor(Color.RED);
+            edMaLoai.setHintTextColor(Color.RED);
+            edMoTa.setHintTextColor(Color.RED);
+            edName.setError("");
+            edPrice.setError("");
+            edMaLoai.setError("");
+            edMoTa.setError("");
+            return false;
+        }
+
+        return true;
     }
 
 }

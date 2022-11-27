@@ -80,4 +80,5 @@ public class ProductFrgm extends Fragment {
         recycle_caphe.setAdapter(adapterSanPham);
         adapterSanPham.notifyDataSetChanged();
     }
+
 }
