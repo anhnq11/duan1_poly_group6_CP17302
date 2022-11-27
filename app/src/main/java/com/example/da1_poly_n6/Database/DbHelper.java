@@ -1,10 +1,8 @@
 package com.example.da1_poly_n6.Database;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
@@ -37,7 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "TenChucVu TEXT\n" +
                 ");";
         db.execSQL(createTableChucVu);
-        db.execSQL(InsertChucVu.insert_chucvu);
+        db.execSQL(InsertInto.insert_chucvu);
 // Bảng User
         String tableUser = "CREATE Table User (\n" +
                 "MaUser INTEGER PRIMARY Key AUTOINCREMENT,\n" +
@@ -49,6 +47,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "NamSinh INTEGER\n" +
                 ");";
         db.execSQL(tableUser);
+        db.execSQL(InsertInto.insert_user);
 // Bảng hóa đơn
         String tableHoaDon = "CREATE Table HoaDon (\n" +
                 "MaHoaDon INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
