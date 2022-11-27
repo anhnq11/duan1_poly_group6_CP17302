@@ -4,12 +4,12 @@ public class LuuHoaDon {
     int maHoaDon;
     String NameUser;
     String NameKH;
-    int SDT;
+    String SDT;
     int maSanPham;
     int soLuong;
     double donGia;
 
-    public LuuHoaDon(int maHoaDon, String nameUser, String nameKH, int SDT, int maSanPham, int soLuong, double donGia) {
+    public LuuHoaDon(int maHoaDon, String nameUser, String nameKH, String SDT, int maSanPham, int soLuong, double donGia) {
         this.maHoaDon = maHoaDon;
         NameUser = nameUser;
         NameKH = nameKH;
@@ -46,11 +46,11 @@ public class LuuHoaDon {
         NameKH = nameKH;
     }
 
-    public int getSDT() {
+    public String getSDT() {
         return SDT;
     }
 
-    public void setSDT(int SDT) {
+    public void setSDT(String SDT) {
         this.SDT = SDT;
     }
 

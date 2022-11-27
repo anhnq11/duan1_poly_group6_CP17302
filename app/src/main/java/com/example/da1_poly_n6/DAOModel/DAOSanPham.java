@@ -1,5 +1,6 @@
 package com.example.da1_poly_n6.DAOModel;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteStatement;
 import com.example.da1_poly_n6.Database.DbHelper;
 import com.example.da1_poly_n6.FragmentManager.ThemSPFrgm;
 import com.example.da1_poly_n6.Model.SanPham;
+import com.example.da1_poly_n6.Model.TheLoai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,20 @@ public class DAOSanPham {
             list.add(new SanPham(image, name, price, maLoai, moTa));
         }
         return list;
+    }
+
+//    DAO LOẠI SẢN PHẨM - ANHNQ
+    public boolean addLSP(TheLoai theLoai) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("tenLoai", theLoai.getTenLoai());
+        long check = sqLiteDatabase.insert("THELOAI", null, contentValues);
+        if (check == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
 }
