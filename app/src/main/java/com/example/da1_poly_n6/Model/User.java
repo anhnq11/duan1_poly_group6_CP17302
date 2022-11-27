@@ -1,0 +1,84 @@
+package com.example.da1_poly_n6.Model;
+
+public class User {
+    int ID_User;
+
+    public int getID_User() {
+        return ID_User;
+    }
+
+    public void setID_User(int ID_User) {
+        this.ID_User = ID_User;
+    }
+
+    public User(int ID_User) {
+        this.ID_User = ID_User;
+    }
+
+    String username;
+    String password;
+    int maChucVu;
+    String tenChucVu;
+    int SDT;
+    int NamSinh;
+
+    public User(String username, String password, int maChucVu, String tenChucVu, int SDT, int namSinh) {
+        this.username = username;
+        this.password = password;
+        this.maChucVu = maChucVu;
+        this.tenChucVu = tenChucVu;
+        this.SDT = SDT;
+        NamSinh = namSinh;
+    }
+
+    public User() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getMaChucVu() {
+        return maChucVu;
+    }
+
+    public void setMaChucVu(int maChucVu) {
+        this.maChucVu = maChucVu;
+    }
+
+    public String getTenChucVu() {
+        return tenChucVu;
+    }
+
+    public void setTenChucVu(String tenChucVu) {
+        this.tenChucVu = tenChucVu;
+    }
+
+    public int getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(int SDT) {
+        this.SDT = SDT;
+    }
+
+    public int getNamSinh() {
+        return NamSinh;
+    }
+
+    public void setNamSinh(int namSinh) {
+        NamSinh = namSinh;
+    }
+}
