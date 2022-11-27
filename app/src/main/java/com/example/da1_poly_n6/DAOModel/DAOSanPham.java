@@ -38,12 +38,21 @@ public class DAOSanPham {
         statement.executeInsert();
     }
 
-    public List<SanPham> getAllProduct() {
-        String sql = "SELECT * FROM SanPham";
+    public ArrayList<SanPham> getAllProduct(int rdoCheck) {
+        String sql = null;
+        if(rdoCheck == 0){
+            sql = "SELECT * FROM SanPham";
+        }
+        if (rdoCheck == 1){
+            sql = "SELECT * FROM SanPham ORDER BY Price ASC";
+        }
+        if (rdoCheck == 2){
+            sql = "SELECT * FROM SanPham ORDER BY MaLoai ASC";
+        }
         return getData(sql);
     }
 
-    public List<SanPham> getData(String sql, String... selectionAGrs) {
+    public ArrayList<SanPham> getData(String sql, String... selectionAGrs) {
         ArrayList<SanPham> list = new ArrayList<>();
         Cursor cursor = database.rawQuery(sql, selectionAGrs);
         while (cursor.moveToNext()) {
@@ -58,6 +67,8 @@ public class DAOSanPham {
     }
 
 //    DAO LOẠI SẢN PHẨM - ANHNQ
+
+//    Thêm Loại Sản phẩm
     public boolean addLSP(TheLoai theLoai) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -71,4 +82,19 @@ public class DAOSanPham {
         }
     }
 
+//    Lấy danh sách Loại Sản phẩm
+    public ArrayList<TheLoai> getDSLSP(){
+        ArrayList<TheLoai> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM THELOAI", null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                int maLoai = cursor.getInt(0);
+                String tenLoai = cursor.getString(1);
+                list.add(new TheLoai(maLoai, tenLoai));
+            }   while (cursor.moveToNext());
+        }
+        return list;
+    }
 }

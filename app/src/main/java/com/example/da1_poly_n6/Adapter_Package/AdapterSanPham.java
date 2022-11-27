@@ -27,16 +27,11 @@ import java.util.ArrayList;
 public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserViewHolder> {
 
     private Context context;
-    private ArrayList<SanPham> arrayList;
-    private CardView cardView;
+    private ArrayList<SanPham> list;
 
-    public AdapterSanPham(Context context) {
+    public AdapterSanPham(Context context, ArrayList<SanPham> list) {
         this.context = context;
-    }
-
-    public void setData(ArrayList<SanPham> arrayList) {
-        this.arrayList = arrayList;
-        notifyDataSetChanged();
+        this.list = list;
     }
 
     @NonNull
@@ -49,7 +44,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        SanPham sanPham = arrayList.get(position);
+        SanPham sanPham = list.get(position);
         holder.TenSanPham.setText(sanPham.getTenSanPham());
         holder.GiaTien.setText(String.valueOf(sanPham.getPrice()));
         byte[] productsImage = sanPham.getImage();
@@ -78,8 +73,8 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
 
     @Override
     public int getItemCount() {
-        if (arrayList != null) {
-            return arrayList.size();
+        if (list != null) {
+            return list.size();
         }
         return 0;
     }

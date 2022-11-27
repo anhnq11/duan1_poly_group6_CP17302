@@ -29,6 +29,7 @@
             android:orientation="vertical">
 
             <RadioButton
+                android:id="@+id/rdoSPAll"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:paddingStart="20dp"
@@ -38,6 +39,7 @@
                 android:textSize="18dp" />
 
             <RadioButton
+                android:id="@+id/rdoSPGia"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:paddingStart="20dp"
@@ -47,6 +49,7 @@
                 android:textSize="18dp" />
 
             <RadioButton
+                android:id="@+id/rdoSPTL"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:paddingStart="20dp"

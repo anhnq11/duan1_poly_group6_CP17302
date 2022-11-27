@@ -99,6 +99,7 @@
                     android:id="@+id/edPrice"
                     style="@style/edt_TextBox2"
                     android:hint="Nhập giá bán"
+                    android:inputType="number"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
@@ -118,12 +119,14 @@
                     android:layout_marginLeft="10dp"
                     />
 
-                <EditText
-                    android:id="@+id/edMaLoai"
+                <Spinner
+                    android:id="@+id/spnLoaiSP"
                     style="@style/edt_TextBox2"
-                    android:hint="Nhập loại sản phẩm"
+                    android:theme="@style/mySpinnerItemStyle"
                     android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:paddingLeft="0dp"
                     />
 
             </LinearLayout>

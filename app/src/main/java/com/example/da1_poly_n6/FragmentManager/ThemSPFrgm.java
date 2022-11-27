@@ -27,40 +27,45 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.da1_poly_n6.DAOModel.DAOSanPham;
 import com.example.da1_poly_n6.Database.DbHelper;
+import com.example.da1_poly_n6.Model.TheLoai;
 import com.example.da1_poly_n6.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ThemSPFrgm extends Fragment {
+
     private ImageView AddImg;
-    private EditText edName, edPrice, edMoTa, btnAddSP,btnHuySP, edMaLoai;
-    private DAOSanPham dao;
+    private EditText edName, edPrice, edMoTa, btnAddSP,btnHuySP;
+    Spinner spnLoaiSP;
+    private DAOSanPham daoSanPham;
     final int REQUEST_CODE_GALLERY = 999;
-//    public static DbHelper dbHelper;
+
+    String strTenSP, strGiaban, strMota;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_them_s_p_frgm, container, false);
         //ánh xạ
-        dao = new DAOSanPham(getActivity());
+        daoSanPham = new DAOSanPham(getActivity());
         ImageView btnBackThemSP = view.findViewById(R.id.btnBackThemSP);
         AddImg = view.findViewById(R.id.add_image);
         edName = view.findViewById(R.id.edNameSP);
         edPrice = view.findViewById(R.id.edPrice);
         edMoTa = view.findViewById(R.id.edMoTa);
-        edMaLoai = view.findViewById(R.id.edMaLoai);
+        spnLoaiSP = view.findViewById(R.id.spnLoaiSP);
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
         btnHuySP = view.findViewById(R.id.btnHuySp);
-
-//        sql
 
         btnBackThemSP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,22 +82,44 @@ public class ThemSPFrgm extends Fragment {
                 LayAnh();
             }
         });
+
+//        Set Data cho spnLoaiSP - AnhNQ
+        ArrayList<TheLoai> listLsp = daoSanPham.getDSLSP();
+        ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
+        for (TheLoai lsp : listLsp){
+            HashMap<String, Object> tl = new HashMap<>();
+            tl.put("maLoai", lsp.getMaLoai());
+            tl.put("tenLoai", lsp.getTenLoai());
+            listHM.add(tl);
+        }
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getContext(),
+                listHM,
+                android.R.layout.simple_list_item_1,
+                new String[]{"tenLoai"},
+                new int[]{android.R.id.text1});
+        spnLoaiSP.setAdapter(simpleAdapter);
+
+//        Set sự kiện Click Button Thêm
         btnAddSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    checkValidate();
-                    dao.insertData(imageToByte(AddImg), edName.getText().toString(), Double.parseDouble(edPrice.getText().toString()
-                    ), Integer.parseInt(edMaLoai.getText().toString()), edMoTa.getText().toString());
-                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    //reset form-cuong
-                    resetEdt();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
+                strTenSP = edName.getText().toString();
+                strGiaban = edPrice.getText().toString();
+                strMota = edMoTa.getText().toString();
+
+                HashMap<String, Object> hsLoaiSach = (HashMap<String, Object>) spnLoaiSP.getSelectedItem();
+                int maLSP = (int) hsLoaiSach.get("maLoai");
+
+                if (checkEdt()){
+                    daoSanPham.insertData(imageToByte(AddImg), strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
+                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    resetEdt();
+                }
             }
         });
+
+//        Set sự kiện Click Button Hủy
         btnHuySP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,28 +171,41 @@ public class ThemSPFrgm extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+//    Reset Edittext
     private void resetEdt(){
 /*        AddImg.setImageResource(0);*/
         edName.setText("");
+        edName.setHintTextColor(Color.BLACK);
         edPrice.setText("");
-        edMaLoai.setText("");
+        edPrice.setHintTextColor(Color.BLACK);
         edMoTa.setText("");
+        edMoTa.setHintTextColor(Color.BLACK);
     }
-    private boolean checkValidate(){
-        if (edName.length()==0||edPrice.length()==0||edMaLoai.length()==0||edMoTa.length()==0){
-           edName.setHintTextColor(Color.RED);
-            edPrice.setHintTextColor(Color.RED);
-            edMaLoai.setHintTextColor(Color.RED);
-            edMoTa.setHintTextColor(Color.RED);
-            edName.setError("");
-            edPrice.setError("");
-            edMaLoai.setError("");
-            edMoTa.setError("");
-            return false;
+
+//    Check Form
+    private boolean checkEdt(){
+
+        boolean checkAdd = true;
+        if (strTenSP.isEmpty()){
+            edName.setError("Vui lòng nhập!");
+            edName.setHintTextColor(Color.RED);
+            checkAdd = false;
         }
 
-        return true;
-    }
+        if (strGiaban.isEmpty()){
+            edPrice.setError("Vui lòng nhập!");
+            edPrice.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
 
+        if (strMota.isEmpty()){
+            edMoTa.setError("Vui lòng nhập!");
+            edPrice.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+
+        return checkAdd;
+    }
 
 }

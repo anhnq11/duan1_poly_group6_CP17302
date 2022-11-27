@@ -19,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
@@ -31,54 +33,85 @@ import com.example.da1_poly_n6.R;
 import java.util.ArrayList;
 
 public class ProductFrgm extends Fragment {
-    //thang
-    private TextView filter;
-    private RecyclerView recycle_caphe;
+
+    private RecyclerView recyclerProduct;
     private AdapterSanPham adapterSanPham;
     private ArrayList<SanPham> list = new ArrayList<>();
-    DbHelper dbHelper;
+    DAOSanPham daoSanPham;
+    int rdoCheck = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_frgm, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_product_frgm, container, false);
+        recyclerProduct = view.findViewById(R.id.recyclerProduct);
+        ImageView filterProduct = view.findViewById(R.id.filterProduct);
+        daoSanPham = new DAOSanPham(getContext());
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recycle_caphe = view.findViewById(R.id.recycle_coffe);
-        filter = view.findViewById(R.id.id_filter);
-        adapterSanPham = new AdapterSanPham(getActivity());
-        dbHelper = new DbHelper(getActivity(), "DuAn1", null, 1);
-        filter.setOnClickListener(new View.OnClickListener() {
+        rdoCheck = 0;
+        createData(0);
+
+//        Set sự kiện OnClick Filter
+        filterProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog();
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_filters);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                RadioButton rdoSPAll = dialog.findViewById(R.id.rdoSPAll);
+                RadioButton rdoSPGia = dialog.findViewById(R.id.rdoSPGia);
+                RadioButton rdoSPTL = dialog.findViewById(R.id.rdoSPTL);
+
+                rdoSPAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            rdoCheck = 0;
+                            createData(0);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                rdoSPGia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            rdoCheck = 1;
+                            createData(1);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                rdoSPTL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            rdoCheck = 2;
+                            createData(2);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                dialog.show();
             }
         });
-        createData();
+
+        return view;
     }
 
-    private void dialog() {
-        Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_filters);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-    }
-
-    private void createData() {
+    private void createData(int rdoCheck) {
         DAOSanPham daoSanPham = new DAOSanPham(getActivity());
-        list.clear();
-        list = (ArrayList<SanPham>) daoSanPham.getAllProduct();
-        adapterSanPham.setData(list);
+        ArrayList<SanPham> list = (ArrayList<SanPham>) daoSanPham.getAllProduct(rdoCheck);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recycle_caphe.setLayoutManager(linearLayoutManager);
-        recycle_caphe.setAdapter(adapterSanPham);
-        adapterSanPham.notifyDataSetChanged();
+        recyclerProduct.setLayoutManager(linearLayoutManager);
+        AdapterSanPham adapterSanPham = new AdapterSanPham(getContext(), list);
+        recyclerProduct.setAdapter(adapterSanPham);
     }
 
 }

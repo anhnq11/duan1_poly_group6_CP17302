@@ -1,5 +1,6 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,7 @@ public class ThemLSPFragm extends Fragment {
             @Override
             public void onClick(View v) {
                 edtAddSPLoai.setText(null);
+                edtAddSPLoai.setHintTextColor(Color.BLACK);
             }
         });
 //        Sự kiện nút thêm
@@ -55,7 +57,8 @@ public class ThemLSPFragm extends Fragment {
             public void onClick(View v) {
                 String strLoai = edtAddSPLoai.getText().toString();
                 if (strLoai.isEmpty()){
-                    Toast.makeText(getContext(), "Vui lòng nhập Loại sản phẩm", Toast.LENGTH_SHORT).show();
+                edtAddSPLoai.setError("Vui lòng nhập!");
+                edtAddSPLoai.setHintTextColor(Color.RED);
                 }
                 else {
                     TheLoai theLoai = new TheLoai(strLoai);
@@ -63,6 +66,7 @@ public class ThemLSPFragm extends Fragment {
                     if (checkAdd){
                         Toast.makeText(getContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
                         edtAddSPLoai.setText(null);
+                        edtAddSPLoai.setHintTextColor(Color.BLACK);
                     }
                     else {
                         Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();

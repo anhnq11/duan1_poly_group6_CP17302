@@ -35,4 +35,13 @@
         <item name="android:paddingBottom">10dp</item>
         <item name="android:background">@drawable/ct_edittext_2</item>
     </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/ct_font_regular</item>
+        <item name="android:background">@color/gray2</item>
+    </style>
 </resources>
