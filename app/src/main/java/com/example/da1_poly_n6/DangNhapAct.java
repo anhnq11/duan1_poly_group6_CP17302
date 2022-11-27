@@ -35,6 +35,17 @@ public class DangNhapAct extends AppCompatActivity {
         checkBox = findViewById(R.id.chkNhoMK);
         btnLogin = findViewById(R.id.btnDangNhap);
         dao = new DAOUser(this);
+
+        //
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        String user = pref.getString("USERNAME", "");
+        String pass = pref.getString("PASSWORD", "");
+        Boolean rem = pref.getBoolean("REMEMBER", false);
+
+
+        edtUser.setText(user);
+        edtPassword.setText(pass);
+        checkBox.setChecked(rem);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

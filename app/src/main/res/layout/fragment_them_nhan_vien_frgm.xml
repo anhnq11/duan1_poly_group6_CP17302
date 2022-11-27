@@ -72,12 +72,11 @@
                     />
 
                 <EditText
-                    android:id="@+id/edtAddNVTen"
+                    android:id="@+id/edTenNhanVien"
                     style="@style/edt_TextBox2"
-                    android:hint="Họ và tên"
                     android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    />
+                    android:hint="Họ và tên"
+                    android:textColorHint="@color/black" />
 
             </LinearLayout>
 
@@ -95,12 +94,11 @@
                     />
 
                 <EditText
-                    android:id="@+id/edtAddNVNamsinh"
+                    android:id="@+id/edUsername"
                     style="@style/edt_TextBox2"
-                    android:hint="Tên đăng nhập"
                     android:layout_marginTop="5dp"
-                    android:textColorHint="@color/black"
-                    />
+                    android:hint="Tên đăng nhập"
+                    android:textColorHint="@color/black" />
 
             </LinearLayout>
 
@@ -117,7 +115,7 @@
                     android:textColor="@color/red" />
 
                 <EditText
-                    android:id="@+id/edtAddNVSdt"
+                    android:id="@+id/edPassword"
                     style="@style/edt_TextBox2"
                     android:hint="Mật khẩu"
                     android:layout_marginTop="5dp"
@@ -132,7 +130,7 @@
                     android:textColor="@color/red" />
 
                 <EditText
-                    android:id="@+id/edtAddNVTendangnhap"
+                    android:id="@+id/edSDT"
                     style="@style/edt_TextBox2"
                     android:hint="Số điện thoại"
                     android:layout_marginTop="5dp"
@@ -146,7 +144,7 @@
                     android:textColor="@color/red" />
 
                 <EditText
-                    android:id="@+id/edtAddNVMatkhau"
+                    android:id="@+id/edNamSinh"
                     style="@style/edt_TextBox2"
                     android:hint="Năm sinh"
                     android:layout_marginTop="5dp"
@@ -210,6 +208,7 @@
                 />
 
             <EditText
+                android:id="@+id/AddNhanVien"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bo_tron_edt"
