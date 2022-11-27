@@ -54,36 +54,19 @@ public class ThemNhanVienFrgm extends Fragment {
         edtPassword = view.findViewById(R.id.edPassword);
         edtSDT = view.findViewById(R.id.edSDT);
         edNamSinh = view.findViewById(R.id.edNamSinh);
-        spnChucVu = view.findViewById(R.id.spnChucVu);
         btnAdd = view.findViewById(R.id.AddNhanVien);
-        dao = new DAOChucVu(getActivity());
         daoUser = new DAOUser(getActivity());
-        //Spinner
-        ArrayList<ChucVu> listCV = (ArrayList<ChucVu>) dao.getAllProduct();
-        ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
-
-        for (ChucVu chucVu : listCV) {
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("MaChucVu", chucVu.getMaChucVu());
-            hashMap.put("TenChucVu", chucVu.getTenChucVu());
-            listHM.add(hashMap);
-        }
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), listHM,
-                R.layout.spinner_ma_loai, new String[]{"TenChucVu"}, new int[]{R.id.item_spinner_maLoai});
-        spnChucVu.setAdapter(simpleAdapter);
         //xử lý sự kiện
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> hashMap = (HashMap<String, Object>) spnChucVu.getSelectedItem();
-                int id_ChucVu = (int) hashMap.get("MaChucVu");
                 User user = new User();
                 user.setFullName(edtName.getText().toString());
                 user.setUsername(edtUser.getText().toString());
                 user.setPassword(edtPassword.getText().toString());
                 user.setSDT(edtSDT.getText().toString());
                 user.setNamSinh(Integer.parseInt(edNamSinh.getText().toString()));
-                user.setMaChucVu(id_ChucVu);
+                user.setMaChucVu(2);
                 //
                 if (daoUser.insertUser(user) < 0) {
                     Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();

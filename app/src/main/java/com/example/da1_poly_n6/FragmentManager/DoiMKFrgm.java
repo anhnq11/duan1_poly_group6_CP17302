@@ -1,5 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ public class DoiMKFrgm extends Fragment {
     EditText edOldPass, edNewPass, edConfirmPass;
     EditText btnChange, btnCancel;
     DAOUser dao;
+    String username, password;
+    boolean chkCheck;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,29 +54,29 @@ public class DoiMKFrgm extends Fragment {
         btnChange = view.findViewById(R.id.btnChange);
         btnCancel = view.findViewById(R.id.btnCancel);
         dao = new DAOUser(getActivity());
+        getDataSSR();
+
         // sự kiện onclick
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edOldPass.setText("");
-                edNewPass.setText("");
-                edConfirmPass.setText("");
+                resetForm();
             }
         });
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
-                String username = pref.getString("USERNAME", "");
+
                 if (validate() > 0) {
                     User user = dao.getID(username);
-                    user.setPassword(edNewPass.getText().toString());
+                    String newPass = edNewPass.getText().toString();
+                    user.setPassword(newPass);
                     dao.updatePass(user);
                     if (dao.updatePass(user) > 0) {
                         Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                        edOldPass.setText("");
-                        edNewPass.setText("");
-                        edConfirmPass.setText("");
+                        resetForm();
+                        remmemberUser(username, newPass, chkCheck);
+                        getDataSSR();
                     } else {
                         Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
                     }
@@ -93,11 +97,9 @@ public class DoiMKFrgm extends Fragment {
             Toast.makeText(getActivity(), "Nhập mật khẩu xác nhận", Toast.LENGTH_SHORT).show();
             check = -1;
         } else {
-            SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
-            String oldpass = pref.getString("PASSWORD", "");
             String newpass = edNewPass.getText().toString();
             String confirmPass = edConfirmPass.getText().toString();
-            if (!oldpass.equals(edOldPass.getText().toString())) {
+            if (!password.equals(edOldPass.getText().toString())) {
                 Toast.makeText(getActivity(), "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
                 check = -1;
             }
@@ -114,6 +116,34 @@ public class DoiMKFrgm extends Fragment {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void remmemberUser(String u, String p, boolean status) {
+        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        if (!status) {
+            editor.clear();
+        } else {
+            editor.putString("USERNAME", u);
+            editor.putString("PASSWORD", p);
+            editor.putBoolean("REMEMBER", true);
+        }
+        editor.commit();
+    }
+
+//    Get Data SharedPreferences
+    public void getDataSSR(){
+        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        username = pref.getString("USERNAME", "");
+        password = pref.getString("PASSWORD", "");
+        chkCheck = pref.getBoolean("REMEMBER", false);
+    }
+
+//    Reset Edittext
+    public void resetForm(){
+        edOldPass.setText("");
+        edNewPass.setText("");
+        edConfirmPass.setText("");
     }
 
 }

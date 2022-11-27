@@ -25,7 +25,7 @@ public class DAOUser {
         ContentValues values = new ContentValues();
         values.put("FullName", user.getFullName());
         values.put("Username", user.getUsername());
-        values.put("ChucVu", user.getTenChucVu());
+        values.put("ChucVu", user.getMaChucVu());
         values.put("Password", user.getPassword());
         values.put("SDT", user.getSDT());
         values.put("NamSinh", user.getNamSinh());
@@ -45,7 +45,7 @@ public class DAOUser {
         return database.update("User", values, "MaUser=?", new String[]{String.valueOf(user.getID_User())});
     }
     public User getID(String id) {
-        String sql = "SELECT * FROM User WHERE MaUser=?";
+        String sql = "SELECT * FROM User WHERE Username=?";
         List<User> list = getData(sql, id);
         return list.get(0);
     }

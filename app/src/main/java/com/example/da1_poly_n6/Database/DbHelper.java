@@ -38,7 +38,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(InsertInto.insert_chucvu);
 // Bảng User
         String tableUser = "CREATE Table User (\n" +
-                "MaUser INTEGER PRIMARY Key AUTOINCREMENT,\n" +
+                "MaUser INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "FullName TEXT,\n" +
                 "Username TEXT,\n" +
                 "ChucVu INTEGR REFERENCES ChucVu(machucvu),\n" +
