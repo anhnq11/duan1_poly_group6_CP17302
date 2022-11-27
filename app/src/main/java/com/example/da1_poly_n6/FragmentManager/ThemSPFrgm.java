@@ -152,7 +152,7 @@ public class ThemSPFrgm extends Fragment {
         edMoTa.setText("");
     }
     private boolean checkValidate(){
-        if (edName.length()==0&&edPrice.length()==0&&edMaLoai.length()==0&&edMoTa.length()==0){
+        if (edName.length()==0||edPrice.length()==0||edMaLoai.length()==0||edMoTa.length()==0){
            edName.setHintTextColor(Color.RED);
             edPrice.setHintTextColor(Color.RED);
             edMaLoai.setHintTextColor(Color.RED);
