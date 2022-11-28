@@ -24,12 +24,14 @@
                 >
 
                 <ImageView
+                    android:id="@+id/imgCTSanPham"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:src="@drawable/bac_xiu" />
 
                 <ImageView
+                    android:id="@+id/imgCTSanPham1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -223,12 +225,12 @@
                             <TextView
                                 android:id="@+id/txtSoLuong"
                                 style="@style/edt_Label"
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
                                 android:text="1"
                                 android:textColor="@color/red"
-                                android:textStyle="bold"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginLeft="10dp"
-                                />
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:id="@+id/btnSoLuongTang"
@@ -302,6 +304,7 @@
                 />
 
             <TextView
+                android:id="@+id/total"
                 style="@style/edt_Label"
                 android:layout_width="match_parent"
                 android:textAlignment="textEnd"
