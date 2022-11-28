@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
@@ -25,8 +26,10 @@ import java.io.ByteArrayOutputStream;
 public class ChiTietSPFrgm extends Fragment {
 
     SanPham sanPham;
-    int rdoSizeCheck;
+    GioHang gioHang;
     String sizeCheck;
+    TextView txtChiTietTenSpTextView, txtChiTietGiaSP, txtChiTietMoTaSP, total, soLuong;
+    ImageView img_sp, img_sp1, btnTang, btnGiam;
 
     public ChiTietSPFrgm(SanPham sanPham) {
         this.sanPham = sanPham;
@@ -36,17 +39,20 @@ public class ChiTietSPFrgm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chi_tiet_s_p_frgm, container, false);
-        TextView txtChiTietTenSpTextView = view.findViewById(R.id.txtChiTietTenSp);
-        TextView txtChiTietGiaSP = view.findViewById(R.id.txtChiTietGiaSP);
-        TextView txtChiTietMoTaSP = view.findViewById(R.id.txtChiTietMoTaSP);
-        ImageView img_sp = view.findViewById(R.id.imgCTSanPham);
-        ImageView img_sp1 = view.findViewById(R.id.imgCTSanPham1);
-        TextView total = view.findViewById(R.id.total);
+        txtChiTietTenSpTextView = view.findViewById(R.id.txtChiTietTenSp);
+        txtChiTietGiaSP = view.findViewById(R.id.txtChiTietGiaSP);
+        txtChiTietMoTaSP = view.findViewById(R.id.txtChiTietMoTaSP);
+        soLuong = view.findViewById(R.id.txtSoLuong);
+        img_sp = view.findViewById(R.id.imgCTSanPham);
+        img_sp1 = view.findViewById(R.id.imgCTSanPham1);
+        total = view.findViewById(R.id.total);
+        btnTang = view.findViewById(R.id.btnSoLuongTang);
+        btnGiam = view.findViewById(R.id.btnSoLuongGiam);
 
 
-        double L = 16000 + sanPham.getPrice();
-        double M = 10000 + sanPham.getPrice();
-        double S = 0 + sanPham.getPrice();
+        final double L = 16000 + sanPham.getPrice();
+        final double M = 10000 + sanPham.getPrice();
+        final double S = 0 + sanPham.getPrice();
 
         RadioButton rdoSizeLon = view.findViewById(R.id.rdoSizeLon);
         RadioButton rdoSizeVua = view.findViewById(R.id.rdoSizeVua);
@@ -109,13 +115,5 @@ public class ChiTietSPFrgm extends Fragment {
         });
 
         return view;
-    }
-
-    private byte[] imageToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        byte[] byteArray = outputStream.toByteArray();
-        return byteArray;
     }
 }
