@@ -1,6 +1,7 @@
 package com.example.da1_poly_n6.Database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -11,7 +12,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
-
+    public void queryData(String sql){
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL(sql);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -97,6 +101,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(dropLuuHoaDon);
         String dropGioHang = "drop table if exists GioHang";
         db.execSQL(dropGioHang);
+    }
+    public Cursor getData(String sql){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql, null);
     }
 
 }

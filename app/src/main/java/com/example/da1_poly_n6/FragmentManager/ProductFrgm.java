@@ -47,7 +47,8 @@ public class ProductFrgm extends Fragment {
         recyclerProduct = view.findViewById(R.id.recyclerProduct);
         ImageView filterProduct = view.findViewById(R.id.filterProduct);
         daoSanPham = new DAOSanPham(getContext());
-
+        adapterSanPham = new AdapterSanPham(getActivity(), list);
+        adapterSanPham.notifyDataSetChanged();
         rdoCheck = 0;
         createData(0);
 
@@ -64,16 +65,16 @@ public class ProductFrgm extends Fragment {
                 RadioButton rdoSPGia = dialog.findViewById(R.id.rdoSPGia);
                 RadioButton rdoSPTL = dialog.findViewById(R.id.rdoSPTL);
 
-                switch (rdoCheck){
-                    case 0:{
+                switch (rdoCheck) {
+                    case 0: {
                         rdoSPAll.setChecked(true);
                     }
                     break;
-                    case 1:{
+                    case 1: {
                         rdoSPGia.setChecked(true);
                     }
                     break;
-                    case 2:{
+                    case 2: {
                         rdoSPTL.setChecked(true);
                     }
                 }
@@ -81,7 +82,7 @@ public class ProductFrgm extends Fragment {
                 rdoSPAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
+                        if (isChecked) {
                             rdoCheck = 0;
                             createData(0);
                             dialog.dismiss();
@@ -92,7 +93,7 @@ public class ProductFrgm extends Fragment {
                 rdoSPGia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
+                        if (isChecked) {
                             rdoCheck = 1;
                             createData(1);
                             dialog.dismiss();
@@ -103,7 +104,7 @@ public class ProductFrgm extends Fragment {
                 rdoSPTL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
+                        if (isChecked) {
                             rdoCheck = 2;
                             createData(2);
                             dialog.dismiss();
@@ -126,6 +127,7 @@ public class ProductFrgm extends Fragment {
         recyclerProduct.setLayoutManager(linearLayoutManager);
         AdapterSanPham adapterSanPham = new AdapterSanPham(getContext(), list);
         recyclerProduct.setAdapter(adapterSanPham);
+        adapterSanPham.notifyDataSetChanged();
     }
 
 }

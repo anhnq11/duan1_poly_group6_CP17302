@@ -1,20 +1,33 @@
 package com.example.da1_poly_n6.Model;
 
 public class SanPham {
+    int id;
     byte [] image;
     String TenSanPham;
     Double Price;
     int MaLoai;
     String Mota;
 
-    public SanPham(byte [] image, String tenSanPham, Double price, int maLoai, String mota) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public SanPham(int id) {
+        this.id = id;
+    }
+
+    public SanPham(int id, byte[] image, String tenSanPham, Double price, int maLoai, String mota) {
+        this.id = id;
         this.image = image;
         TenSanPham = tenSanPham;
         Price = price;
         MaLoai = maLoai;
         Mota = mota;
     }
-
 
     public SanPham() {
 

@@ -17,13 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.da1_poly_n6.DAOModel.DAOSanPham;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
 public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
 
     SanPham sanPham;
-
+    DAOSanPham dao;
     public ChiTietSPSuaFrgm(SanPham sanPham) {
         this.sanPham = sanPham;
     }
@@ -38,7 +39,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         TextView txtCTSPSuaMoTaSP = view.findViewById(R.id.txtCTSPSuaMoTaSP);
         EditText btnCTSPSuaSua = view.findViewById(R.id.btnCTSPSuaSua);
         EditText btnCTSPSuaXoa = view.findViewById(R.id.btnCTSPSuaXoa);
-
+        dao = new DAOSanPham(getContext());
         txtCTSPSuaTenSp.setText(sanPham.getTenSanPham());
         txtCTSPSuaGiaSP.setText(sanPham.getPrice() + "");
         txtCTSPSuaLoaiSP.setText("Loại sản phẩm: " + sanPham.getMaLoai());
@@ -76,6 +77,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
                 btnDialogXN.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        dao.deleteData(sanPham.getId());
                         Toast.makeText(getContext(), "Đã xóa Sản phẩm", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }

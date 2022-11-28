@@ -132,7 +132,7 @@ public class ThemSPFrgm extends Fragment {
     private byte[] imageToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         byte[] byteArray = outputStream.toByteArray();
         return byteArray;
     }

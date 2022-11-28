@@ -43,6 +43,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/update_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/img_add_img"
@@ -70,7 +71,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/edtAddSPTen"
+                    android:id="@+id/update_tenSP"
                     style="@style/edt_TextBox2"
                     android:hint="Cà Phê Sữa Đá"
                     android:layout_marginTop="5dp"
@@ -93,7 +94,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/edtAddSPGia"
+                    android:id="@+id/update_giaBan"
                     style="@style/edt_TextBox2"
                     android:hint="29.000"
                     android:layout_marginTop="5dp"
@@ -115,8 +116,8 @@
                     android:layout_marginLeft="10dp"
                     />
 
-                <EditText
-                    android:id="@+id/edtAddSPLoai"
+                <Spinner
+                    android:id="@+id/update_spnLoai"
                     style="@style/edt_TextBox2"
                     android:hint="Cà Phê"
                     android:layout_marginTop="5dp"
@@ -139,7 +140,7 @@
                     />
 
                 <EditText
-                    android:id="@+id/edtAddSPMoTa"
+                    android:id="@+id/update_moTa"
                     style="@style/edt_TextBox2"
                     android:hint="Cà phê Đắk Lắk nguyên chất..."
                     android:layout_marginTop="5dp"
@@ -184,7 +185,7 @@
                 />
 
             <EditText
-                android:id="@+id/btnSuaSPXN"
+                android:id="@+id/btnUpdateSp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bo_tron_edt"
