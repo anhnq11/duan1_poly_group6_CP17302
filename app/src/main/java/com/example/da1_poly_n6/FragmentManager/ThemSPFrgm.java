@@ -70,7 +70,7 @@ public class ThemSPFrgm extends Fragment {
         btnBackThemSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new AccountFrgm());
+                loadFragment(new Account_Fragment());
             }
         });
         AddImg.setOnClickListener(new View.OnClickListener() {

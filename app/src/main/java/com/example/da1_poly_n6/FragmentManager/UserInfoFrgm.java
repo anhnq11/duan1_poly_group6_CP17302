@@ -23,7 +23,7 @@ public class UserInfoFrgm extends Fragment {
         btnBackUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new AccountFrgm());
+                loadFragment(new Account_Fragment());
             }
         });
         return view;

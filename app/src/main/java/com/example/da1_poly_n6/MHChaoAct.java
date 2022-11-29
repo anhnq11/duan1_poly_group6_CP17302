@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 public class MHChaoAct extends AppCompatActivity {
 
     @Override
@@ -14,10 +15,11 @@ public class MHChaoAct extends AppCompatActivity {
         Intent intent = new Intent(MHChaoAct.this, DangNhapAct.class);
 
         Thread timer = new Thread() {
-            public void run(){
+            public void run() {
                 try {
                     sleep(3000);
                     startActivity(intent);
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

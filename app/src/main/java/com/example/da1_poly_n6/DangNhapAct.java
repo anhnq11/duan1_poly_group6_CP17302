@@ -25,7 +25,7 @@ public class DangNhapAct extends AppCompatActivity {
     EditText edtUser, edtPassword;
     ImageView btnLogin;
     CheckBox checkBox;
-
+    public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +34,14 @@ public class DangNhapAct extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtMatKhau);
         checkBox = findViewById(R.id.chkNhoMK);
         btnLogin = findViewById(R.id.btnDangNhap);
+        user = new User();
         dao = new DAOUser(this);
 
         //
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         String user = pref.getString("USERNAME", "");
         String pass = pref.getString("PASSWORD", "");
-        Boolean rem = pref.getBoolean("REMEMBER", false);
+        boolean rem = pref.getBoolean("REMEMBER", false);
 
 
         edtUser.setText(user);
@@ -70,6 +71,7 @@ public class DangNhapAct extends AppCompatActivity {
                 remmemberUser(strUser, strPass, checkBox.isChecked());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("user", strUser);
+                user.setUsername(strUser);
                 startActivity(intent);
                 finish();
                 closeKeyboard();

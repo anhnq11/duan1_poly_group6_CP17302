@@ -3,6 +3,8 @@ package com.example.da1_poly_n6.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,33 +14,37 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.da1_poly_n6.DAOModel.DAOChucVu;
-import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.DangNhapAct;
-import com.example.da1_poly_n6.Model.ChucVu;
 import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Account_Fragment extends Fragment {
+    private LinearLayout userFrgmTaiKhoan, userFrgmDoiMK, userFrgmTKDoanhThu, userFrgmTKNhanVien, userFrgmThemSP, userFrgmThemLSP, userFrgmThemNhanVien, userFrgmDangXuat;
 
 
-public class AccountFrgm extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account_frgm, container, false);
+//         Inflate the layout for this fragment
+//        if (!DangNhapAct.user.getUsername().equals("admin")) {
+//            return inflater.inflate(R.layout.fragment_account_, container, false);
+//
+//        } else {
+        return inflater.inflate(R.layout.fragment_account_frgm, container, false);
 
-        LinearLayout userFrgmTaiKhoan = view.findViewById(R.id.userFrgmTaiKhoan);
-        LinearLayout userFrgmDoiMK = view.findViewById(R.id.userFrgmDoiMK);
-        LinearLayout userFrgmTKDoanhThu = view.findViewById(R.id.userFrgmTKDoanhThu);
-        LinearLayout userFrgmTKNhanVien = view.findViewById(R.id.userFrgmTKNhanVien);
-        LinearLayout userFrgmThemSP = view.findViewById(R.id.userFrgmThemSP);
-        LinearLayout userFrgmThemLSP = view.findViewById(R.id.userFrgmThemLSP);
-        LinearLayout userFrgmThemNhanVien = view.findViewById(R.id.userFrgmThemNhanVien);
-        LinearLayout userFrgmDangXuat = view.findViewById(R.id.userFrgmDangXuat);
+//        }
+    }
 
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        anhXa(view);
+        if (!DangNhapAct.user.getUsername().equals("admin")) {
+            userFrgmThemNhanVien.setVisibility(View.INVISIBLE);
+            userFrgmTKNhanVien.setVisibility(View.INVISIBLE);
+            userFrgmThemSP.setVisibility(View.INVISIBLE);
+            userFrgmThemLSP.setVisibility(View.INVISIBLE);
+        }
         userFrgmTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +95,6 @@ public class AccountFrgm extends Fragment {
                 loadFragment(new ThemNhanVienFrgm());
             }
         });
-
         userFrgmDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +104,17 @@ public class AccountFrgm extends Fragment {
                 startActivity(intent);
             }
         });
+    }
 
-        return view;
+    private void anhXa(View view) {
+        userFrgmTaiKhoan = view.findViewById(R.id.userFrgmTaiKhoan);
+        userFrgmDoiMK = view.findViewById(R.id.userFrgmDoiMK);
+        userFrgmTKDoanhThu = view.findViewById(R.id.userFrgmTKDoanhThu);
+        userFrgmTKNhanVien = view.findViewById(R.id.userFrgmTKNhanVien);
+        userFrgmThemSP = view.findViewById(R.id.userFrgmThemSP);
+        userFrgmThemLSP = view.findViewById(R.id.userFrgmThemLSP);
+        userFrgmThemNhanVien = view.findViewById(R.id.userFrgmThemNhanVien);
+        userFrgmDangXuat = view.findViewById(R.id.userFrgmDangXuat);
     }
 
     private void loadFragment(Fragment fragment) {

@@ -8,10 +8,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.FragmentManager.AccountFrgm;
+import com.example.da1_poly_n6.FragmentManager.Account_Fragment;
 import com.example.da1_poly_n6.FragmentManager.HomeFrgm;
 import com.example.da1_poly_n6.FragmentManager.ProductFrgm;
 import com.example.da1_poly_n6.FragmentManager.StoreFrgm;
+import com.example.da1_poly_n6.Model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.pageTrangChu);
         loadFragment(new HomeFrgm());
+
     }
 
     @Override
@@ -48,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
 
             case R.id.pageTaiKhoan:
-                fragment = new AccountFrgm();
-                loadFragment(fragment);
+                loadFragment(new Account_Fragment());
                 return true;
         }
         return false;

@@ -44,10 +44,17 @@ public class DAOUser {
 
         return database.update("User", values, "MaUser=?", new String[]{String.valueOf(user.getID_User())});
     }
+
     public User getID(String id) {
         String sql = "SELECT * FROM User WHERE Username=?";
         List<User> list = getData(sql, id);
         return list.get(0);
+    }
+
+    public User getUsername(String username) {
+        String sql = "SELECT Username FROM User WHERE Username = 'admin'";
+        List<User> list = getData(sql, username);
+        return list.get(2);
     }
 
     public List<User> getAllUser() {
@@ -78,8 +85,6 @@ public class DAOUser {
     public int checkLogin(String username, String password) {
         String sql = "SELECT * FROM User WHERE Username=? AND Password=?";
         List<User> list = getData(sql, username, password);
-        if (list.size() == 0)
-            return -1;
-        return 1;
+      return list.size()==0?-1:1;
     }
 }
