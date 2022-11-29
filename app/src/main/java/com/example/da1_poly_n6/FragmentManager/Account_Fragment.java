@@ -40,10 +40,10 @@ public class Account_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         anhXa(view);
         if (!DangNhapAct.user.getUsername().equals("admin")) {
-            userFrgmThemNhanVien.setVisibility(View.INVISIBLE);
-            userFrgmTKNhanVien.setVisibility(View.INVISIBLE);
-            userFrgmThemSP.setVisibility(View.INVISIBLE);
-            userFrgmThemLSP.setVisibility(View.INVISIBLE);
+            userFrgmThemNhanVien.setVisibility(View.GONE);
+            userFrgmTKNhanVien.setVisibility(View.GONE);
+            userFrgmThemSP.setVisibility(View.GONE);
+            userFrgmThemLSP.setVisibility(View.GONE);
         }
         userFrgmTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
