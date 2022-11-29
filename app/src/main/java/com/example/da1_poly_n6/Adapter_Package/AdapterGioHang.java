@@ -2,72 +2,144 @@ package com.example.da1_poly_n6.Adapter_Package;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.da1_poly_n6.DAOModel.DAOGioHang;
+import com.example.da1_poly_n6.FragmentManager.StoreFrgm;
+import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
 import java.util.ArrayList;
 
-public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.UserViewHolder> {
+public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHolder> {
 
+    private ArrayList<GioHang> list;
     private Context context;
-    private ArrayList<SanPham> arrayList;
-    private CardView cardView;
+    DAOGioHang daoGioHang;
+    StoreFrgm storeFrgm;
 
-    public AdapterGioHang(Context context) {
+    public AdapterGioHang(Context context, ArrayList<GioHang> list, Fragment storeFrgm) {
+        this.storeFrgm = (StoreFrgm) storeFrgm;
         this.context = context;
-    }
-
-    public void setData(ArrayList<SanPham> arrayList) {
-        this.arrayList = arrayList;
-        notifyDataSetChanged();
+        this.list = list;
     }
 
     @NonNull
     @Override
-    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_gio_hang, parent, false);
-        return new UserViewHolder(view);
+        daoGioHang = new DAOGioHang(view.getContext());
+        return new AdapterGioHang.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        SanPham sanPham = arrayList.get(position);
-        holder.name.setText(sanPham.getTenSanPham());
-        holder.price.setText(String.valueOf(sanPham.getPrice()));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        GioHang gioHang = list.get(position);
+
+//        Set ảnh cho Items
+        byte[] imgSP = gioHang.getImgSP();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imgSP, 0, imgSP.length);
+        holder.imgGHAnhSP.setImageBitmap(bitmap);
+        holder.txtGHTenSP.setText(gioHang.getTenSP() + " - " + gioHang.getSize());
+        double donGia = gioHang.getDonGia();
+        String outDonGia = String.format("%,.0f", donGia);
+        holder.txtGHGia.setText(outDonGia + " VNĐ");
+        int soLuong = gioHang.getSoLuong();
+        holder.edtGHSoLuong.setText(soLuong + "");
+
+//        Sự kiện giảm số lượng sản phẩm
+        holder.btnHGTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int soLuong = gioHang.getSoLuong();
+                if (soLuong > 1){
+//                    Số lượng SP hiện tại > 0 => Giảm
+                    soLuong--;
+                    gioHang.setSoLuong(soLuong);
+                    boolean kiemtra = daoGioHang.updateGioHang(gioHang);
+                    if (kiemtra){
+                        list.clear();
+                        list = daoGioHang.getGioHang();
+                        notifyDataSetChanged();
+                    }
+                    else {
+                        Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
+                    }
+                    holder.edtGHSoLuong.setText(soLuong + "");
+                }
+                else {
+//                    Số lượng SP = 0 => Xóa SP khỏi giỏ hàng
+                    boolean kiemtra = daoGioHang.deleteGiohang(gioHang);
+                    if (kiemtra){
+                        Toast.makeText(context, "Đã xóa Sản phẩm khỏi giỏ hàng!", Toast.LENGTH_SHORT).show();
+                        list.clear();
+                        list = daoGioHang.getGioHang();
+                        notifyDataSetChanged();
+                    }
+                    else {
+                        Toast.makeText(context, "Delete Fail!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+//        Sự kiện tăng số lượng sản phẩm
+        holder.btnGHCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int soLuong = gioHang.getSoLuong();
+                soLuong++;
+                gioHang.setSoLuong(soLuong);
+                boolean kiemtra = daoGioHang.updateGioHang(gioHang);
+                if (kiemtra){
+                    list.clear();
+                    list = daoGioHang.getGioHang();
+                    notifyDataSetChanged();
+                }
+                else {
+                    Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
+                }
+                holder.edtGHSoLuong.setText(soLuong + "");
+                notifyDataSetChanged();
+            }
+        });
+        holder.edtGHSoLuong.getText().toString();
     }
 
     @Override
     public int getItemCount() {
-        if (arrayList != null) {
-            return arrayList.size();
-        }
-        return 0;
+        return list.size();
     }
 
-    public class UserViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private ImageView btn_tru, btn_cong;
-        private TextView name;
-        private TextView price;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgGHAnhSP, btnHGTru, btnGHCong;
+        TextView txtGHTenSP, txtGHGia, edtGHSoLuong;
 
-        public UserViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.card_view_gioHang);
-            btn_cong = itemView.findViewById(R.id.btn_cong);
-            btn_tru = itemView.findViewById(R.id.btn_tru);
-            name = itemView.findViewById(R.id.name_SP);
-            price = itemView.findViewById(R.id.price_SP);
+            imgGHAnhSP = itemView.findViewById(R.id.imgGHAnhSP);
+            txtGHTenSP = itemView.findViewById(R.id.txtGHTenSP);
+            txtGHGia = itemView.findViewById(R.id.txtGHGia);
+            edtGHSoLuong = itemView.findViewById(R.id.edtGHSoLuong);
+            btnHGTru = itemView.findViewById(R.id.btnHGTru);
+            btnGHCong = itemView.findViewById(R.id.btnGHCong);
         }
     }
 }

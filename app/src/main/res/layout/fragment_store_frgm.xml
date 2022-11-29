@@ -44,6 +44,7 @@
         >
 
         <EditText
+            android:id="@+id/edtGHTenKH"
             style="@style/edt_TextBox2"
             android:hint="Tên khách hàng"
             android:layout_marginTop="5dp"
@@ -73,6 +74,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/txtGHTongTien"
                     style="@style/edt_Label"
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"

@@ -30,7 +30,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Nhân viên:"
                 android:fontFamily="@font/ct_font_medium"
@@ -38,10 +38,10 @@
                 android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/txtHDTenNV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyen Dat"
-                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:fontFamily="@font/ct_font_bold"
@@ -55,7 +55,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Khách hàng:"
                 android:textColor="@color/white"
@@ -63,11 +63,11 @@
                 android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/txtHDTenKH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyen Dat"
                 android:fontFamily="@font/ct_font_bold"
-                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Ngày bán:"
                 android:fontFamily="@font/ct_font_medium"
@@ -88,11 +88,11 @@
                 android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/txtHDNgayBan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="22/11/2003"
                 android:fontFamily="@font/ct_font_bold"
-                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -188,6 +188,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/txtHDTongTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

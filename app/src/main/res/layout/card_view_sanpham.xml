@@ -29,18 +29,18 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:text="Bạc sỉu"
             android:id="@+id/ten_sanpham"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ct_font_medium"
-            android:textSize="18dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
             android:layout_toRightOf="@+id/cardview_img"
+            android:fontFamily="@font/ct_font_medium"
             android:paddingLeft="10dp"
             android:paddingRight="0dp"
-            android:textColor="@color/black" />
+            android:text="Bạc sỉu"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/gia_sanpham"
@@ -48,13 +48,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="0dp"
-            android:text="29.000đ"
-            android:fontFamily="@font/ct_font_medium"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/boxicon"
             android:layout_toRightOf="@+id/cardview_img"
+            android:fontFamily="@font/ct_font_medium"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:text="29.000đ"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
