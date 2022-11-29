@@ -1,6 +1,7 @@
 package com.example.da1_poly_n6.Adapter_Package;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -18,10 +19,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_poly_n6.DAOModel.DAOGioHang;
+import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.FragmentManager.ChiTietSPFrgm;
 import com.example.da1_poly_n6.FragmentManager.ChiTietSPSuaFrgm;
 import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.SanPham;
+import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
     private Context context;
     private ArrayList<SanPham> list;
     DAOGioHang daoGioHang;
+    DAOUser daoUser;
 
     public AdapterSanPham(Context context, ArrayList<SanPham> list) {
         this.context = context;
@@ -43,6 +47,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_sanpham, parent, false);
         daoGioHang = new DAOGioHang(view.getContext());
+        daoUser = new DAOUser(view.getContext());
         return new UserViewHolder(view);
     }
 
@@ -101,6 +106,15 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
                 }
             }
         });
+
+        SharedPreferences pref = context.getSharedPreferences("USER_FILE", context.MODE_PRIVATE);
+        int maUser = pref.getInt("MA", 0);
+        User user = daoUser.getUser(maUser);
+        int quyenUser =user.getMaChucVu();
+        if (quyenUser == 2){
+            holder.info_sanpham.setVisibility(View.GONE);
+        }
+
         holder.info_sanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

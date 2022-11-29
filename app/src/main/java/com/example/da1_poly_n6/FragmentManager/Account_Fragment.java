@@ -1,6 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,39 +13,51 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.DangNhapAct;
 import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 public class Account_Fragment extends Fragment {
     private LinearLayout userFrgmTaiKhoan, userFrgmDoiMK, userFrgmTKDoanhThu, userFrgmTKNhanVien, userFrgmThemSP, userFrgmThemLSP, userFrgmThemNhanVien, userFrgmDangXuat;
-
+    TextView txtUserName, txtChucVu;
+    DAOUser daoUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//         Inflate the layout for this fragment
-//        if (!DangNhapAct.user.getUsername().equals("admin")) {
-//            return inflater.inflate(R.layout.fragment_account_, container, false);
-//
-//        } else {
-        return inflater.inflate(R.layout.fragment_account_frgm, container, false);
+        View view = inflater.inflate(R.layout.fragment_account_frgm, container, false);
 
-//        }
-    }
+        userFrgmTaiKhoan = view.findViewById(R.id.userFrgmTaiKhoan);
+        userFrgmDoiMK = view.findViewById(R.id.userFrgmDoiMK);
+        userFrgmTKDoanhThu = view.findViewById(R.id.userFrgmTKDoanhThu);
+        userFrgmTKNhanVien = view.findViewById(R.id.userFrgmTKNhanVien);
+        userFrgmThemSP = view.findViewById(R.id.userFrgmThemSP);
+        userFrgmThemLSP = view.findViewById(R.id.userFrgmThemLSP);
+        userFrgmThemNhanVien = view.findViewById(R.id.userFrgmThemNhanVien);
+        userFrgmDangXuat = view.findViewById(R.id.userFrgmDangXuat);
+        txtUserName = view.findViewById(R.id.txtUserName);
+        txtChucVu = view.findViewById(R.id.txtChucVu);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        anhXa(view);
-        if (!DangNhapAct.user.getUsername().equals("admin")) {
+        daoUser = new DAOUser(getContext());
+
+        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
+        int maUser = pref.getInt("MA", 0);
+        User user = daoUser.getUser(maUser);
+        int quyenUser =user.getMaChucVu();
+        if (quyenUser == 2){
             userFrgmThemNhanVien.setVisibility(View.GONE);
             userFrgmTKNhanVien.setVisibility(View.GONE);
             userFrgmThemSP.setVisibility(View.GONE);
             userFrgmThemLSP.setVisibility(View.GONE);
         }
+
+        txtUserName.setText(user.getFullName());
+        txtChucVu.setText(user.getTenChucVu());
+
         userFrgmTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,14 +65,12 @@ public class Account_Fragment extends Fragment {
             }
         });
 
-
         userFrgmDoiMK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadFragment(new DoiMKFrgm());
             }
         });
-
 
         userFrgmTKDoanhThu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +106,7 @@ public class Account_Fragment extends Fragment {
                 loadFragment(new ThemNhanVienFrgm());
             }
         });
+
         userFrgmDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,17 +116,8 @@ public class Account_Fragment extends Fragment {
                 startActivity(intent);
             }
         });
-    }
 
-    private void anhXa(View view) {
-        userFrgmTaiKhoan = view.findViewById(R.id.userFrgmTaiKhoan);
-        userFrgmDoiMK = view.findViewById(R.id.userFrgmDoiMK);
-        userFrgmTKDoanhThu = view.findViewById(R.id.userFrgmTKDoanhThu);
-        userFrgmTKNhanVien = view.findViewById(R.id.userFrgmTKNhanVien);
-        userFrgmThemSP = view.findViewById(R.id.userFrgmThemSP);
-        userFrgmThemLSP = view.findViewById(R.id.userFrgmThemLSP);
-        userFrgmThemNhanVien = view.findViewById(R.id.userFrgmThemNhanVien);
-        userFrgmDangXuat = view.findViewById(R.id.userFrgmDangXuat);
+        return view;
     }
 
     private void loadFragment(Fragment fragment) {

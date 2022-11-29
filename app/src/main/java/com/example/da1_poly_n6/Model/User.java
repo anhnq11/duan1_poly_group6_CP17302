@@ -19,6 +19,16 @@ public class User {
         this.username = username;
         this.password = password;
         this.maChucVu = maChucVu;
+        this.SDT = SDT;
+        NamSinh = namSinh;
+    }
+
+    public User(int ID_User, String fullName, String username, String password, int maChucVu, String tenChucVu, String SDT, int namSinh) {
+        this.ID_User = ID_User;
+        FullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.maChucVu = maChucVu;
         this.tenChucVu = tenChucVu;
         this.SDT = SDT;
         NamSinh = namSinh;

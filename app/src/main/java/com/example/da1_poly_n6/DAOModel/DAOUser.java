@@ -51,16 +51,7 @@ public class DAOUser {
         return list.get(0);
     }
 
-    public User getUsername(String username) {
-        String sql = "SELECT Username FROM User WHERE Username = 'admin'";
-        List<User> list = getData(sql, username);
-        return list.get(2);
-    }
 
-    public List<User> getAllUser() {
-        String sql = "SELECT User.MaUser, User.FullName, User.Username, ChucVu.TenChucVu,User.Password,User.SDT,User.NamSinh FROM User, ChucVu WHERE User.MaChucVu = ChucVu.MaChucVu";
-        return getData(sql);
-    }
 
     public ArrayList<User> getData(String sql, String... selectionAGrs) {
         ArrayList<User> list = new ArrayList<>();
@@ -82,9 +73,31 @@ public class DAOUser {
         return list;
     }
 
-    public int checkLogin(String username, String password) {
+//    Check Đăng nhập tài khoản
+    public ArrayList<User> checkLogin(String username, String password) {
         String sql = "SELECT * FROM User WHERE Username=? AND Password=?";
-        List<User> list = getData(sql, username, password);
-      return list.size()==0?-1:1;
+        ArrayList<User> list = getData(sql, username, password);
+      return list;
+    }
+
+//    Lấy thông tin User theo ID
+    public User getUser(int inputId) {
+        User user = null;
+        Cursor cursor = database.rawQuery("SELECT User.mauser, User.fullname, User.Username, User.password, ChucVu.MaChucVu, ChucVu.tenchucvu, User.sdt,User.namsinh FROM User, ChucVu WHERE User.ChucVu = ChucVu.machucvu and User.MaUser = ?", new String[]{String.valueOf(inputId)});
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                int maUser = cursor.getInt(0);
+                String fullName = cursor.getString(1);
+                String userName = cursor.getString(2);
+                String passWord = cursor.getString(3);
+                int maChucVu = cursor.getInt(4);
+                String tenChucVu = cursor.getString(5);
+                String soDT = cursor.getString(6);
+                int namSinh = cursor.getInt(7);
+                user = new User(maUser, fullName, userName, passWord, maChucVu, tenChucVu, soDT, namSinh);
+            }   while (cursor.moveToNext());
+        }
+        return user;
     }
 }
