@@ -60,11 +60,10 @@ public class StoreFrgm extends Fragment {
             public void onClick(View v) {
                 String tenKH = edtGHTenKH.getText().toString();
 //                Kiểm tra nhập tên khách hàng
-                if (tenKH.isEmpty()){
+                if (tenKH.isEmpty()) {
                     edtGHTenKH.setHintTextColor(Color.RED);
                     edtGHTenKH.setError("Vui lòng nhập!");
-                }
-                else {
+                } else {
                     edtGHTenKH.setHintTextColor(Color.BLACK);
 
 //                Tạo hóa đơn
@@ -84,7 +83,6 @@ public class StoreFrgm extends Fragment {
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 //                    Ánh xạ View
-
                     EditText btnHoaDonHuy = dialog.findViewById(R.id.btnHoaDonHuy);
                     EditText btnHoaDonXN = dialog.findViewById(R.id.btnHoaDonXN);
 
@@ -99,6 +97,7 @@ public class StoreFrgm extends Fragment {
                     txtHDTenNV.setText(userName);
                     txtHDTenKH.setText(tenKH);
                     txtHDNgayBan.setText(ngayTaoHD);
+                    txtHDTongTien.setText(txtGHTongTien.getText());
 
 //                Sự kiện Button Hủy
                     btnHoaDonHuy.setOnClickListener(new View.OnClickListener() {
