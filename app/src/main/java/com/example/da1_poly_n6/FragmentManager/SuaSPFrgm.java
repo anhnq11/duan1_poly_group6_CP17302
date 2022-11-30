@@ -79,6 +79,12 @@ public class SuaSPFrgm extends Fragment {
         daoSanPham = new DAOSanPham(getContext());
         arrayList = new ArrayList<>();
         adapter = new AdapterSanPham(getActivity(), arrayList);
+        // set dữ liệu vào edt
+        edUpdateTenSP.setText(sanPham.getTenSanPham());
+        edUpdateGiaBan.setText(String.valueOf(sanPham.getPrice()));
+        edUpdateMoTa.setText(sanPham.getMota());
+
+        // xử lý sự kiện thêm ảnh
         imgUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,18 +170,19 @@ public class SuaSPFrgm extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (checkEdt()){
-                   daoSanPham.updateSanPham(imageToByte(imgUpdate), strTenSP, strGiaban, maLSP, strMota, sanPham.getId());
-                   dialog.dismiss();
-                   Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                   adapter.notifyDataSetChanged();
-               }
+                if (checkEdt()) {
+                    daoSanPham.updateSanPham(imageToByte(imgUpdate), strTenSP, strGiaban, maLSP, strMota, sanPham.getId());
+                    Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                    loadFragment(new ProductFrgm());
+                    resetEdt();
+                    dialog.dismiss();
+                    adapter.notifyDataSetChanged();
+                }
             }
 
         });
         dialog.show();
     }
-
 
 
     //Cấp quyền lấy ảnh

@@ -79,6 +79,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
                     public void onClick(View v) {
                         dao.deleteData(sanPham.getId());
                         Toast.makeText(getContext(), "Đã xóa Sản phẩm", Toast.LENGTH_SHORT).show();
+                        loadFragment(new ProductFrgm());
                         dialog.dismiss();
                     }
                 });

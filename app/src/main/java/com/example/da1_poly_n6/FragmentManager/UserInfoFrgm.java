@@ -42,7 +42,7 @@ public class UserInfoFrgm extends Fragment {
         txtInfoFullName.setText(user.getFullName());
         txtInfoChucVu.setText(user.getTenChucVu());
         txtInfoSDT.setText(user.getSDT());
-        txtInfoNamSinh.setText(user.getNamSinh() + "");
+        txtInfoNamSinh.setText(String.valueOf(user.getNamSinh()));
 
         btnBackUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
