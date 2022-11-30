@@ -1,5 +1,7 @@
 package com.example.da1_poly_n6.Adapter_Package;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,24 +9,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.da1_poly_n6.DAOModel.DAOGioHang;
+import com.example.da1_poly_n6.DAOModel.DAOUser;
+import com.example.da1_poly_n6.Model.GioHang;
+import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
 
-public class AdapterHoaDon extends RecyclerView.Adapter<AdapterGioHang.ViewHolder>{
+import java.util.ArrayList;
+
+public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder>{
+
+    private Context context;
+    private ArrayList<GioHang> list;
+    DAOGioHang daoGioHang;
+
+    public AdapterHoaDon(Context context, ArrayList<GioHang> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
-    public AdapterGioHang.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_view_hoadon, parent, false);
+        daoGioHang = new DAOGioHang(view.getContext());
+        return new AdapterHoaDon.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterGioHang.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        GioHang gioHang = list.get(position);
+        holder.txtHDTenSP.setText(gioHang.getTenSP() + "(" + gioHang.getSize() + ")");
+        double donGia = gioHang.getDonGia();
+        String outDonGia = String.format("%,.0f", donGia);
+        holder.txtHDDonGia.setText(outDonGia);
+        holder.txtHDSL.setText(gioHang.getSoLuong() + "");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

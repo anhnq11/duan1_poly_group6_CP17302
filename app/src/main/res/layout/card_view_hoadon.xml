@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_height="wrap_content"
     >
 
     <LinearLayout
@@ -11,16 +9,16 @@
         android:layout_height="wrap_content"
         android:background="@color/red"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_marginBottom="5dp"
+        android:paddingBottom="3dp"
+        android:gravity="center_vertical"
         >
 
         <TextView
             android:id="@+id/txtHDTenSP"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:text="Teen San Pham"
+            android:text="Teen San Pharưerwerwerwerwerwerm"
             android:maxWidth="250dp"
             android:fontFamily="@font/ct_font_regular"
             android:textSize="18dp"

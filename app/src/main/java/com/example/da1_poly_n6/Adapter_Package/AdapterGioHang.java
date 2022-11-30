@@ -33,8 +33,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
     DAOGioHang daoGioHang;
     StoreFrgm storeFrgm;
 
-    public AdapterGioHang(Context context, ArrayList<GioHang> list, Fragment storeFrgm) {
-        this.storeFrgm = (StoreFrgm) storeFrgm;
+    public AdapterGioHang(Context context, ArrayList<GioHang> list) {
         this.context = context;
         this.list = list;
     }

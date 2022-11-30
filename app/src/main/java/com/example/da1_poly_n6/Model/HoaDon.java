@@ -3,21 +3,92 @@ package com.example.da1_poly_n6.Model;
 import java.util.Date;
 
 public class HoaDon {
+    int maHoaDon;
     int maUser;
+    String tenUser;
     String tenKhachHang;
-    String SDT;
-    Date NgayLapHD;
+    String NgayLapHD;
     int maGiohang;
+    String tenSP;
+    int soLuong;
+    String size;
+    double donGia;
+    double thanhTien;
 
-    public HoaDon(int maUser, String tenKhachHang, String SDT, Date ngayLapHD, int maGiohang) {
+    public HoaDon(int maUser, String tenKhachHang, String ngayLapHD, int maGiohang) {
         this.maUser = maUser;
         this.tenKhachHang = tenKhachHang;
-        this.SDT = SDT;
         NgayLapHD = ngayLapHD;
         this.maGiohang = maGiohang;
     }
 
-    public HoaDon() {
+    public HoaDon(int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
+        this.maHoaDon = maHoaDon;
+        this.maUser = maUser;
+        this.tenUser = tenUser;
+        this.tenKhachHang = tenKhachHang;
+        NgayLapHD = ngayLapHD;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.size = size;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
+    }
+
+    public double getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+    public String getTenUser() {
+        return tenUser;
+    }
+
+    public void setTenUser(String tenUser) {
+        this.tenUser = tenUser;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
+    public int getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(int maHoaDon) {
+        this.maHoaDon = maHoaDon;
     }
 
     public int getMaUser() {
@@ -36,19 +107,11 @@ public class HoaDon {
         this.tenKhachHang = tenKhachHang;
     }
 
-    public String getSDT() {
-        return SDT;
-    }
-
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
-    }
-
-    public Date getNgayLapHD() {
+    public String getNgayLapHD() {
         return NgayLapHD;
     }
 
-    public void setNgayLapHD(Date ngayLapHD) {
+    public void setNgayLapHD(String ngayLapHD) {
         NgayLapHD = ngayLapHD;
     }
 

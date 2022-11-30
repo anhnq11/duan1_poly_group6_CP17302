@@ -1,25 +1,45 @@
 package com.example.da1_poly_n6.Model;
 
 public class LuuHoaDon {
+    int maLuu;
     int maHoaDon;
     String NameUser;
     String NameKH;
-    String SDT;
     int maSanPham;
     int soLuong;
     double donGia;
+    String size;
+    String ngayLap;
 
-    public LuuHoaDon(int maHoaDon, String nameUser, String nameKH, String SDT, int maSanPham, int soLuong, double donGia) {
+    public LuuHoaDon(int maLuu, int maHoaDon, String nameUser, String nameKH, int maSanPham, int soLuong, double donGia, String size, String ngayLap) {
+        this.maLuu = maLuu;
         this.maHoaDon = maHoaDon;
         NameUser = nameUser;
         NameKH = nameKH;
-        this.SDT = SDT;
         this.maSanPham = maSanPham;
         this.soLuong = soLuong;
         this.donGia = donGia;
+        this.size = size;
+        this.ngayLap = ngayLap;
     }
 
-    public LuuHoaDon() {
+    public LuuHoaDon(int maHoaDon, String nameUser, String nameKH, int maSanPham, int soLuong, double donGia, String size, String ngayLap) {
+        this.maHoaDon = maHoaDon;
+        NameUser = nameUser;
+        NameKH = nameKH;
+        this.maSanPham = maSanPham;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.size = size;
+        this.ngayLap = ngayLap;
+    }
+
+    public int getMaLuu() {
+        return maLuu;
+    }
+
+    public void setMaLuu(int maLuu) {
+        this.maLuu = maLuu;
     }
 
     public int getMaHoaDon() {
@@ -46,14 +66,6 @@ public class LuuHoaDon {
         NameKH = nameKH;
     }
 
-    public String getSDT() {
-        return SDT;
-    }
-
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
-    }
-
     public int getMaSanPham() {
         return maSanPham;
     }
@@ -76,5 +88,21 @@ public class LuuHoaDon {
 
     public void setDonGia(double donGia) {
         this.donGia = donGia;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getNgayLap() {
+        return ngayLap;
+    }
+
+    public void setNgayLap(String ngayLap) {
+        this.ngayLap = ngayLap;
     }
 }

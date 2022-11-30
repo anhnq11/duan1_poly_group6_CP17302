@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
 
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,7 +208,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -242,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -276,7 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
         <LinearLayout
