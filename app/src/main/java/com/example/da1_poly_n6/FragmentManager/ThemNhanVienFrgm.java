@@ -1,5 +1,8 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,10 +29,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ThemNhanVienFrgm extends Fragment {
-    EditText edtUser, edtName, edtPassword, edtSDT, edNamSinh, btnAdd, btnHuy;
-    Spinner spnChucVu;
-    DAOChucVu dao;
+    EditText edtUser, edtName, edtPassword, edtSDT, edtNamSinh, btnAdd, btnHuy;
     DAOUser daoUser;
+    String strUsername;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,9 +55,10 @@ public class ThemNhanVienFrgm extends Fragment {
         edtUser = view.findViewById(R.id.edUsername);
         edtPassword = view.findViewById(R.id.edPassword);
         edtSDT = view.findViewById(R.id.edSDT);
-        edNamSinh = view.findViewById(R.id.edNamSinh);
+        edtNamSinh = view.findViewById(R.id.edNamSinh);
         btnAdd = view.findViewById(R.id.AddNhanVien);
         daoUser = new DAOUser(getActivity());
+
         //xử lý sự kiện
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +68,24 @@ public class ThemNhanVienFrgm extends Fragment {
                 user.setUsername(edtUser.getText().toString());
                 user.setPassword(edtPassword.getText().toString());
                 user.setSDT(edtSDT.getText().toString());
-                user.setNamSinh(Integer.parseInt(edNamSinh.getText().toString()));
                 user.setMaChucVu(2);
-                //
-                if (daoUser.insertUser(user) < 0) {
-                    Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                // check username đã tồn tài
+                strUsername = edtUser.getText().toString();
+                ArrayList<User> arrayList = daoUser.checkValidUser(strUsername);
+                if (arrayList.size() != 0) {
+                    // so sánh nếu có thì không cho insert
+                    Toast.makeText(getActivity(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //insert
+                if (checkEdt()) {
+                    //Câu insert
+                    if (daoUser.insertUser(user) < 0) {
+                        Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        resetEdt();
+                    }
                 }
             }
         });
@@ -85,4 +99,65 @@ public class ThemNhanVienFrgm extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    //    Reset Edittext
+    private void resetEdt() {
+        edtName.setText("");
+        edtName.setHintTextColor(Color.BLACK);
+        edtUser.setText("");
+        edtUser.setHintTextColor(Color.BLACK);
+        edtPassword.setText("");
+        edtPassword.setHintTextColor(Color.BLACK);
+        edtSDT.setText("");
+        edtSDT.setHintTextColor(Color.BLACK);
+        edtNamSinh.setText("");
+        edtNamSinh.setHintTextColor(Color.BLACK);
+    }
+//    Check Form
+
+    private boolean checkEdt() {
+
+        boolean checkAdd = true;
+
+        if (edtName.getText().toString().isEmpty()) {
+            edtName.setError("Vui lòng nhập!");
+            edtName.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+
+        if (edtUser.getText().toString().isEmpty()) {
+            edtUser.setError("Vui lòng nhập!");
+            edtUser.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+//        if (user.getUsername().equals(edtUser.getText().toString())) {
+//            Toast.makeText(getActivity(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+//            checkAdd = false;
+//        }
+        if (edtPassword.getText().toString().isEmpty()) {
+            edtPassword.setError("Vui lòng nhập!");
+            edtPassword.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+        if (edtSDT.getText().toString().isEmpty()) {
+            edtSDT.setError("Vui lòng nhập!");
+            edtSDT.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+
+
+        if (edtNamSinh.getText().toString().isEmpty()) {
+            edtNamSinh.setError("Vui lòng nhập!");
+            edtNamSinh.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+        try {
+            Integer.parseInt(edtNamSinh.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), "Năm sinh phải là số", Toast.LENGTH_SHORT).show();
+        }
+
+        return checkAdd;
+    }
+
 }

@@ -47,8 +47,9 @@ public class Account_Fragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
         int maUser = pref.getInt("MA", 0);
         User user = daoUser.getUser(maUser);
-        int quyenUser =user.getMaChucVu();
-        if (quyenUser == 2){
+        int quyenUser = user.getMaChucVu();
+
+        if (quyenUser == 2) {
             userFrgmThemNhanVien.setVisibility(View.GONE);
             userFrgmTKNhanVien.setVisibility(View.GONE);
             userFrgmThemSP.setVisibility(View.GONE);
