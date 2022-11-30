@@ -54,6 +54,8 @@
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_filters.xml" value="0.25" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_notifi.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_thanh_toan.xml" value="0.275" />
+        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_xac_nhan_sua_tt_nv.xml" value="0.275" />
+        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_xac_nhan_xoa.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/dialog_xacnhan.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_account_.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_account_frgm.xml" value="0.275" />
@@ -70,6 +72,7 @@
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_test.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_them_nhan_vien_frgm.xml" value="0.25" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_them_s_p_frgm.xml" value="0.275" />
+        <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_thong_tin_n_v_frgm.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/fragment_user_info_frgm.xml" value="0.25" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/item_thongkedoanhthu.xml" value="0.275" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/layout/item_thongkenhanvien.xml" value="0.275" />

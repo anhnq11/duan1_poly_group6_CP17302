@@ -25,6 +25,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
 
     SanPham sanPham;
     DAOSanPham dao;
+
     public ChiTietSPSuaFrgm(SanPham sanPham) {
         this.sanPham = sanPham;
     }
@@ -33,6 +34,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chi_tiet_s_p_sua_frgm, container, false);
+        // ánh xạ
         TextView txtCTSPSuaTenSp = view.findViewById(R.id.txtCTSPSuaTenSp);
         TextView txtCTSPSuaGiaSP = view.findViewById(R.id.txtCTSPSuaGiaSP);
         TextView txtCTSPSuaLoaiSP = view.findViewById(R.id.txtCTSPSuaLoaiSP);
@@ -40,18 +42,20 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         EditText btnCTSPSuaSua = view.findViewById(R.id.btnCTSPSuaSua);
         EditText btnCTSPSuaXoa = view.findViewById(R.id.btnCTSPSuaXoa);
         dao = new DAOSanPham(getContext());
+        // set text cho view
         txtCTSPSuaTenSp.setText(sanPham.getTenSanPham());
         txtCTSPSuaGiaSP.setText(sanPham.getPrice() + "");
         txtCTSPSuaLoaiSP.setText("Loại sản phẩm: " + sanPham.getMaLoai());
         txtCTSPSuaMoTaSP.setText(sanPham.getMota());
-
+        // sự kiện onclick
+        // sửa sản phẩm
         btnCTSPSuaSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadFragment(new SuaSPFrgm(sanPham));
             }
         });
-
+        // xoá sửa sản phẩm
         btnCTSPSuaXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

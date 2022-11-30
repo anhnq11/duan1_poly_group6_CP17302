@@ -17,7 +17,7 @@ public class MHChaoAct extends AppCompatActivity {
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(1000);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

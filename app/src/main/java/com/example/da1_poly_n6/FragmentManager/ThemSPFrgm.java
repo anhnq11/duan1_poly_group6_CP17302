@@ -45,7 +45,7 @@ import java.util.HashMap;
 public class ThemSPFrgm extends Fragment {
 
     private ImageView AddImg;
-    private EditText edName, edPrice, edMoTa, btnAddSP,btnHuySP;
+    private EditText edName, edPrice, edMoTa, btnAddSP, btnHuySP;
     Spinner spnLoaiSP;
     private DAOSanPham daoSanPham;
     final int REQUEST_CODE_GALLERY = 999;
@@ -86,7 +86,7 @@ public class ThemSPFrgm extends Fragment {
 //        Set Data cho spnLoaiSP - AnhNQ
         ArrayList<TheLoai> listLsp = daoSanPham.getDSLSP();
         ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
-        for (TheLoai lsp : listLsp){
+        for (TheLoai lsp : listLsp) {
             HashMap<String, Object> tl = new HashMap<>();
             tl.put("maLoai", lsp.getMaLoai());
             tl.put("tenLoai", lsp.getTenLoai());
@@ -111,7 +111,7 @@ public class ThemSPFrgm extends Fragment {
                 HashMap<String, Object> hsLoaiSach = (HashMap<String, Object>) spnLoaiSP.getSelectedItem();
                 int maLSP = (int) hsLoaiSach.get("maLoai");
 
-                if (checkEdt()){
+                if (checkEdt()) {
                     daoSanPham.insertData(imageToByte(AddImg), strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     resetEdt();
@@ -172,8 +172,8 @@ public class ThemSPFrgm extends Fragment {
         transaction.commit();
     }
 
-//    Reset Edittext
-    private void resetEdt(){
+    //    Reset Edittext
+    private void resetEdt() {
         AddImg.setImageResource(R.drawable.img_add_img);
         edName.setText("");
         edName.setHintTextColor(Color.BLACK);
@@ -183,23 +183,22 @@ public class ThemSPFrgm extends Fragment {
         edMoTa.setHintTextColor(Color.BLACK);
     }
 
-//    Check Form
-    private boolean checkEdt(){
+    //    Check Form
+    private boolean checkEdt() {
 
         boolean checkAdd = true;
-        if (strTenSP.isEmpty()){
+        if (strTenSP.isEmpty()) {
             edName.setError("Vui lòng nhập!");
             edName.setHintTextColor(Color.RED);
             checkAdd = false;
         }
 
-        if (strGiaban.isEmpty()){
+        if (strGiaban.isEmpty()) {
             edPrice.setError("Vui lòng nhập!");
             edPrice.setHintTextColor(Color.RED);
             checkAdd = false;
         }
-
-        if (strMota.isEmpty()){
+        if (strMota.isEmpty()) {
             edMoTa.setError("Vui lòng nhập!");
             edPrice.setHintTextColor(Color.RED);
             checkAdd = false;
