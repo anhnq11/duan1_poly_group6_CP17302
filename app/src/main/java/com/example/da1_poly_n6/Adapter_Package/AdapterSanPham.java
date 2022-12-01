@@ -26,6 +26,7 @@ import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
     private ArrayList<SanPham> list;
     DAOGioHang daoGioHang;
     DAOUser daoUser;
+    BottomNavigationView bottomNavigationView;
 
     public AdapterSanPham(Context context, ArrayList<SanPham> list) {
         this.context = context;
@@ -48,6 +50,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
                 .inflate(R.layout.card_view_sanpham, parent, false);
         daoGioHang = new DAOGioHang(view.getContext());
         daoUser = new DAOUser(view.getContext());
+        bottomNavigationView = view.findViewById(R.id.navigation);
         return new UserViewHolder(view);
     }
 
@@ -66,6 +69,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                bottomNavigationView.setSelectedItemId(R.id.pageBanHang);
                 loadFragment(new ChiTietSPFrgm(sanPham));
             }
         });

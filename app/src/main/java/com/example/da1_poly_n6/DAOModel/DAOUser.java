@@ -46,12 +46,12 @@ public class DAOUser {
         return database.update("User", values, "MaUser=?", new String[]{String.valueOf(user.getID_User())});
     }
 
+
     public User getID(String id) {
         String sql = "SELECT * FROM User WHERE Username=?";
         List<User> list = getData(sql, id);
         return list.get(0);
     }
-
 
     public ArrayList<User> getData(String sql, String... selectionAGrs) {
         ArrayList<User> list = new ArrayList<>();

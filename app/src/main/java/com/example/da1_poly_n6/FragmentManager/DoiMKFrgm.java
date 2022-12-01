@@ -63,6 +63,7 @@ public class DoiMKFrgm extends Fragment {
                 resetForm();
             }
         });
+
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

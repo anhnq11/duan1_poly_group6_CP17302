@@ -19,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.da1_poly_n6.DAOModel.DAOGioHang;
+import com.example.da1_poly_n6.MainActivity;
 import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -197,6 +199,7 @@ public class ChiTietSPFrgm extends Fragment {
                     }
                 }
                 loadFragment(new StoreFrgm());
+                MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageBanHang);
             }
         });
 

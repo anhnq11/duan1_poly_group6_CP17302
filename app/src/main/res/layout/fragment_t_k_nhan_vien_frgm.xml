@@ -110,7 +110,7 @@
 
         <TextView
             style="@style/edt_Label"
-            android:text="Tổng số lượng"
+            android:text="Số nhân viên: "
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"

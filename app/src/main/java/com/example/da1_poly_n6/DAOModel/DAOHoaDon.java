@@ -38,9 +38,20 @@ public class DAOHoaDon {
         }
     }
 
+//    Lấy ra hóa đơn
     public ArrayList<HoaDon> getHoaDon(){
         ArrayList<HoaDon> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT HoaDon.MaHoaDon, User.mauser, User.username, HoaDon.tenkhachhang, HoaDon.ngaylaphd, SanPham.tensanpham, GioHang.soluong, GioHang.size, GioHang.dongia, (GioHang.soluong * GioHang.dongia) as ThanhTien FROM HoaDon, GioHang, SanPham, User WHERE HoaDon.magiohang = GioHang.MaGioHang and GioHang.masanpham = SanPham.MaSanPham and HoaDon.mauser = User.MaUser", null);
+        Cursor cursor = database.rawQuery("SELECT HoaDon.MaHoaDon, " +
+                "User.mauser, " +
+                "User.username, " +
+                "HoaDon.tenkhachhang, " +
+                "HoaDon.ngaylaphd, " +
+                "SanPham.MaSanPham, " +
+                "SanPham.tensanpham, " +
+                "GioHang.soluong, " +
+                "GioHang.size, " +
+                "GioHang.dongia, " +
+                "(GioHang.soluong * GioHang.dongia) as ThanhTien FROM HoaDon, GioHang, SanPham, User WHERE HoaDon.magiohang = GioHang.MaGioHang and GioHang.masanpham = SanPham.MaSanPham and HoaDon.mauser = User.MaUser", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
@@ -49,14 +60,20 @@ public class DAOHoaDon {
                 String userName = cursor.getString(2);
                 String tenKH = cursor.getString(3);
                 String ngayLapHD = cursor.getString(4);
-                String tenSP = cursor.getString(5);
-                int soLuong = cursor.getInt(6);
-                String size = cursor.getString(7);
-                double donGia = cursor.getDouble(8);
-                double thanhTien = cursor.getDouble(9);
-                list.add(new HoaDon(maHoaDon, maUser, userName, tenKH, ngayLapHD, tenSP, soLuong, size, donGia, thanhTien));
+                int maSP = cursor.getInt(5);
+                String tenSP = cursor.getString(6);
+                int soLuong = cursor.getInt(7);
+                String size = cursor.getString(8);
+                double donGia = cursor.getDouble(9);
+                double thanhTien = cursor.getDouble(10);
+                list.add(new HoaDon(maHoaDon, maUser, userName, tenKH, ngayLapHD,maSP, tenSP, soLuong, size, donGia, thanhTien));
             }   while (cursor.moveToNext());
         }
         return list;
+    }
+
+//    Xóa hóa đơn
+    public  void deleteHoaDon(HoaDon hoaDon){
+        database.delete("HoaDon","MaHoaDon = ?", new String[]{String.valueOf(hoaDon.getMaHoaDon())});
     }
 }

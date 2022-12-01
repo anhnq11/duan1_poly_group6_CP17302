@@ -23,6 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String createTableTheLoai = "CREATE TABLE THELOAI(maLoai INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "tenLoai TEXT);";
         db.execSQL(createTableTheLoai);
+        db.execSQL("INSERT INTO THELOAI VALUES(1, 'Cà Phê Truyền Thống'), (2, 'Cà Phê Máy'), (3, 'Trà Sữa'), (4, 'Bánh Ngọt');");
 //Bảng sản phẩm
         String createTableSanPham = ("CREATE TABLE SanPham(\n" +
                 "MaSanPham INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -73,14 +74,17 @@ public class DbHelper extends SQLiteOpenHelper {
 // Bảng lưu hóa đơn
         String tableLuuHoaDon = "CREATE Table LuuHoaDon (\n" +
                 "maLuu INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "MaHoaDon INTEGER REFERENCES HoaDon(MaHoaDon),\n" +
-                "TenUser TEXT,\n" +
-                "TenKH TEXT,\n" +
-                "MaSanPham INTEGER,\n" +
-                "SoLuong INTEGER,\n" +
-                "DonGia DOUBLE\n," +
+                "maHoaDon INTEGER REFERENCES HoaDon(MaHoaDon),\n" +
+                "maUser INTEGER REFERENCES User(MaUser),\n" +
+                "tenUser TEXT,\n" +
+                "tenKhachHang TEXT,\n" +
+                "NgayLapHD TEXT,\n" +
+                "maSP INTEGER,\n" +
+                "tenSP TEXT,\n" +
+                "soLuong INTEGER,\n" +
                 "size TEXT,\n" +
-                "ngayLap TEXT\n" +
+                "donGia DOUBLE\n," +
+                "thanhTien DOUBLE\n" +
                 ");";
         db.execSQL(tableLuuHoaDon);
     }

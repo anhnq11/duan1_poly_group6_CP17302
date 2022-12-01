@@ -24,6 +24,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,11 +48,11 @@ public class ThemSPFrgm extends Fragment {
 
     private ImageView AddImg;
     private EditText edName, edPrice, edMoTa, btnAddSP, btnHuySP;
-    Spinner spnLoaiSP;
+    AutoCompleteTextView edtLoaiSP;
     private DAOSanPham daoSanPham;
     final int REQUEST_CODE_GALLERY = 999;
 
-    String strTenSP, strGiaban, strMota;
+    String strTenSP, strGiaban, strLoaiSP, strMota;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +65,7 @@ public class ThemSPFrgm extends Fragment {
         edName = view.findViewById(R.id.edNameSP);
         edPrice = view.findViewById(R.id.edPrice);
         edMoTa = view.findViewById(R.id.edMoTa);
-        spnLoaiSP = view.findViewById(R.id.spnLoaiSP);
+        edtLoaiSP = view.findViewById(R.id.edtLoaiSP);
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
         btnHuySP = view.findViewById(R.id.btnHuySp);
 
@@ -84,20 +86,24 @@ public class ThemSPFrgm extends Fragment {
         });
 
 //        Set Data cho spnLoaiSP - AnhNQ
-        ArrayList<TheLoai> listLsp = daoSanPham.getDSLSP();
-        ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
-        for (TheLoai lsp : listLsp) {
-            HashMap<String, Object> tl = new HashMap<>();
-            tl.put("maLoai", lsp.getMaLoai());
-            tl.put("tenLoai", lsp.getTenLoai());
-            listHM.add(tl);
+        ArrayList<TheLoai> listTheLoai = daoSanPham.getDSLSP();
+        ArrayList<String> listTenTL = new ArrayList<>();
+        ArrayList<Integer> listMaTL = new ArrayList<>();
+        int listTheLoaiSize = listTheLoai.size();
+        if (listTheLoaiSize != 0){
+            for (int i = 0; i < listTheLoaiSize; i++) {
+                TheLoai theLoaiModel = listTheLoai.get(i);
+                listTenTL.add(theLoaiModel.getTenLoai());
+                listMaTL.add(theLoaiModel.getMaLoai());
+            }
         }
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getContext(),
-                listHM,
-                android.R.layout.simple_list_item_1,
-                new String[]{"tenLoai"},
-                new int[]{android.R.id.text1});
-        spnLoaiSP.setAdapter(simpleAdapter);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (getContext(), android.R.layout.select_dialog_item, listTenTL);
+
+        edtLoaiSP.setThreshold(1);
+        edtLoaiSP.setAdapter(adapter);
+
 
 //        Set sự kiện Click Button Thêm
         btnAddSP.setOnClickListener(new View.OnClickListener() {
@@ -107,9 +113,16 @@ public class ThemSPFrgm extends Fragment {
                 strTenSP = edName.getText().toString();
                 strGiaban = edPrice.getText().toString();
                 strMota = edMoTa.getText().toString();
+                strLoaiSP = edtLoaiSP.getText().toString();
 
-                HashMap<String, Object> hsLoaiSach = (HashMap<String, Object>) spnLoaiSP.getSelectedItem();
-                int maLSP = (int) hsLoaiSach.get("maLoai");
+                int index = 0;
+                for (int i = 0; i < listTheLoaiSize; i++) {
+                    String mTenLoai = listTenTL.get(i);
+                    if (mTenLoai.equals(strLoaiSP)){
+                        index = i;
+                    }
+                }
+                int maLSP = listMaTL.get(index);
 
                 if (checkEdt()) {
                     daoSanPham.insertData(imageToByte(AddImg), strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
@@ -179,6 +192,8 @@ public class ThemSPFrgm extends Fragment {
         edName.setHintTextColor(Color.BLACK);
         edPrice.setText("");
         edPrice.setHintTextColor(Color.BLACK);
+        edtLoaiSP.setText("");
+        edtLoaiSP.setHintTextColor(Color.BLACK);
         edMoTa.setText("");
         edMoTa.setHintTextColor(Color.BLACK);
     }
@@ -198,6 +213,13 @@ public class ThemSPFrgm extends Fragment {
             edPrice.setHintTextColor(Color.RED);
             checkAdd = false;
         }
+
+        if (strLoaiSP.isEmpty()) {
+            edtLoaiSP.setError("Vui lòng nhập!");
+            edtLoaiSP.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
+
         if (strMota.isEmpty()) {
             edMoTa.setError("Vui lòng nhập!");
             edPrice.setHintTextColor(Color.RED);

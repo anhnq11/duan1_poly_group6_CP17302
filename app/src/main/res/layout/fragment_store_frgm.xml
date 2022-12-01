@@ -32,6 +32,17 @@
             android:layout_marginRight="10dp"
             android:padding="13dp" />
 
+        <TextView
+            android:id="@+id/txtNotifi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Vui lòng chọn sản phẩm!"
+            android:textSize="22dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+
     </LinearLayout>
 
     <LinearLayout

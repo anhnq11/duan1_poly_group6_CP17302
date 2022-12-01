@@ -9,6 +9,7 @@ public class HoaDon {
     String tenKhachHang;
     String NgayLapHD;
     int maGiohang;
+    int maSP;
     String tenSP;
     int soLuong;
     String size;
@@ -22,17 +23,26 @@ public class HoaDon {
         this.maGiohang = maGiohang;
     }
 
-    public HoaDon(int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
+    public HoaDon(int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, int maSP, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
         this.maHoaDon = maHoaDon;
         this.maUser = maUser;
         this.tenUser = tenUser;
         this.tenKhachHang = tenKhachHang;
         NgayLapHD = ngayLapHD;
+        this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.size = size;
         this.donGia = donGia;
         this.thanhTien = thanhTien;
+    }
+
+    public int getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(int maSP) {
+        this.maSP = maSP;
     }
 
     public double getThanhTien() {

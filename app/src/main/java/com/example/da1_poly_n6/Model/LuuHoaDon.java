@@ -3,35 +3,58 @@ package com.example.da1_poly_n6.Model;
 public class LuuHoaDon {
     int maLuu;
     int maHoaDon;
-    String NameUser;
-    String NameKH;
-    int maSanPham;
+    int maUser;
+    String tenUser;
+    String userName;
+    String chucVu;
+    String userSDT;
+    int userNamSinh;
+    String tenKhachHang;
+    String NgayLapHD;
+    int maSP;
+    String tenSP;
     int soLuong;
-    double donGia;
     String size;
-    String ngayLap;
+    double donGia;
+    double thanhTien;
 
-    public LuuHoaDon(int maLuu, int maHoaDon, String nameUser, String nameKH, int maSanPham, int soLuong, double donGia, String size, String ngayLap) {
+    public LuuHoaDon(int maLuu, int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, int maSP, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
         this.maLuu = maLuu;
         this.maHoaDon = maHoaDon;
-        NameUser = nameUser;
-        NameKH = nameKH;
-        this.maSanPham = maSanPham;
+        this.maUser = maUser;
+        this.tenUser = tenUser;
+        this.tenKhachHang = tenKhachHang;
+        NgayLapHD = ngayLapHD;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
         this.soLuong = soLuong;
-        this.donGia = donGia;
         this.size = size;
-        this.ngayLap = ngayLap;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
     }
 
-    public LuuHoaDon(int maHoaDon, String nameUser, String nameKH, int maSanPham, int soLuong, double donGia, String size, String ngayLap) {
+    public LuuHoaDon(int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, int maSP, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
         this.maHoaDon = maHoaDon;
-        NameUser = nameUser;
-        NameKH = nameKH;
-        this.maSanPham = maSanPham;
+        this.maUser = maUser;
+        this.tenUser = tenUser;
+        this.tenKhachHang = tenKhachHang;
+        NgayLapHD = ngayLapHD;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
         this.soLuong = soLuong;
-        this.donGia = donGia;
         this.size = size;
-        this.ngayLap = ngayLap;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
+    }
+
+    public LuuHoaDon(int maUser, String tenUser, String userName, String chucVu, String userSDT, int userNamSinh, double thanhTien) {
+        this.maUser = maUser;
+        this.tenUser = tenUser;
+        this.userName = userName;
+        this.chucVu = chucVu;
+        this.userSDT = userSDT;
+        this.userNamSinh = userNamSinh;
+        this.thanhTien = thanhTien;
     }
 
     public int getMaLuu() {
@@ -50,28 +73,52 @@ public class LuuHoaDon {
         this.maHoaDon = maHoaDon;
     }
 
-    public String getNameUser() {
-        return NameUser;
+    public int getMaUser() {
+        return maUser;
     }
 
-    public void setNameUser(String nameUser) {
-        NameUser = nameUser;
+    public void setMaUser(int maUser) {
+        this.maUser = maUser;
     }
 
-    public String getNameKH() {
-        return NameKH;
+    public String getTenUser() {
+        return tenUser;
     }
 
-    public void setNameKH(String nameKH) {
-        NameKH = nameKH;
+    public void setTenUser(String tenUser) {
+        this.tenUser = tenUser;
     }
 
-    public int getMaSanPham() {
-        return maSanPham;
+    public String getTenKhachHang() {
+        return tenKhachHang;
     }
 
-    public void setMaSanPham(int maSanPham) {
-        this.maSanPham = maSanPham;
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
+    }
+
+    public String getNgayLapHD() {
+        return NgayLapHD;
+    }
+
+    public void setNgayLapHD(String ngayLapHD) {
+        NgayLapHD = ngayLapHD;
+    }
+
+    public int getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(int maSP) {
+        this.maSP = maSP;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public int getSoLuong() {
@@ -82,14 +129,6 @@ public class LuuHoaDon {
         this.soLuong = soLuong;
     }
 
-    public double getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(double donGia) {
-        this.donGia = donGia;
-    }
-
     public String getSize() {
         return size;
     }
@@ -98,11 +137,19 @@ public class LuuHoaDon {
         this.size = size;
     }
 
-    public String getNgayLap() {
-        return ngayLap;
+    public double getDonGia() {
+        return donGia;
     }
 
-    public void setNgayLap(String ngayLap) {
-        this.ngayLap = ngayLap;
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
+    public double getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
     }
 }

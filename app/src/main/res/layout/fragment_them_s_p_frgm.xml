@@ -119,14 +119,12 @@
                     android:layout_marginLeft="10dp"
                     />
 
-                <Spinner
-                    android:id="@+id/spnLoaiSP"
+                <AutoCompleteTextView
+                    android:id="@+id/edtLoaiSP"
                     style="@style/edt_TextBox2"
-                    android:theme="@style/mySpinnerItemStyle"
+                    android:hint="Nhập loại Sản Phẩm"
                     android:layout_marginTop="5dp"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="0dp"
-                    android:paddingLeft="0dp"
+                    android:textColorHint="@color/black"
                     />
 
             </LinearLayout>
@@ -147,7 +145,7 @@
                 <EditText
                     android:id="@+id/edMoTa"
                     style="@style/edt_TextBox2"
-                    android:hint="Nhập mô tả"
+                    android:hint="Nhập mô tả sản phẩm"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     android:lines="2"

@@ -96,6 +96,9 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
                     }
                 }
                 notifyDataSetChanged();
+                double tongTien = daoGioHang.tongTienGiohang();
+                String outTongTien = String.format("%,.0f", tongTien);
+                StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
             }
         });
 
@@ -117,6 +120,9 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
                 }
                 holder.edtGHSoLuong.setText(soLuong + "");
                 notifyDataSetChanged();
+                double tongTien = daoGioHang.tongTienGiohang();
+                String outTongTien = String.format("%,.0f", tongTien);
+                StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
             }
         });
         holder.edtGHSoLuong.getText().toString();
