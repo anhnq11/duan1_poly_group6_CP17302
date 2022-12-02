@@ -65,7 +65,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         holder.img_SanPham.setImageBitmap(bitmap);
         //
         String outTongTien = String.format("%,.0f", sanPham.getPrice());
-        holder.GiaTien.setText(outTongTien + "Đ");
+        holder.GiaTien.setText(outTongTien + " VNĐ");
 
 //        Set sự kiện Onclick cho các Button
 //        Buton xem sản phẩm

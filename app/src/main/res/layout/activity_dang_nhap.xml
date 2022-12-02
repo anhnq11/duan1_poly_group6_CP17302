@@ -66,28 +66,30 @@
                 style="@style/edt_Label"
                 android:text="Mật Khẩu" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ct_edittext"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edtMatKhau"
                     style="@style/edt_TextBox1"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nhập mật khẩu"
                     android:inputType="textPassword" />
 
                 <ImageView
                     android:id="@+id/img_hidePassword"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_visibility_off" />
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </LinearLayout>

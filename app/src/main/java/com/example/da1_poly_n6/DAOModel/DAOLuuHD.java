@@ -47,7 +47,7 @@ public class DAOLuuHD {
         }
     }
 
-//    Thống kê nhân viên và doanh thu
+//    Thống kê nhân viên và doanh thu theo từng nhân viên
     public ArrayList<LuuHoaDon> tkNhanVien(){
         ArrayList<LuuHoaDon> listTKNV = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT User.MaUser, User.fullname, User.username, User.ChucVu, User.SDT, User.namsinh, SUM(LuuHoaDon.soluong * LuuHoaDon.dongia) as doanhThu FROM User left JOIN LuuHoaDon on User.MaUser = LuuHoaDon.mauser GROUP BY User.MaUser", null);
@@ -65,6 +65,37 @@ public class DAOLuuHD {
             }   while (cursor.moveToNext());
         }
         return listTKNV;
+    }
+
+//    Lấy tổng doanh thu theo khoảng thời gian
+    public double getTongDoanhThu(String dStart, String dEnd){
+        double tongDT = 0;
+
+        Cursor cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ?;", new String[]{dStart, dEnd});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                tongDT += cursor.getDouble(0);
+            }   while (cursor.moveToNext());
+        }
+
+        return tongDT;
+    }
+
+//    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
+    public ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd){
+        ArrayList<LuuHoaDon> listHD = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ? GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                int maLuu = cursor.getInt(0);
+                String tenKH = cursor.getString(1);
+                double thanhTien = cursor.getDouble(2);
+                listHD.add(new LuuHoaDon(maLuu, tenKH, thanhTien));
+            }   while (cursor.moveToNext());
+        }
+        return listHD;
     }
 
 }

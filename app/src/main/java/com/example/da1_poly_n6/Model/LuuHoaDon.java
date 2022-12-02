@@ -33,6 +33,12 @@ public class LuuHoaDon {
         this.thanhTien = thanhTien;
     }
 
+    public LuuHoaDon(int maLuu, String tenKhachHang, double thanhTien) {
+        this.maLuu = maLuu;
+        this.tenKhachHang = tenKhachHang;
+        this.thanhTien = thanhTien;
+    }
+
     public LuuHoaDon(int maHoaDon, int maUser, String tenUser, String tenKhachHang, String ngayLapHD, int maSP, String tenSP, int soLuong, String size, double donGia, double thanhTien) {
         this.maHoaDon = maHoaDon;
         this.maUser = maUser;

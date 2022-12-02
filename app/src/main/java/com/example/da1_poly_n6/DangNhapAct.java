@@ -45,10 +45,10 @@ public class DangNhapAct extends AppCompatActivity {
             public void onClick(View v) {
                 if (edtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                     edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    img_hidePassword.setImageResource(R.drawable.ic_visibility_off);
+                    img_hidePassword.setImageResource(R.drawable.ic_hide_on);
                 } else {
                     edtPassword.setInputType(129);
-                    img_hidePassword.setImageResource(R.drawable.ic_hide_on);
+                    img_hidePassword.setImageResource(R.drawable.ic_visibility_off);
                 }
             }
         });

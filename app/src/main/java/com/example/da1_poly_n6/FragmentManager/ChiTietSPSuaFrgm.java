@@ -22,7 +22,10 @@ import android.widget.Toast;
 
 import com.example.da1_poly_n6.DAOModel.DAOSanPham;
 import com.example.da1_poly_n6.Model.SanPham;
+import com.example.da1_poly_n6.Model.TheLoai;
 import com.example.da1_poly_n6.R;
+
+import java.util.ArrayList;
 
 public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
 
@@ -52,7 +55,16 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         // set text cho view
         txtCTSPSuaTenSp.setText(sanPham.getTenSanPham());
         txtCTSPSuaGiaSP.setText(sanPham.getPrice() + "");
-        txtCTSPSuaLoaiSP.setText("Loại sản phẩm: " + sanPham.getMaLoai());
+        int maLSP = sanPham.getMaLoai();
+        String tenLSP = "";
+        ArrayList<TheLoai> listTheLoai = dao.getDSLSP();
+        for (int i = 0; i < listTheLoai.size(); i++) {
+            TheLoai theLoai = listTheLoai.get(i);
+            if (theLoai.getMaLoai() == maLSP){
+                tenLSP = theLoai.getTenLoai();
+            }
+        }
+        txtCTSPSuaLoaiSP.setText("Loại sản phẩm: " + tenLSP);
         txtCTSPSuaMoTaSP.setText(sanPham.getMota());
         byte[] productsImage = sanPham.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
@@ -60,7 +72,7 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         img1.setImageBitmap(bitmap);
         //
         String outGia = String.format("%,.0f", sanPham.getPrice());
-        txtCTSPSuaGiaSP.setText(outGia + "Đ");
+        txtCTSPSuaGiaSP.setText(outGia + " VNĐ");
         // sự kiện onclick
         // sửa sản phẩm
         btnCTSPSuaSua.setOnClickListener(new View.OnClickListener() {

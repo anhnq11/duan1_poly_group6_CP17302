@@ -95,7 +95,7 @@ public class StoreFrgm extends Fragment {
 
 //                    Lấy ngày tạo hóa đơn
                         Date nowDate = Calendar.getInstance().getTime();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy", Locale.getDefault());
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
                         String ngayTaoHD = simpleDateFormat.format(nowDate);
 
 //                Lấy thông tin hóa đơn - Hiển thị lên dialog
