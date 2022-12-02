@@ -18,6 +18,8 @@ import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.Model.TheLoai;
 import com.example.da1_poly_n6.R;
 
+import java.util.ArrayList;
+
 public class ThemLSPFragm extends Fragment {
     
     DAOSanPham daoSanPham;
@@ -56,11 +58,31 @@ public class ThemLSPFragm extends Fragment {
             @Override
             public void onClick(View v) {
                 String strLoai = edtAddSPLoai.getText().toString();
+
+                boolean checkAddLSP = true;
+
+//                Kiểm tra Edt Rỗng
                 if (strLoai.isEmpty()){
-                edtAddSPLoai.setError("Vui lòng nhập!");
-                edtAddSPLoai.setHintTextColor(Color.RED);
+                    edtAddSPLoai.setError("Vui lòng nhập!");
+                    edtAddSPLoai.setHintTextColor(Color.RED);
+                    checkAddLSP = false;
                 }
-                else {
+
+//                Kiểm tra Tên Loại trùng
+                ArrayList<TheLoai> listLoaiSP = daoSanPham.getDSLSP();
+                for (int i = 0; i < listLoaiSP.size(); i++) {
+                    TheLoai mTheLoai = listLoaiSP.get(i);
+                    String mTenLoai = mTheLoai.getTenLoai();
+                    if (mTenLoai.equals(strLoai)){
+                        checkAddLSP = false;
+                        Toast.makeText(getContext(), "Loại sản phẩm đã tồn tại!", Toast.LENGTH_SHORT).show();
+                        edtAddSPLoai.setText(null);
+                        edtAddSPLoai.setHintTextColor(Color.BLACK);
+                    }
+                }
+
+//                Kiểm tra điểu kiện
+                if (checkAddLSP) {
                     TheLoai theLoai = new TheLoai(strLoai);
                     boolean checkAdd = daoSanPham.addLSP(theLoai);
                     if (checkAdd){
@@ -74,8 +96,6 @@ public class ThemLSPFragm extends Fragment {
                 }
             }
         });
-
-
         return view;
     }
 

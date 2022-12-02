@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ThemNhanVienFrgm extends Fragment {
-    EditText edtUser, edtName, edtPassword, edtSDT, edtNamSinh, btnAdd, btnHuy;
+    EditText edtUser, edtName, edtPassword, edtSDT, edtNamSinh, btnAddThemNV, btnHuyThemNV;
     DAOUser daoUser;
     String strUsername;
 
@@ -50,46 +50,58 @@ public class ThemNhanVienFrgm extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //ánh xạ
+
+//        Ánh xạ các View
         edtName = view.findViewById(R.id.edTenNhanVien);
         edtUser = view.findViewById(R.id.edUsername);
         edtPassword = view.findViewById(R.id.edPassword);
         edtSDT = view.findViewById(R.id.edSDT);
         edtNamSinh = view.findViewById(R.id.edNamSinh);
-        btnAdd = view.findViewById(R.id.AddNhanVien);
+        btnAddThemNV = view.findViewById(R.id.btnAddThemNV);
+        btnHuyThemNV = view.findViewById(R.id.btnHuyThemNV);
         daoUser = new DAOUser(getActivity());
-
-        //xử lý sự kiện
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+//        Sự kiện Button Thêm OnClick
+        btnAddThemNV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User();
-                user.setFullName(edtName.getText().toString());
-                user.setUsername(edtUser.getText().toString());
-                user.setPassword(edtPassword.getText().toString());
-                user.setSDT(edtSDT.getText().toString());
-                user.setMaChucVu(2);
-                // check username đã tồn tài
-                strUsername = edtUser.getText().toString();
-                ArrayList<User> arrayList = daoUser.checkValidUser(strUsername);
-                if (arrayList.size() != 0) {
-                    // so sánh nếu có thì không cho insert
-                    Toast.makeText(getActivity(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                //insert
-                if (checkEdt()) {
-                    //Câu insert
-                    if (daoUser.insertUser(user) < 0) {
-                        Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        resetEdt();
+//                Khởi tạo Model
+
+                String fullName = edtName.getText().toString();
+                String userName = edtUser.getText().toString();
+                String passWord = edtPassword.getText().toString();
+                String userSDT = edtSDT.getText().toString();
+                String namSinh = edtNamSinh.getText().toString();
+
+//                Check Form
+                if (checkEdt()){
+//                    Kiểm tra trùng lặp UserName
+                    int checkValid = daoUser.checkValid(userName);
+                    if (checkValid != 0){
+//                        UserName đã tồn tại -> Thông báo lỗi, Nhập lại
+                        Toast.makeText(getContext(), "Tên tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+                        edtUser.setTextColor(Color.RED);
+                        edtUser.setError("UserName đã tồn tại.");
+                    }
+                    else {
+//                        UserName chưa tồn tại -> Thêm Account
+                        int mNamSinh = Integer.parseInt(namSinh);
+                        User user = new User(fullName, userName, passWord, 2, userSDT, mNamSinh);
+                        if (daoUser.insertUser(user) < 0) {
+                            Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            resetEdt();
+                        }
                     }
                 }
             }
         });
-
+        btnHuyThemNV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetEdt();
+            }
+        });
 
     }
 
@@ -104,19 +116,23 @@ public class ThemNhanVienFrgm extends Fragment {
     private void resetEdt() {
         edtName.setText("");
         edtName.setHintTextColor(Color.BLACK);
+        edtName.setError(null);
         edtUser.setText("");
         edtUser.setHintTextColor(Color.BLACK);
+        edtUser.setError(null);
         edtPassword.setText("");
         edtPassword.setHintTextColor(Color.BLACK);
+        edtPassword.setError(null);
         edtSDT.setText("");
         edtSDT.setHintTextColor(Color.BLACK);
+        edtSDT.setError(null);
         edtNamSinh.setText("");
         edtNamSinh.setHintTextColor(Color.BLACK);
+        edtNamSinh.setError(null);
     }
 //    Check Form
 
     private boolean checkEdt() {
-
         boolean checkAdd = true;
 
         if (edtName.getText().toString().isEmpty()) {
@@ -130,15 +146,13 @@ public class ThemNhanVienFrgm extends Fragment {
             edtUser.setHintTextColor(Color.RED);
             checkAdd = false;
         }
-//        if (user.getUsername().equals(edtUser.getText().toString())) {
-//            Toast.makeText(getActivity(), "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
-//            checkAdd = false;
-//        }
+
         if (edtPassword.getText().toString().isEmpty()) {
             edtPassword.setError("Vui lòng nhập!");
             edtPassword.setHintTextColor(Color.RED);
             checkAdd = false;
         }
+
         if (edtSDT.getText().toString().isEmpty()) {
             edtSDT.setError("Vui lòng nhập!");
             edtSDT.setHintTextColor(Color.RED);
@@ -150,11 +164,6 @@ public class ThemNhanVienFrgm extends Fragment {
             edtNamSinh.setError("Vui lòng nhập!");
             edtNamSinh.setHintTextColor(Color.RED);
             checkAdd = false;
-        }
-        try {
-            Integer.parseInt(edtNamSinh.getText().toString());
-        } catch (NumberFormatException e) {
-            Toast.makeText(getActivity(), "Năm sinh phải là số", Toast.LENGTH_SHORT).show();
         }
 
         return checkAdd;

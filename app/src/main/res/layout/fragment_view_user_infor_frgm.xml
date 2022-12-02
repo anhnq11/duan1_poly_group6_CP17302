@@ -14,7 +14,7 @@
         android:paddingBottom="5dp">
 
         <ImageView
-            android:id="@+id/btnBackUserInfo"
+            android:id="@+id/btnBackViewUserInfo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_marginRight="30dp"
             android:fontFamily="@font/ct_font_bold"
-            android:text="Thông Tin Cá Nhân"
+            android:text="Thông Tin Nhân Viên"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25dp" />
@@ -33,7 +33,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -82,7 +82,7 @@
                     android:src="@drawable/ic_baseline_account_circle_24" />
 
                 <TextView
-                    android:id="@+id/txtInfoFullName"
+                    android:id="@+id/txtViewInfoFullName"
                     style="@style/edt_Label"
                     android:layout_marginLeft="10dp"
                     android:paddingBottom="3dp"
@@ -101,6 +101,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -124,11 +125,11 @@
                     android:src="@drawable/ic_baseline_account_circle_24" />
 
                 <TextView
-                    android:id="@+id/txtInfoUserName"
+                    android:id="@+id/txtViewInfoUserName"
                     style="@style/edt_Label"
                     android:layout_marginLeft="10dp"
                     android:paddingBottom="3dp"
-                    android:text="Admin"
+                    android:text="AdminName"
                     android:textColor="@color/black" />
 
             </LinearLayout>
@@ -139,7 +140,6 @@
                 android:layout_marginTop="2dp"
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
                     android:src="@drawable/ic_baseline_account_circle_24" />
 
                 <TextView
-                    android:id="@+id/txtInfoChucVu"
+                    android:id="@+id/txtViewInfoChucVu"
                     style="@style/edt_Label"
                     android:layout_marginLeft="10dp"
                     android:paddingBottom="3dp"
@@ -208,7 +208,7 @@
                     android:src="@drawable/ic_phone" />
 
                 <TextView
-                    android:id="@+id/txtInfoSDT"
+                    android:id="@+id/txtViewInfoSDT"
                     style="@style/edt_Label"
                     android:layout_marginLeft="10dp"
                     android:paddingBottom="3dp"
@@ -250,7 +250,7 @@
                     android:src="@drawable/ic_calendar" />
 
                 <TextView
-                    android:id="@+id/txtInfoNamSinh"
+                    android:id="@+id/txtViewInfoNamSinh"
                     style="@style/edt_Label"
                     android:layout_marginLeft="10dp"
                     android:paddingBottom="3dp"
@@ -261,26 +261,58 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/btnInfoEdit"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bo_tron_edt"
-            android:backgroundTint="@color/red"
-            android:text="Chỉnh Sửa Thông Tin"
             android:gravity="center"
-            android:textSize="25dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/ct_font_medium"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:editable="false"
-            android:focusable="false"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            >
+
+            <EditText
+                android:id="@+id/btnViewInfoSua"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bo_tron_edt"
+                android:backgroundTint="@color/red"
+                android:text="Chỉnh Sửa"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ct_font_medium"
+                android:textStyle="bold"
+                android:paddingTop="7dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:editable="false"
+                android:focusable="false"
+                android:layout_marginRight="15dp"
+                />
+
+            <EditText
+                android:id="@+id/btnViewInfoXoa"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bo_tron_edt"
+                android:backgroundTint="@color/red"
+                android:text="Xóa NV"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ct_font_medium"
+                android:textStyle="bold"
+                android:paddingTop="7dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:editable="false"
+                android:focusable="false"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

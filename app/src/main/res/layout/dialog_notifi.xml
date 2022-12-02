@@ -18,6 +18,7 @@
         <TextView
             style="@style/edt_Label"
             android:text="Thông báo"
+            android:textStyle="bold"
             android:padding="0dp"
             />
 
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hiện chưa có thông báo nào !"
+            android:textSize="23dp"
             android:textColor="@color/white"
             android:fontFamily="@font/ct_font_medium"
             android:layout_marginTop="10dp"
@@ -37,7 +39,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ct_edittext"
             android:text="Đóng"
-            android:textSize="22dp"
+            android:textSize="25dp"
             android:fontFamily="@font/ct_font_bold"
             android:textColor="@color/red"
             android:editable="false"

@@ -6,9 +6,11 @@
     >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ct_dialog"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:gravity="center"
@@ -18,6 +20,7 @@
         <TextView
             style="@style/edt_Label"
             android:text="Xác Nhận"
+            android:textStyle="bold"
             android:padding="0dp"
             />
 
@@ -27,6 +30,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="Hiện chưa có thông báo nào !"
+            android:textSize="23dp"
             android:textColor="@color/white"
             android:fontFamily="@font/ct_font_medium"
             android:layout_marginTop="10dp"

@@ -8,13 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.da1_poly_n6.DAOModel.DAOUser;
-import com.example.da1_poly_n6.FragmentManager.AccountFrgm;
 import com.example.da1_poly_n6.FragmentManager.Account_Fragment;
 import com.example.da1_poly_n6.FragmentManager.HomeFrgm;
 import com.example.da1_poly_n6.FragmentManager.ProductFrgm;
 import com.example.da1_poly_n6.FragmentManager.StoreFrgm;
-import com.example.da1_poly_n6.Model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {

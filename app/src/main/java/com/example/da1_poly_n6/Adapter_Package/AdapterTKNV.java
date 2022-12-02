@@ -8,11 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_poly_n6.DAOModel.DAOGioHang;
+import com.example.da1_poly_n6.DAOModel.DAOLuuHD;
+import com.example.da1_poly_n6.DAOModel.DAOUser;
+import com.example.da1_poly_n6.FragmentManager.ViewUserInforFrgm;
 import com.example.da1_poly_n6.Model.GioHang;
 import com.example.da1_poly_n6.Model.LuuHoaDon;
+import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 import java.util.ArrayList;
@@ -21,6 +28,8 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
 
     ArrayList<LuuHoaDon> list;
     Context context;
+    DAOLuuHD daoLuuHD;
+    DAOUser daoUser;
 
     public AdapterTKNV(Context context, ArrayList<LuuHoaDon> list) {
         this.context = context;
@@ -32,11 +41,16 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_thongkenhanvien, parent, false);
+        daoLuuHD = new DAOLuuHD(view.getContext());
+        daoUser = new DAOUser(view.getContext());
         return new AdapterTKNV.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+//        Settext
+
         LuuHoaDon luuHoaDon = list.get(position);
         String index = "";
         if (position < 9){
@@ -47,9 +61,29 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
         }
         holder.txtTknvSTT.setText(index);
         holder.txtTknvTenNv.setText(luuHoaDon.getTenUser());
-        double doanhThu = luuHoaDon.getThanhTien();
-        String outTongTien = String.format("%,.0f", doanhThu);
-        holder.txtTknvDoanhThu.setText(outTongTien + " VNĐ");
+
+        if (String.valueOf(luuHoaDon.getThanhTien()) != null){
+            double doanhThu = luuHoaDon.getThanhTien();
+            String outTongTien = String.format("%,.0f", doanhThu);
+            holder.txtTknvDoanhThu.setText(outTongTien + " VNĐ");
+        }
+        else {
+            holder.txtTknvDoanhThu.setText("0 VNĐ");
+        }
+        if (position == (list.size() - 1)){
+            holder.bottomViewTknv.setVisibility(View.GONE);
+        }
+
+        User user = daoUser.getUser(luuHoaDon.getMaUser());
+
+//        Item Click
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Load Fragment hiển thị thông tin nhân viên
+                loadFragment(new ViewUserInforFrgm(user));
+            }
+        });
     }
 
     @Override
@@ -60,13 +94,22 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtTknvSTT, txtTknvTenNv, txtTknvDoanhThu;
+        View bottomViewTknv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTknvSTT = itemView.findViewById(R.id.txtTknvSTT);
             txtTknvTenNv = itemView.findViewById(R.id.txtTknvTenNv);
             txtTknvDoanhThu = itemView.findViewById(R.id.txtTknvDoanhThu);
+            bottomViewTknv = itemView.findViewById(R.id.bottomViewTknv);
         }
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

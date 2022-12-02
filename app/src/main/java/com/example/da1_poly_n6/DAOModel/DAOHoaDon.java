@@ -43,7 +43,7 @@ public class DAOHoaDon {
         ArrayList<HoaDon> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT HoaDon.MaHoaDon, " +
                 "User.mauser, " +
-                "User.username, " +
+                "User.FullName, " +
                 "HoaDon.tenkhachhang, " +
                 "HoaDon.ngaylaphd, " +
                 "SanPham.MaSanPham, " +

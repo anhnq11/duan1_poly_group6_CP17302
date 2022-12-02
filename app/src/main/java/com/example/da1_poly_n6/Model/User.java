@@ -10,7 +10,13 @@ public class User {
     String SDT;
     int NamSinh;
 
-    public User() {
+    public User(String fullName, String username, String password, int maChucVu, String SDT, int namSinh) {
+        FullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.maChucVu = maChucVu;
+        this.SDT = SDT;
+        NamSinh = namSinh;
     }
 
     public User(int ID_User, String fullName, String username, String password, int maChucVu, String SDT, int namSinh) {

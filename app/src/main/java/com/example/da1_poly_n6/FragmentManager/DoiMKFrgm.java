@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,11 +25,14 @@ import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 public class DoiMKFrgm extends Fragment {
+
     EditText edOldPass, edNewPass, edConfirmPass;
     EditText btnChange, btnCancel;
-    DAOUser dao;
+    DAOUser daoUser;
     String username, password;
+    int maUser;
     boolean chkCheck;
+    String oldPass, newPass, confirmPass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,10 +57,11 @@ public class DoiMKFrgm extends Fragment {
         edConfirmPass = view.findViewById(R.id.edConfirmPass);
         btnChange = view.findViewById(R.id.btnChange);
         btnCancel = view.findViewById(R.id.btnCancel);
-        dao = new DAOUser(getActivity());
+        daoUser = new DAOUser(getActivity());
+
         getDataSSR();
 
-        // sự kiện onclick
+//        Sự kiện Button Hủy
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,20 +69,25 @@ public class DoiMKFrgm extends Fragment {
             }
         });
 
+//        Sự kiện Button đổi mật khẩu
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (validate() > 0) {
-                    User user = dao.getID(username);
-                    String newPass = edNewPass.getText().toString();
+//                Get Data từ Edittext;
+                oldPass = edOldPass.getText().toString();
+                newPass = edNewPass.getText().toString();
+                confirmPass = edConfirmPass.getText().toString();
+
+                if (checkEdt()) {
+                    User user = daoUser.getUser(maUser);
                     user.setPassword(newPass);
-                    dao.updatePass(user);
-                    if (dao.updatePass(user) > 0) {
+                    boolean checkUpdate = daoUser.updateUser(user);
+                    if (checkUpdate) {
                         Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                        resetForm();
                         remmemberUser(username, newPass, chkCheck);
                         getDataSSR();
+                        loadFragment(new Account_Fragment());
                     } else {
                         Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
                     }
@@ -86,30 +96,46 @@ public class DoiMKFrgm extends Fragment {
         });
     }
 
-    private int validate() {
-        int check = 1;
-        if (edOldPass.getText().length() == 0) {
-            Toast.makeText(getActivity(), "Nhập mật khẩu cũ", Toast.LENGTH_SHORT).show();
-            check = -1;
-        } else if (edNewPass.getText().length() == 0) {
-            Toast.makeText(getActivity(), "Nhập mật khẩu mới", Toast.LENGTH_SHORT).show();
-            check = -1;
-        } else if (edConfirmPass.getText().length() == 0) {
-            Toast.makeText(getActivity(), "Nhập mật khẩu xác nhận", Toast.LENGTH_SHORT).show();
-            check = -1;
-        } else {
-            String newpass = edNewPass.getText().toString();
-            String confirmPass = edConfirmPass.getText().toString();
-            if (!password.equals(edOldPass.getText().toString())) {
-                Toast.makeText(getActivity(), "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
-                check = -1;
-            }
-            if (!newpass.equals(confirmPass)) {
-                Toast.makeText(getActivity(), "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
-                check = -1;
+    private boolean checkEdt() {
+        boolean checkAdd = true;
+
+//        Kiểm tra trống MK cũ, MK cũ sai
+        if (oldPass.isEmpty()) {
+            edOldPass.setError("Vui lòng nhập!");
+            edOldPass.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }   else {
+            if (!oldPass.equals(password)){
+                edOldPass.setError("Mật khẩu sai!");
+                checkAdd = false;
             }
         }
-        return check;
+
+//        Kiểm tra trống MK mới, MK mới giống MK cũ
+        if (newPass.isEmpty()) {
+            edNewPass.setError("Vui lòng nhập!");
+            edNewPass.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }   else {
+            if (newPass.equals(password)){
+                edNewPass.setError("Mật khẩu mới trùng mật khẩu cũ!");
+                checkAdd = false;
+            }
+        }
+
+//        Kiểm tra trống xác nhận MK, XNMK khác MK mới
+        if (confirmPass.isEmpty()) {
+            edConfirmPass.setError("Vui lòng nhập!");
+            edConfirmPass.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }   else {
+            if (!confirmPass.equals(newPass)){
+                edConfirmPass.setError("Xác nhận mật khẩu sai!");
+                checkAdd = false;
+            }
+        }
+
+        return checkAdd;
     }
 
     private void loadFragment(Fragment fragment) {
@@ -135,6 +161,7 @@ public class DoiMKFrgm extends Fragment {
 //    Get Data SharedPreferences
     public void getDataSSR(){
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        maUser = pref.getInt("MA", 0);
         username = pref.getString("USERNAME", "");
         password = pref.getString("PASSWORD", "");
         chkCheck = pref.getBoolean("REMEMBER", false);
@@ -143,8 +170,17 @@ public class DoiMKFrgm extends Fragment {
 //    Reset Edittext
     public void resetForm(){
         edOldPass.setText("");
+        edOldPass.setHintTextColor(Color.BLACK);
+        edOldPass.setTextColor(Color.BLACK);
+        edOldPass.setError(null);
         edNewPass.setText("");
+        edNewPass.setHintTextColor(Color.BLACK);
+        edNewPass.setTextColor(Color.BLACK);
+        edNewPass.setError(null);
         edConfirmPass.setText("");
+        edConfirmPass.setHintTextColor(Color.BLACK);
+        edConfirmPass.setTextColor(Color.BLACK);
+        edConfirmPass.setError(null);
     }
 
 }

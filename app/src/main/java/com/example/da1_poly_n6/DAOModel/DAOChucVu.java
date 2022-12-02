@@ -21,7 +21,7 @@ public class DAOChucVu {
         database = dbHelper.getReadableDatabase();
     }
 
-    public List<ChucVu> getAll() {
+    public List<ChucVu> getAllChucVu() {
         String sql = "SELECT * FROM ChucVu";
         return getData(sql);
     }

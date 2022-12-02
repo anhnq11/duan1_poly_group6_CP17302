@@ -7,19 +7,35 @@
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/activity_main.xml" value="0.3578125" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/card_view_gio_hang.xml" value="0.5703245749613601" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/card_view_hoadon.xml" value="0.1" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/cardview_sp_home.xml" value="0.22780797101449277" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_confirm.xml" value="0.5" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_filters.xml" value="0.12613981762917933" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_notifi.xml" value="0.5" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_thanh_toan.xml" value="0.22780797101449277" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_xac_nhan_sua_tt_nv.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/dialog_xac_nhan_xoa.xml" value="0.371875" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_accoun_frgm.xml" value="0.371875" />
-        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_chi_tiet_s_p_frgm.xml" value="0.1" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_account_.xml" value="0.19166666666666668" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_account_frgm.xml" value="0.22" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_chi_tiet_s_p_frgm.xml" value="0.22" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_chi_tiet_s_p_sua_frgm.xml" value="0.22780797101449277" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_doi_m_k_frgm.xml" value="0.22780797101449277" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_home_frgm.xml" value="0.371875" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_product_frgm.xml" value="0.371875" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_store_frgm.xml" value="0.176" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_sua_n_v_frgm.xml" value="0.22780797101449277" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_sua_s_p_frgm.xml" value="0.22780797101449277" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_sua_tt_nhan_vien.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_t_k_doanh_thu_frgm.xml" value="0.22780797101449277" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_t_k_nhan_vien_frgm.xml" value="0.25" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_them_l_s_p.xml" value="0.1671195652173913" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_them_nhan_vien_frgm.xml" value="0.18704710144927536" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_them_s_p_frgm.xml" value="0.16" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_thong_tin_n_v_frgm.xml" value="0.18704710144927536" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_user_info_frgm.xml" value="0.264" />
-        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/item_thongkenhanvien.xml" value="0.33" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/fragment_view_user_infor_frgm.xml" value="0.371875" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/item_thongkenhanvien.xml" value="0.25834542815674894" />
+        <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/layout/user_info_dialog.xml" value="0.18085106382978725" />
         <entry key="..\:/My Document/FPT Polytechnic/K4_FA22/ProjectDA1_Poly/app/src/main/res/menu/menu.xml" value="0.371875" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable-v24/bo_goc_duoi.xml" value="0.3555" />
         <entry key="..\:/duan1_poly_group6_CP17302/app/src/main/res/drawable/background_dialog.xml" value="0.3555" />

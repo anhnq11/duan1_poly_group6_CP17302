@@ -67,6 +67,7 @@ public class TKDoanhThuFrgm extends Fragment {
                 d.show();
             }
         });
+
         edtThongKe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

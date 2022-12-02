@@ -124,18 +124,19 @@ public class Account_Fragment extends Fragment {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
                 dialog_confirm_content.setText("Bạn muốn đăng xuất?");
-                EditText No = dialog.findViewById(R.id.btnDialogHuy);
-                EditText OK = dialog.findViewById(R.id.btnDialogXN);
-                OK.setOnClickListener(new View.OnClickListener() {
+                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+                btnDialogXN.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), DangNhapAct.class);
                         Toast.makeText(getContext(), "Đăng xuất!", Toast.LENGTH_SHORT).show();
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        dialog.dismiss();
                     }
                 });
-                No.setOnClickListener(new View.OnClickListener() {
+                btnDialogHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
@@ -144,7 +145,6 @@ public class Account_Fragment extends Fragment {
                 dialog.show();
             }
         });
-
         return view;
     }
 

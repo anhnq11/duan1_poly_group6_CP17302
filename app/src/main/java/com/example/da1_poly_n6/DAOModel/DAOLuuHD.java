@@ -47,33 +47,24 @@ public class DAOLuuHD {
         }
     }
 
-//    Thống kê nhân viên và doanh thu theo từng nhân viên
+//    Thống kê nhân viên và doanh thu
     public ArrayList<LuuHoaDon> tkNhanVien(){
-        ArrayList<LuuHoaDon> listNhanVien = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT User.mauser," +
-                " User.FullName," +
-                " User.username," +
-                " ChucVu.TenChucVu," +
-                " User.sdt," +
-                " User.namsinh," +
-                " Sum(LuuHoaDon.thanhtien) as doanhThu" +
-                " FROM LuuHoaDon, User, ChucVu " +
-                "WHERE LuuHoaDon.mauser = User.MaUser AND User.ChucVu = ChucVu.MaChucVu " +
-                "GROUP by LuuHoaDon.maUser", null);
+        ArrayList<LuuHoaDon> listTKNV = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT User.MaUser, User.fullname, User.username, User.ChucVu, User.SDT, User.namsinh, SUM(LuuHoaDon.soluong * LuuHoaDon.dongia) as doanhThu FROM User left JOIN LuuHoaDon on User.MaUser = LuuHoaDon.mauser GROUP BY User.MaUser", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
                 int maUser = cursor.getInt(0);
                 String fullName = cursor.getString(1);
                 String userName = cursor.getString(2);
-                String chucVu = cursor.getString(3);
+                int chucVu = cursor.getInt(3);
                 String userSDT = cursor.getString(4);
                 int userNamSinh = cursor.getInt(5);
                 double userDoanhThu = cursor.getDouble(6);
-                listNhanVien.add(new LuuHoaDon(maUser, fullName, userName, chucVu, userSDT, userNamSinh, userDoanhThu));
+                listTKNV.add(new LuuHoaDon(maUser, fullName, userName, chucVu, userSDT, userNamSinh, userDoanhThu));
             }   while (cursor.moveToNext());
         }
-        return listNhanVien;
+        return listTKNV;
     }
 
 }
