@@ -63,6 +63,9 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         byte[] productsImage = sanPham.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
         holder.img_SanPham.setImageBitmap(bitmap);
+        //
+        String outTongTien = String.format("%,.0f", sanPham.getPrice());
+        holder.GiaTien.setText(outTongTien + "Đ");
 
 //        Set sự kiện Onclick cho các Button
 //        Buton xem sản phẩm
@@ -78,11 +81,11 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
             @Override
             public void onClick(View v) {
 //                Khởi tạo Model
-                GioHang gioHang = new GioHang(1 ,sanPham.getId(), 1, "N", sanPham.getPrice());
+                GioHang gioHang = new GioHang(1, sanPham.getId(), 1, "N", sanPham.getPrice());
 //                Check Valid SP (SanPham.ID, Size)
                 ArrayList<GioHang> outList = daoGioHang.checkValidGioHang(gioHang);
 //                Toast.makeText(context, outList.size() + "", Toast.LENGTH_SHORT).show();
-                if (outList.size() != 0){
+                if (outList.size() != 0) {
 //                - Có: Update số lượng
                     GioHang gioHang1 = outList.get(0);
 //                    Toast.makeText(context, "OldSL: " + gioHang1.getSoLuong(), Toast.LENGTH_SHORT).show();
@@ -90,21 +93,18 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
 //                    Toast.makeText(context, "NewSL" + newSL, Toast.LENGTH_SHORT).show();
                     gioHang.setSoLuong(newSL);
                     boolean kiemtra = daoGioHang.updateGioHang(gioHang);
-                    if (kiemtra){
+                    if (kiemtra) {
                         notifyDataSetChanged();
 //                        Toast.makeText(context, "Done!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
 //                - Không: Thêm sản phẩm
                     boolean check = daoGioHang.addGiohang(gioHang);
-                    if (check){
+                    if (check) {
                         Toast.makeText(context, "Thêm sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(context, "Fail!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -114,8 +114,8 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
         SharedPreferences pref = context.getSharedPreferences("USER_FILE", context.MODE_PRIVATE);
         int maUser = pref.getInt("MA", 0);
         User user = daoUser.getUser(maUser);
-        int quyenUser =user.getMaChucVu();
-        if (quyenUser == 2){
+        int quyenUser = user.getMaChucVu();
+        if (quyenUser == 2) {
             holder.info_sanpham.setVisibility(View.GONE);
         }
 
@@ -137,7 +137,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
-        private ImageView add_sanpham, info_sanpham,img_SanPham;
+        private ImageView add_sanpham, info_sanpham, img_SanPham;
         private TextView TenSanPham;
         private TextView GiaTien;
 
@@ -151,8 +151,9 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.UserView
             GiaTien = itemView.findViewById(R.id.gia_sanpham);
         }
     }
+
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

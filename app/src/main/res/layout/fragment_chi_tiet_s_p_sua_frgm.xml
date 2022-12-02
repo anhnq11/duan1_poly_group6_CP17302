@@ -23,12 +23,14 @@
                 >
 
                 <ImageView
+                    android:id="@+id/img_SP"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:src="@drawable/bac_xiu" />
 
                 <ImageView
+                    android:id="@+id/img_SP1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

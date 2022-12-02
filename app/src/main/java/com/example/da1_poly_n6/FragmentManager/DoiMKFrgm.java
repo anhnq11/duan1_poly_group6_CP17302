@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class DoiMKFrgm extends Fragment {
 
     EditText edOldPass, edNewPass, edConfirmPass;
     EditText btnChange, btnCancel;
+    ImageView imgHide1, imgHide2, imgHide3;
     DAOUser daoUser;
     String username, password;
     int maUser;
@@ -57,8 +59,48 @@ public class DoiMKFrgm extends Fragment {
         edConfirmPass = view.findViewById(R.id.edConfirmPass);
         btnChange = view.findViewById(R.id.btnChange);
         btnCancel = view.findViewById(R.id.btnCancel);
+        imgHide1 = view.findViewById(R.id.img_hidePassword1);
+        imgHide2 = view.findViewById(R.id.img_hidePassword2);
+        imgHide3 = view.findViewById(R.id.img_hidePassword3);
         daoUser = new DAOUser(getActivity());
 
+        //set hide pass
+        imgHide1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edOldPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    edOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    imgHide1.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    edOldPass.setInputType(129);
+                    imgHide1.setImageResource(R.drawable.ic_hide_on);
+                }
+            }
+        });
+        imgHide2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edNewPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    edNewPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    imgHide2.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    edNewPass.setInputType(129);
+                    imgHide2.setImageResource(R.drawable.ic_hide_on);
+                }
+            }
+        });
+        imgHide3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edConfirmPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    edConfirmPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    imgHide3.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    edConfirmPass.setInputType(129);
+                    imgHide3.setImageResource(R.drawable.ic_hide_on);
+                }
+            }
+        });
         getDataSSR();
 
 //        Sự kiện Button Hủy
@@ -104,8 +146,8 @@ public class DoiMKFrgm extends Fragment {
             edOldPass.setError("Vui lòng nhập!");
             edOldPass.setHintTextColor(Color.RED);
             checkAdd = false;
-        }   else {
-            if (!oldPass.equals(password)){
+        } else {
+            if (!oldPass.equals(password)) {
                 edOldPass.setError("Mật khẩu sai!");
                 checkAdd = false;
             }
@@ -116,8 +158,8 @@ public class DoiMKFrgm extends Fragment {
             edNewPass.setError("Vui lòng nhập!");
             edNewPass.setHintTextColor(Color.RED);
             checkAdd = false;
-        }   else {
-            if (newPass.equals(password)){
+        } else {
+            if (newPass.equals(password)) {
                 edNewPass.setError("Mật khẩu mới trùng mật khẩu cũ!");
                 checkAdd = false;
             }
@@ -128,8 +170,8 @@ public class DoiMKFrgm extends Fragment {
             edConfirmPass.setError("Vui lòng nhập!");
             edConfirmPass.setHintTextColor(Color.RED);
             checkAdd = false;
-        }   else {
-            if (!confirmPass.equals(newPass)){
+        } else {
+            if (!confirmPass.equals(newPass)) {
                 edConfirmPass.setError("Xác nhận mật khẩu sai!");
                 checkAdd = false;
             }
@@ -158,8 +200,8 @@ public class DoiMKFrgm extends Fragment {
         editor.commit();
     }
 
-//    Get Data SharedPreferences
-    public void getDataSSR(){
+    //    Get Data SharedPreferences
+    public void getDataSSR() {
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
         maUser = pref.getInt("MA", 0);
         username = pref.getString("USERNAME", "");
@@ -167,8 +209,8 @@ public class DoiMKFrgm extends Fragment {
         chkCheck = pref.getBoolean("REMEMBER", false);
     }
 
-//    Reset Edittext
-    public void resetForm(){
+    //    Reset Edittext
+    public void resetForm() {
         edOldPass.setText("");
         edOldPass.setHintTextColor(Color.BLACK);
         edOldPass.setTextColor(Color.BLACK);

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,8 +25,9 @@ import java.util.List;
 public class DangNhapAct extends AppCompatActivity {
     private DAOUser daoUser;
     EditText edtUser, edtPassword;
-    ImageView btnLogin;
+    ImageView btnLogin, img_hidePassword;
     CheckBox checkBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,22 @@ public class DangNhapAct extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtMatKhau);
         checkBox = findViewById(R.id.chkNhoMK);
         btnLogin = findViewById(R.id.btnDangNhap);
+        img_hidePassword = findViewById(R.id.img_hidePassword);
         daoUser = new DAOUser(this);
+        edtPassword.getInputType();
+        //sự kiện hide pass
+        img_hidePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    img_hidePassword.setImageResource(R.drawable.ic_visibility_off);
+                } else {
+                    edtPassword.setInputType(129);
+                    img_hidePassword.setImageResource(R.drawable.ic_hide_on);
+                }
+            }
+        });
 
 //        Get Data từ SharedPreferences
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
@@ -67,7 +84,7 @@ public class DangNhapAct extends AppCompatActivity {
                 }
 
 //                Kiểm tra User tồn tại
-                if (checkLogin){
+                if (checkLogin) {
                     ArrayList<User> list = daoUser.checkLogin(strUser, strPass);
                     if (list.size() > 0) {
                         Toast.makeText(DangNhapAct.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
@@ -99,7 +116,8 @@ public class DangNhapAct extends AppCompatActivity {
         }
         editor.commit();
     }
-    private void closeKeyboard(){
+
+    private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

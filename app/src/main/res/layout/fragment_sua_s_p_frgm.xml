@@ -116,10 +116,10 @@
                     android:layout_marginLeft="10dp"
                     />
 
-                <Spinner
-                    android:id="@+id/update_spnLoai"
+                <AutoCompleteTextView
+                    android:id="@+id/edUpdateLSP"
                     style="@style/edt_TextBox2"
-                    android:hint="Cà Phê"
+                    android:hint="Nhập loại Sản Phẩm"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />
