@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.da1_poly_n6.Database.DbHelper;
 import com.example.da1_poly_n6.Model.HoaDon;
 import com.example.da1_poly_n6.Model.LuuHoaDon;
+import com.example.da1_poly_n6.Model.SanPham;
 
 import java.util.ArrayList;
 
@@ -87,6 +88,26 @@ public class DAOLuuHD {
         return tongDT;
     }
 
+    //    Lấy tổng doanh thu theo khoảng thời gian
+    public double getAllDoanhThu(int caseTK, int maUserInput){
+        double tongDT = 0;
+        Cursor cursor = null;
+        if (caseTK == 2){
+            cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon;", null);
+        }
+        else {
+            cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE LuuHoaDon.maUser = ?;", new String[]{String.valueOf(maUserInput)});
+        }
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                tongDT += cursor.getDouble(0);
+            }   while (cursor.moveToNext());
+        }
+
+        return tongDT;
+    }
+
 //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
     public ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd, int caseTk, int maUserInput){
         ArrayList<LuuHoaDon> listHD = new ArrayList<>();
@@ -113,4 +134,41 @@ public class DAOLuuHD {
         return listHD;
     }
 
+    //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
+    public ArrayList<LuuHoaDon> getAllHoaDon(int caseTk, int maUserInput){
+        ArrayList<LuuHoaDon> listHD = new ArrayList<>();
+        Cursor cursor = null;
+        if (caseTk == 2){
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon GROUP BY LuuHoaDon.maHoaDon;", null);
+        }
+        else {
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+                    "FROM LuuHoaDon WHERE LuuHoaDon.maUser = ? " +
+                    "GROUP BY LuuHoaDon.maHoaDon;", new String[]{String.valueOf(maUserInput)});
+        }
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                int maLuu = cursor.getInt(0);
+                String tenKH = cursor.getString(1);
+                double thanhTien = cursor.getDouble(2);
+                listHD.add(new LuuHoaDon(maLuu, tenKH, thanhTien));
+            }   while (cursor.moveToNext());
+        }
+        return listHD;
+    }
+
+//    Get SP bán chạy
+    public ArrayList<Integer> getTopSP (){
+        ArrayList<Integer> listMaSP = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT LuuHoaDon.maSP, SUM(LuuHoaDon.soluong) as tongSL FROM LuuHoaDon GROUP by LuuHoaDon.maSP ORDER BY tongSL DESC LIMIT 4", null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                int maSp = cursor.getInt(0);
+                listMaSP.add(maSp);
+            }   while (cursor.moveToNext());
+        }
+        return listMaSP;
+    }
 }

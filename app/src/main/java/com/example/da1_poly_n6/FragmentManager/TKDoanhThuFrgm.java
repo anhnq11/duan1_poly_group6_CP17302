@@ -44,7 +44,7 @@ public class TKDoanhThuFrgm extends Fragment {
 
     EditText edtTuNgay,edtDenNgay,btnThongKe;
     ImageView btnBackTKDT;
-    TextView txtTongDoanhThu;
+    TextView txtTongDoanhThu, txtNotifi2;
     boolean ipDateStart, ipDateEnd;
     String dateStart, dateEnd;
     DAOLuuHD daoLuuHD;
@@ -53,7 +53,7 @@ public class TKDoanhThuFrgm extends Fragment {
     RadioGroup rdoTKDTGr;
     RadioButton rdoTKDTAll, rdoTKDTNV;
     AutoCompleteTextView edtTKDTTenNV;
-    LinearLayout boxTenNV;
+    LinearLayout boxTenNV, layoutListDT;
     DAOUser daoUser;
     int quyenNow, maUserInput, maUserNow, rdoCheck, caseTK;
     String tenNVInput = "";
@@ -73,6 +73,8 @@ public class TKDoanhThuFrgm extends Fragment {
         rdoTKDTAll = view.findViewById(R.id.rdoTKDTAll);
         boxTenNV = view.findViewById(R.id.boxTenNV);
         rdoTKDTNV = view.findViewById(R.id.rdoTKDTNV);
+        layoutListDT = view.findViewById(R.id.layoutListDT);
+        txtNotifi2 = view.findViewById(R.id.txtNotifi2);
 
         maUserInput = 0;
         caseTK = 0;
@@ -94,6 +96,19 @@ public class TKDoanhThuFrgm extends Fragment {
             maUserInput = maUserNow;
             caseTK = 1;
             rdoCheck = -1;
+            listHD = daoLuuHD.getAllHoaDon(caseTK, maUserInput);
+            goneListTK();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recycler_TKDT.setLayoutManager(layoutManager);
+            AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
+            recycler_TKDT.setAdapter(adapterTKDT);
+            double doanhThu = daoLuuHD.getAllDoanhThu(caseTK, maUserInput);
+            String fDoanhThu = String.format("%,.0f VNĐ", doanhThu);
+            txtTongDoanhThu.setText(fDoanhThu);
+        }
+        else {
+            tkAllDoanhThu();
+            goneListTK();
         }
 
 //        Check Radio Button Check
@@ -102,11 +117,15 @@ public class TKDoanhThuFrgm extends Fragment {
                 rdoTKDTAll.setChecked(true);
                 boxTenNV.setVisibility(View.GONE);
                 caseTK = 2;
+                tkAllDoanhThu();
+                goneListTK();
             }
             break;
             case 1: {
                 rdoTKDTNV.setChecked(true);
                 caseTK = 3;
+                clearListTK();
+                goneListTK();
             }
             break;
         }
@@ -119,6 +138,8 @@ public class TKDoanhThuFrgm extends Fragment {
                     boxTenNV.setVisibility(View.GONE);
                     caseTK = 2;
                     maUserInput = -1;
+                    tkAllDoanhThu();
+                    goneListTK();
                 }
             }
         });
@@ -130,6 +151,8 @@ public class TKDoanhThuFrgm extends Fragment {
                     rdoCheck = 1;
                     caseTK = 3;
                     boxTenNV.setVisibility(View.VISIBLE);
+                    clearListTK();
+                    goneListTK();
                 }
             }
         });
@@ -261,6 +284,7 @@ public class TKDoanhThuFrgm extends Fragment {
                         txtTongDoanhThu.setText(fDoanhThu);
 //                        Get ArrayList
                         listHD = daoLuuHD.getDSHoaDon(dateStart, dateEnd, caseTK, maUserInput);
+                        goneListTK();
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                         recycler_TKDT.setLayoutManager(layoutManager);
                         AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
@@ -287,6 +311,36 @@ public class TKDoanhThuFrgm extends Fragment {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void tkAllDoanhThu(){
+        listHD = daoLuuHD.getAllHoaDon(2, maUserInput);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recycler_TKDT.setLayoutManager(layoutManager);
+        AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
+        recycler_TKDT.setAdapter(adapterTKDT);
+        double doanhThu = daoLuuHD.getAllDoanhThu(2, maUserInput);
+        String fDoanhThu = String.format("%,.0f VNĐ", doanhThu);
+        txtTongDoanhThu.setText(fDoanhThu);
+    }
+
+    public void clearListTK(){
+        if (listHD.size() != 0){
+            listHD.clear();
+        }
+        txtTongDoanhThu.setText("0 VNĐ");
+        edtTKDTTenNV.setText(null);
+        edtTuNgay.setText(null);
+        edtDenNgay.setText(null);
+    }
+
+    public void goneListTK(){
+        if (listHD.size() == 0){
+            layoutListDT.setVisibility(View.GONE);
+        }
+        else {
+            layoutListDT.setVisibility(View.VISIBLE);
+        }
     }
 
 }

@@ -188,7 +188,7 @@ public class StoreFrgm extends Fragment {
                                         }
                                         createData();
                                         Toast.makeText(getContext(), "Mua hàng thành công!", Toast.LENGTH_SHORT).show();
-                                        txtGHTongTien.setText("000.000 VNĐ");
+                                        txtGHTongTien.setText("0 VNĐ");
                                         dialog.dismiss();
                                     }
                                 }

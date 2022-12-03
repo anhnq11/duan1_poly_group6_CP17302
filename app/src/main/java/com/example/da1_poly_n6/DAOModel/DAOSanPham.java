@@ -10,6 +10,7 @@ import com.example.da1_poly_n6.Database.DbHelper;
 import com.example.da1_poly_n6.FragmentManager.ThemSPFrgm;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.Model.TheLoai;
+import com.example.da1_poly_n6.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,12 @@ public class DAOSanPham {
             sql = "SELECT * FROM SanPham ORDER BY MaLoai ASC";
         }
         return getData(sql);
+    }
+
+    public ArrayList<SanPham> getSPofTL (int maLoai){
+        String sql = "Select * FROM SanPham WHERE SanPham.MaLoai = ?";
+        ArrayList<SanPham> list = getData(sql, String.valueOf(maLoai));
+        return list;
     }
 
     public ArrayList<SanPham> getData(String sql, String... selectionAGrs) {

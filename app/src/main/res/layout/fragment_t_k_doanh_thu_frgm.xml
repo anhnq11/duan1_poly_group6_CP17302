@@ -175,6 +175,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/layoutListDT"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -198,7 +199,7 @@
                     android:layout_marginLeft="80dp"
                     android:layout_marginRight="10dp"
                     android:fontFamily="@font/ct_font_bold"
-                    android:text="Tổng tiền"
+                    android:text="T.tiền"
                     android:textColor="@color/red"
                     android:textSize="23dp" />
 
@@ -210,6 +211,18 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNotifi2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Chưa có doanh thu!"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:paddingBottom="30dp"
+            android:fontFamily="@font/ct_font_medium"
+            />
 
     </LinearLayout>
 

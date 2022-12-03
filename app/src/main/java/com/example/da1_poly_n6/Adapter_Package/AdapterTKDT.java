@@ -39,8 +39,8 @@ public class AdapterTKDT extends RecyclerView.Adapter<AdapterTKDT.ViewHolder>{
         holder.txtTkdtTenSP.setText(hoaDon.getTenKhachHang());
         double doanhThu = hoaDon.getThanhTien();
         String outDoanhThu = String.format("%,.0f", doanhThu);
-//        String subDoanhThu = outDoanhThu.substring(0, (outDoanhThu.length() - 4));
-        holder.txtTkdtThanhTien.setText(outDoanhThu + " VNĐ");
+        String subDoanhThu = outDoanhThu.substring(0, (outDoanhThu.length() - 4));
+        holder.txtTkdtThanhTien.setText(subDoanhThu + "K VNĐ");
 
         if (position == (listHoaDon.size() - 1)){
             holder.bottomViewTkdt.setVisibility(View.GONE);

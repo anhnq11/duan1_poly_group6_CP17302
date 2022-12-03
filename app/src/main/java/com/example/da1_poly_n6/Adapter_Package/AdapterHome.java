@@ -2,6 +2,8 @@ package com.example.da1_poly_n6.Adapter_Package;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_poly_n6.FragmentManager.ChiTietSPFrgm;
+import com.example.da1_poly_n6.MainActivity;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -42,10 +46,14 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SanPham sanPham = list.get(position);
+        byte[] productsImage = sanPham.getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
+        holder.itemSpHomeImg.setImageBitmap(bitmap);
         holder.itemSpHomeTen.setText(sanPham.getTenSanPham());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageSanPham);
                 loadFragment(new ChiTietSPFrgm(sanPham));
             }
         });
