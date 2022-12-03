@@ -70,10 +70,10 @@ public class DoiMKFrgm extends Fragment {
             public void onClick(View v) {
                 if (edOldPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                     edOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide1.setImageResource(R.drawable.ic_visibility_off);
+                    imgHide1.setImageResource(R.drawable.ic_hide_on);
                 } else {
                     edOldPass.setInputType(129);
-                    imgHide1.setImageResource(R.drawable.ic_hide_on);
+                    imgHide1.setImageResource(R.drawable.ic_visibility_off);
                 }
             }
         });
@@ -82,10 +82,10 @@ public class DoiMKFrgm extends Fragment {
             public void onClick(View v) {
                 if (edNewPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                     edNewPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide2.setImageResource(R.drawable.ic_visibility_off);
+                    imgHide2.setImageResource(R.drawable.ic_hide_on);
                 } else {
                     edNewPass.setInputType(129);
-                    imgHide2.setImageResource(R.drawable.ic_hide_on);
+                    imgHide2.setImageResource(R.drawable.ic_visibility_off);
                 }
             }
         });
@@ -94,10 +94,10 @@ public class DoiMKFrgm extends Fragment {
             public void onClick(View v) {
                 if (edConfirmPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                     edConfirmPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide3.setImageResource(R.drawable.ic_visibility_off);
+                    imgHide3.setImageResource(R.drawable.ic_hide_on);
                 } else {
                     edConfirmPass.setInputType(129);
-                    imgHide3.setImageResource(R.drawable.ic_hide_on);
+                    imgHide3.setImageResource(R.drawable.ic_visibility_off);
                 }
             }
         });

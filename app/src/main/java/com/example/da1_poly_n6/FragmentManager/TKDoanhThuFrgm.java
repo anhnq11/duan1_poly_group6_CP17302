@@ -1,6 +1,8 @@
 package com.example.da1_poly_n6.FragmentManager;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,15 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterTKDT;
 import com.example.da1_poly_n6.DAOModel.DAOLuuHD;
+import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.Model.LuuHoaDon;
+import com.example.da1_poly_n6.Model.TheLoai;
+import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 import java.text.ParseException;
@@ -39,7 +50,13 @@ public class TKDoanhThuFrgm extends Fragment {
     DAOLuuHD daoLuuHD;
     RecyclerView recycler_TKDT;
     ArrayList<LuuHoaDon> listHD = new ArrayList<>();
-
+    RadioGroup rdoTKDTGr;
+    RadioButton rdoTKDTAll, rdoTKDTNV;
+    AutoCompleteTextView edtTKDTTenNV;
+    LinearLayout boxTenNV;
+    DAOUser daoUser;
+    int quyenNow, maUserInput, maUserNow, rdoCheck, caseTK;
+    String tenNVInput = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,15 +69,88 @@ public class TKDoanhThuFrgm extends Fragment {
         btnThongKe = view.findViewById(R.id.edtThongKeDoanhThu);
         txtTongDoanhThu = view.findViewById(R.id.txtTongDoanhThu);
         recycler_TKDT = view.findViewById(R.id.recycler_TKDT);
+        rdoTKDTGr = view.findViewById(R.id.rdoTKDTGr);
+        rdoTKDTAll = view.findViewById(R.id.rdoTKDTAll);
+        boxTenNV = view.findViewById(R.id.boxTenNV);
+        rdoTKDTNV = view.findViewById(R.id.rdoTKDTNV);
 
+        maUserInput = 0;
+        caseTK = 0;
+
+        edtTKDTTenNV = view.findViewById(R.id.edtTKDTTenNV);
+
+        daoUser = new DAOUser(getContext());
         daoLuuHD = new DAOLuuHD(getContext());
 
-        btnBackTKDT.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
+        maUserNow = pref.getInt("MA", 0);
+        User user = daoUser.getUser(maUserNow);
+        quyenNow = user.getMaChucVu();
+
+//        Nếu Account đang đăng nhập là nhân viên -> Ẩn box nhập tên nhân viên và RadioGroup
+        if (quyenNow != 1){
+            rdoTKDTGr.setVisibility(View.GONE);
+            boxTenNV.setVisibility(View.GONE);
+            maUserInput = maUserNow;
+            caseTK = 1;
+            rdoCheck = -1;
+        }
+
+//        Check Radio Button Check
+        switch (rdoCheck) {
+            case 0: {
+                rdoTKDTAll.setChecked(true);
+                boxTenNV.setVisibility(View.GONE);
+                caseTK = 2;
+            }
+            break;
+            case 1: {
+                rdoTKDTNV.setChecked(true);
+                caseTK = 3;
+            }
+            break;
+        }
+
+        rdoTKDTAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    rdoCheck = 0;
+                    boxTenNV.setVisibility(View.GONE);
+                    caseTK = 2;
+                    maUserInput = -1;
+                }
             }
         });
+
+        rdoTKDTNV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    rdoCheck = 1;
+                    caseTK = 3;
+                    boxTenNV.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+//        Set Data cho edtTenNV
+        ArrayList<User> listUser = daoUser.getAllUser();
+        ArrayList<String> listTenUser = new ArrayList<>();
+        ArrayList<Integer> listMaUser = new ArrayList<>();
+        int listUserSize = listUser.size();
+        if (listUserSize != 0){
+            for (int i = 0; i < listUserSize; i++) {
+                User userModel = listUser.get(i);
+                listTenUser.add(userModel.getFullName());
+                listMaUser.add(userModel.getID_User());
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (getContext(), android.R.layout.select_dialog_item, listTenUser);
+
+        edtTKDTTenNV.setThreshold(1);
+        edtTKDTTenNV.setAdapter(adapter);
 
 //        Get ngày bắt đầu
         edtTuNgay.setOnClickListener(new View.OnClickListener() {
@@ -116,16 +206,25 @@ public class TKDoanhThuFrgm extends Fragment {
         btnThongKe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Check trống ngày bắt đầu & ngày kết thúc
                 boolean checkDoanhThu = true;
+//                Check Tên nhân viên trống nếu CaseTK = 3;
+                if (caseTK == 3){
+                    tenNVInput = edtTKDTTenNV.getText().toString();
+                    if (tenNVInput.isEmpty()){
+                        checkDoanhThu = false;
+                        edtTKDTTenNV.setHintTextColor(Color.RED);
+                        edtTKDTTenNV.setError("Vui lòng nhập!");
+                    }
+                }
+//                Check trống ngày bắt đầu & ngày kết thúc
                 if (!ipDateStart){
                     checkDoanhThu = false;
-                    Toast.makeText(getContext(), "Chọn ngày bắt đầu!", Toast.LENGTH_SHORT).show();
+                    edtTuNgay.setHintTextColor(Color.RED);
                     edtTuNgay.setError("Vui lòng nhập!");
                 }
                 if (!ipDateEnd){
                     checkDoanhThu = false;
-                    Toast.makeText(getContext(), "Chọn ngày kết thúc!", Toast.LENGTH_SHORT).show();
+                    edtDenNgay.setHintTextColor(Color.RED);
                     edtDenNgay.setError("Vui lòng nhập!");
                 }
                 if (checkDoanhThu){
@@ -144,12 +243,24 @@ public class TKDoanhThuFrgm extends Fragment {
                     }
 //                    Check ngày bắt đầu <= ngày kết thúc
                     if (dDateS.before(dDateE)){
+//                        Gán giá trị mã nhân viên
+                        if (caseTK == 3){
+                            int index = 0;
+                            for (int i = 0; i < listUserSize; i++) {
+                                String mTenUser = listTenUser.get(i);
+                                if (mTenUser.equals(tenNVInput)){
+                                    index = i;
+                                }
+                            }
+                            maUserInput = listMaUser.get(index);
+                        }
+
 //                        Gọi thống kê tổng doanh thu
-                        double doanhThu = daoLuuHD.getTongDoanhThu(dateStart, dateEnd);
+                        double doanhThu = daoLuuHD.getTongDoanhThu(dateStart, dateEnd, caseTK, maUserInput);
                         String fDoanhThu = String.format("%,.0f VNĐ", doanhThu);
                         txtTongDoanhThu.setText(fDoanhThu);
 //                        Get ArrayList
-                        listHD = daoLuuHD.getDSHoaDon(dateStart, dateEnd);
+                        listHD = daoLuuHD.getDSHoaDon(dateStart, dateEnd, caseTK, maUserInput);
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                         recycler_TKDT.setLayoutManager(layoutManager);
                         AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
@@ -159,6 +270,14 @@ public class TKDoanhThuFrgm extends Fragment {
                         Toast.makeText(getContext(), "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+//        Back
+        btnBackTKDT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new Account_Fragment());
             }
         });
         return view;

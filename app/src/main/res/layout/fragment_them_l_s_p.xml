@@ -60,10 +60,9 @@
             <EditText
                 android:id="@+id/edtAddSPLoai"
                 style="@style/edt_TextBox2"
-                android:hint="Tên Loại"
                 android:layout_marginTop="5dp"
-                android:textColorHint="@color/black"
-                />
+                android:hint="Tên Loại"
+                android:textColorHint="@color/black" />
 
         </LinearLayout>
 

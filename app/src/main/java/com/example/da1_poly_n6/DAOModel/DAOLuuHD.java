@@ -68,10 +68,15 @@ public class DAOLuuHD {
     }
 
 //    Lấy tổng doanh thu theo khoảng thời gian
-    public double getTongDoanhThu(String dStart, String dEnd){
+    public double getTongDoanhThu(String dStart, String dEnd, int caseTK, int maUserInput){
         double tongDT = 0;
-
-        Cursor cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ?;", new String[]{dStart, dEnd});
+        Cursor cursor = null;
+        if (caseTK == 2){
+            cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ?;", new String[]{dStart, dEnd});
+        }
+        else {
+            cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ? AND LuuHoaDon.maUser = ?;", new String[]{dStart, dEnd, String.valueOf(maUserInput)});
+        }
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
@@ -83,9 +88,19 @@ public class DAOLuuHD {
     }
 
 //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
-    public ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd){
+    public ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd, int caseTk, int maUserInput){
         ArrayList<LuuHoaDon> listHD = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ? GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd});
+        Cursor cursor = null;
+        if (caseTk == 2){
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+                    "FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ? " +
+                    "GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd});
+        }
+        else {
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+                    "FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ?  AND LuuHoaDon.maUser = ? " +
+                    "GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd, String.valueOf(maUserInput)});
+        }
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {

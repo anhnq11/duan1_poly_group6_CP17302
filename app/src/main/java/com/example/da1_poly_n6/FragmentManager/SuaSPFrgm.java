@@ -82,9 +82,17 @@ public class SuaSPFrgm extends Fragment {
         arrayList = new ArrayList<>();
         adapter = new AdapterSanPham(getActivity(), arrayList);
         // set dữ liệu vào edt
-        String outGia = String.format("%,.0f", sanPham.getPrice());
-        edUpdateGiaBan.setText(outGia + "Đ");
+        edUpdateGiaBan.setText(sanPham.getPrice() + "");
         edUpdateTenSP.setText(sanPham.getTenSanPham());
+        int maLoai = sanPham.getMaLoai();
+        String tenLoai = "";
+        ArrayList<TheLoai> listTL = daoSanPham.getDSLSP();
+        for (int i = 0; i < listTL.size(); i++) {
+            if (listTL.get(i).getMaLoai() == maLoai){
+                tenLoai = listTL.get(i).getTenLoai();
+            }
+        }
+        edtLoaiSP.setText(tenLoai);
         edUpdateMoTa.setText(sanPham.getMota());
         byte[] productsImage = sanPham.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);

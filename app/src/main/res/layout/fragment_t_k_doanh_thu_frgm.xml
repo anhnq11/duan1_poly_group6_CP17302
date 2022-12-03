@@ -43,11 +43,63 @@
 
         </LinearLayout>
 
+        <RadioGroup
+            android:id="@+id/rdoTKDTGr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rdoTKDTAll"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/ct_font_medium"
+                android:text="Cửa hàng"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+            <RadioButton
+                android:id="@+id/rdoTKDTNV"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="40dp"
+                android:fontFamily="@font/ct_font_medium"
+                android:text="Nhân viên"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+        </RadioGroup>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/boxTenNV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/edt_Label"
+                    android:layout_marginLeft="10dp"
+                    android:text="Tên nhân viên"
+                    android:textColor="@color/red" />
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/edtTKDTTenNV"
+                    style="@style/edt_TextBox2"
+                    android:layout_marginTop="5dp"
+                    android:drawableStart="@drawable/ic_baseline_account_circle_24"
+                    android:drawablePadding="10dp"
+                    android:hint="Nhập Tên nhân viên"
+                    android:textColorHint="@color/black" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,6 +155,7 @@
             android:id="@+id/edtThongKeDoanhThu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/bo_tron_edt"
             android:backgroundTint="@color/red"
@@ -111,14 +164,13 @@
             android:fontFamily="@font/ct_font_medium"
             android:gravity="center"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             android:paddingTop="5dp"
+            android:paddingRight="30dp"
             android:paddingBottom="5dp"
             android:text="Thống Kê"
             android:textColor="@color/white"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
 
             />
 
@@ -143,11 +195,11 @@
 
                 <TextView
                     style="@style/edt_Label"
+                    android:layout_marginLeft="80dp"
                     android:layout_marginRight="10dp"
                     android:fontFamily="@font/ct_font_bold"
                     android:text="Tổng tiền"
                     android:textColor="@color/red"
-                    android:layout_marginLeft="80dp"
                     android:textSize="23dp" />
 
             </LinearLayout>
