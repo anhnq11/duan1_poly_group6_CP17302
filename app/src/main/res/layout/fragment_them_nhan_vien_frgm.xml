@@ -134,6 +134,7 @@
 
                 <EditText
                     android:id="@+id/edSDT"
+                    android:maxLength="10"
                     style="@style/edt_TextBox2"
                     android:hint="Số điện thoại"
                     android:inputType="number"
@@ -150,6 +151,7 @@
                 <EditText
                     android:id="@+id/edNamSinh"
                     style="@style/edt_TextBox2"
+                    android:maxLength="4"
                     android:hint="Năm sinh"
                     android:inputType="number"
                     android:layout_marginTop="5dp"

@@ -73,16 +73,15 @@ public class ThemNhanVienFrgm extends Fragment {
                 String namSinh = edtNamSinh.getText().toString();
 
 //                Check Form
-                if (checkEdt()){
+                if (checkEdt()) {
 //                    Kiểm tra trùng lặp UserName
                     int checkValid = daoUser.checkValid(userName);
-                    if (checkValid != 0){
+                    if (checkValid != 0) {
 //                        UserName đã tồn tại -> Thông báo lỗi, Nhập lại
                         Toast.makeText(getContext(), "Tên tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
                         edtUser.setTextColor(Color.RED);
                         edtUser.setError("UserName đã tồn tại.");
-                    }
-                    else {
+                    } else {
 //                        UserName chưa tồn tại -> Thêm Account
                         int mNamSinh = Integer.parseInt(namSinh);
                         User user = new User(fullName, userName, passWord, 2, userSDT, mNamSinh);
@@ -159,12 +158,18 @@ public class ThemNhanVienFrgm extends Fragment {
             checkAdd = false;
         }
 
+        if (!edtSDT.getText().toString().startsWith("0")) {
+            edtSDT.setError("Số điện thoại không hợp lệ!");
+            edtSDT.setHintTextColor(Color.RED);
+            checkAdd = false;
+        }
 
         if (edtNamSinh.getText().toString().isEmpty()) {
             edtNamSinh.setError("Vui lòng nhập!");
             edtNamSinh.setHintTextColor(Color.RED);
             checkAdd = false;
         }
+
 
         return checkAdd;
     }

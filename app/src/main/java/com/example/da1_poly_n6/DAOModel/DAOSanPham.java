@@ -52,16 +52,17 @@ public class DAOSanPham {
         statement.execute();
         database.close();
     }
-    public  void deleteData(int id) {
+
+    public void deleteData(int id) {
 
         String sql = "DELETE FROM SanPham WHERE MaSanPham = ?";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
-        statement.bindDouble(1, (double)id);
-
+        statement.bindDouble(1, (double) id);
         statement.execute();
         database.close();
     }
+
     public ArrayList<SanPham> getAllProduct(int rdoCheck) {
         String sql = null;
         if (rdoCheck == 0) {
@@ -76,7 +77,7 @@ public class DAOSanPham {
         return getData(sql);
     }
 
-    public ArrayList<SanPham> getSPofTL (int maLoai){
+    public ArrayList<SanPham> getSPofTL(int maLoai) {
         String sql = "Select * FROM SanPham WHERE SanPham.MaLoai = ?";
         ArrayList<SanPham> list = getData(sql, String.valueOf(maLoai));
         return list;
@@ -92,7 +93,7 @@ public class DAOSanPham {
             double price = cursor.getDouble(3);
             int maLoai = cursor.getInt(4);
             String moTa = cursor.getString(5);
-            list.add(new SanPham(id,image, name, price, maLoai, moTa));
+            list.add(new SanPham(id, image, name, price, maLoai, moTa));
         }
         return list;
     }
@@ -127,4 +128,7 @@ public class DAOSanPham {
         }
         return list;
     }
+
+    // Tìm kiếm sản phẩm
+
 }
