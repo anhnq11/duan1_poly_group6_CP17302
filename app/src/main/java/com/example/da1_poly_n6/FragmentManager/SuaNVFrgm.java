@@ -188,6 +188,11 @@ public class SuaNVFrgm extends Fragment {
             edtSuaSDT.setError("Vui lòng nhập");
             checkForm = false;
         }
+
+        if (!sdtSua.startsWith("0")) {
+            edtSuaSDT.setError("Số điện thoại không hợp lệ");
+            checkForm = false;
+        }
         
         if (namSinhSua.isEmpty()){
             edtSuaNamSinh.setError("Vui lòng nhập");
