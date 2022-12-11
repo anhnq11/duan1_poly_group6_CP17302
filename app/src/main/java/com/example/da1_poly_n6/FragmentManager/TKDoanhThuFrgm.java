@@ -1,5 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +60,14 @@ public class TKDoanhThuFrgm extends Fragment {
     DAOUser daoUser;
     int quyenNow, maUserInput, maUserNow, rdoCheck, caseTK;
     String tenNVInput = "";
+    boolean isNameValid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_t_k_doanh_thu_frgm, container, false);
 
+//        Ánh xạ
         btnBackTKDT = view.findViewById(R.id.btnBackTKDT);
         edtTuNgay = view.findViewById(R.id.edtTKDTStart);
         edtDenNgay = view.findViewById(R.id.edtTKDTEnd);
@@ -75,15 +80,16 @@ public class TKDoanhThuFrgm extends Fragment {
         rdoTKDTNV = view.findViewById(R.id.rdoTKDTNV);
         layoutListDT = view.findViewById(R.id.layoutListDT);
         txtNotifi2 = view.findViewById(R.id.txtNotifi2);
+        edtTKDTTenNV = view.findViewById(R.id.edtTKDTTenNV);
 
         maUserInput = 0;
         caseTK = 0;
 
-        edtTKDTTenNV = view.findViewById(R.id.edtTKDTTenNV);
-
+//        Khởi tạo các Contructors
         daoUser = new DAOUser(getContext());
         daoLuuHD = new DAOLuuHD(getContext());
 
+//        Lấy quyển User Đăng nhập
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
         maUserNow = pref.getInt("MA", 0);
         User user = daoUser.getUser(maUserNow);
@@ -130,6 +136,7 @@ public class TKDoanhThuFrgm extends Fragment {
             break;
         }
 
+//        Sự kiện Rdo Check
         rdoTKDTAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -156,6 +163,7 @@ public class TKDoanhThuFrgm extends Fragment {
                 }
             }
         });
+
 //        Set Data cho edtTenNV
         ArrayList<User> listUser = daoUser.getAllUser();
         ArrayList<String> listTenUser = new ArrayList<>();
@@ -229,14 +237,32 @@ public class TKDoanhThuFrgm extends Fragment {
         btnThongKe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isNameValid = false;
                 boolean checkDoanhThu = true;
 //                Check Tên nhân viên trống nếu CaseTK = 3;
                 if (caseTK == 3){
+//                    Lấy tên nhân viên từ Edittext
                     tenNVInput = edtTKDTTenNV.getText().toString();
                     if (tenNVInput.isEmpty()){
                         checkDoanhThu = false;
                         edtTKDTTenNV.setHintTextColor(Color.RED);
                         edtTKDTTenNV.setError("Vui lòng nhập!");
+                    } else {
+//                    Check tên nhân viên không tồn tại
+                        ArrayList<User> listNv = daoUser.getAllUser();
+                        for (int i = 0; i < listNv.size(); i++) {
+                            if (listNv.get(i).getFullName().equals(tenNVInput)){
+                                isNameValid = true;
+                            }
+                        }
+                        Log.d(TAG, "isNameValid: " + isNameValid);
+                        if (!isNameValid){
+                            edtTKDTTenNV.setError("Tên nhân viên không tồn tại!");
+                            edtTKDTTenNV.setText(null);
+                            Log.d(TAG, "Running!");
+                            checkDoanhThu = false;
+                            Log.d(TAG, "checkDoanhThu: " + checkDoanhThu);
+                        }
                     }
                 }
 //                Check trống ngày bắt đầu & ngày kết thúc
@@ -293,6 +319,9 @@ public class TKDoanhThuFrgm extends Fragment {
                     else {
                         Toast.makeText(getContext(), "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc", Toast.LENGTH_SHORT).show();
                     }
+                }
+                else {
+                    layoutListDT.setVisibility(View.GONE);
                 }
             }
         });

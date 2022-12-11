@@ -20,9 +20,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.da1_poly_n6.Adapter_Package.AdapterSanPham;
 import com.example.da1_poly_n6.DAOModel.DAOSanPham;
@@ -129,5 +132,4 @@ public class ProductFrgm extends Fragment {
         recyclerProduct.setAdapter(adapterSanPham);
         adapterSanPham.notifyDataSetChanged();
     }
-
 }

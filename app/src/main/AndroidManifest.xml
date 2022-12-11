@@ -11,12 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DA1_Poly_N6">
-        <activity
-            android:name=".ClassDaoSanPham.DAOSP"
-            android:exported="false" />
-        <activity
-            android:name=".Package_Activity.ImageProducts"
-            android:exported="false" />
+
         <activity
             android:name=".DangNhapAct"
             android:exported="false" />

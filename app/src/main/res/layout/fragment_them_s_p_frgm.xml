@@ -5,6 +5,8 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -99,6 +101,7 @@
                     android:id="@+id/edPrice"
                     style="@style/edt_TextBox2"
                     android:hint="Nhập giá bán"
+                    android:maxLength="7"
                     android:inputType="number"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"

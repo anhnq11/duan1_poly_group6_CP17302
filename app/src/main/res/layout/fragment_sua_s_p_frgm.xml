@@ -97,6 +97,8 @@
                     android:id="@+id/update_giaBan"
                     style="@style/edt_TextBox2"
                     android:hint="Giá bán"
+                    android:maxLength="7"
+                    android:inputType="number"
                     android:layout_marginTop="5dp"
                     android:textColorHint="@color/black"
                     />

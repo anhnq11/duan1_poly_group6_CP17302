@@ -42,7 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "MaUser INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "FullName TEXT,\n" +
                 "Username TEXT,\n" +
-                "ChucVu INTEGR REFERENCES ChucVu(machucvu),\n" +
+                "ChucVu INTEGER REFERENCES ChucVu(machucvu),\n" +
                 "Password TEXT,\n" +
                 "SDT TEXT,\n" +
                 "NamSinh INTEGER\n" +

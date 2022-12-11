@@ -1,5 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +28,14 @@ import com.example.da1_poly_n6.Model.ChucVu;
 import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ThemNhanVienFrgm extends Fragment {
     EditText edtUser, edtName, edtPassword, edtSDT, edtNamSinh, btnAddThemNV, btnHuyThemNV;
     DAOUser daoUser;
-    String strUsername;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,6 +164,7 @@ public class ThemNhanVienFrgm extends Fragment {
 
         if (!edtSDT.getText().toString().startsWith("0")) {
             edtSDT.setError("Số điện thoại không hợp lệ!");
+            edtSDT.setText(null);
             edtSDT.setHintTextColor(Color.RED);
             checkAdd = false;
         }
@@ -170,6 +175,20 @@ public class ThemNhanVienFrgm extends Fragment {
             checkAdd = false;
         }
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateAndTime = simpleDateFormat.format(new Date());
+        String curYear = currentDateAndTime.substring(6,10);
+        Log.d(TAG, "Current Year: " + curYear);
+        int mCurYear = Integer.parseInt(curYear);
+        int fromYear = mCurYear - 70;
+        int toYear = mCurYear - 18;
+        String strNamSinh = edtNamSinh.getText().toString();
+        int namSinh = Integer.parseInt(strNamSinh);
+        if ((namSinh > toYear) || (namSinh < fromYear)){
+            edtNamSinh.setError("Năm sinh không hợp lệ!");
+            edtNamSinh.setText(null);
+            checkAdd = false;
+        }
 
         return checkAdd;
     }

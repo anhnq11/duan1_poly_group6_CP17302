@@ -58,7 +58,8 @@ public class SuaSPFrgm extends Fragment {
     double strGiaban;
     ArrayList<SanPham> arrayList;
     AdapterSanPham adapter = null;
-
+    int maLoai, index;
+    boolean checkTL;
 
     public SuaSPFrgm(SanPham sanPham) {
         this.sanPham = sanPham;
@@ -81,10 +82,11 @@ public class SuaSPFrgm extends Fragment {
         daoSanPham = new DAOSanPham(getContext());
         arrayList = new ArrayList<>();
         adapter = new AdapterSanPham(getActivity(), arrayList);
-        // set dữ liệu vào edt
+
+//        Settext cho Edittext
         edUpdateGiaBan.setText(sanPham.getPrice() + "");
         edUpdateTenSP.setText(sanPham.getTenSanPham());
-        int maLoai = sanPham.getMaLoai();
+        maLoai = sanPham.getMaLoai();
         String tenLoai = "";
         ArrayList<TheLoai> listTL = daoSanPham.getDSLSP();
         for (int i = 0; i < listTL.size(); i++) {
@@ -97,9 +99,6 @@ public class SuaSPFrgm extends Fragment {
         byte[] productsImage = sanPham.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
         imgUpdate.setImageBitmap(bitmap);
-        //
-
-
         // xử lý sự kiện thêm ảnh
         imgUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +125,21 @@ public class SuaSPFrgm extends Fragment {
         btnSuaSPHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edUpdateGiaBan.setText(sanPham.getPrice() + "");
+                edUpdateTenSP.setText(sanPham.getTenSanPham());
+                maLoai = sanPham.getMaLoai();
+                String tenLoai = "";
+                ArrayList<TheLoai> listTL = daoSanPham.getDSLSP();
+                for (int i = 0; i < listTL.size(); i++) {
+                    if (listTL.get(i).getMaLoai() == maLoai){
+                        tenLoai = listTL.get(i).getTenLoai();
+                    }
+                }
+                edtLoaiSP.setText(tenLoai);
+                edUpdateMoTa.setText(sanPham.getMota());
+                byte[] productsImage = sanPham.getImage();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(productsImage, 0, productsImage.length);
+                imgUpdate.setImageBitmap(bitmap);
                 Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -147,66 +161,71 @@ public class SuaSPFrgm extends Fragment {
 
         edtLoaiSP.setThreshold(1);
         edtLoaiSP.setAdapter(adapter);
+
         btnSuaSPXN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_confirm);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                EditText btnUpdate = dialog.findViewById(R.id.btnDialogXN);
-
-                dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin sản phẩm đã chọn!");
-
-                btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-                // ánh xạ 1
                 strTenSP = edUpdateTenSP.getText().toString();
                 strGiaban = Double.parseDouble(edUpdateGiaBan.getText().toString());
                 strMota = edUpdateMoTa.getText().toString();
                 strLoaiSP = edtLoaiSP.getText().toString();
 
-                int index = 0;
+                checkTL = false;
+                index = 0;
                 for (int i = 0; i < listTheLoaiSize; i++) {
                     String mTenLoai = listTenTL.get(i);
-                    if (mTenLoai.equals(strLoaiSP)) {
+                    if (mTenLoai.equals(strLoaiSP)){
                         index = i;
+                        checkTL = true;
+                        break;
                     }
                 }
-                int maLoai = listMaTL.get(index);
 
-                //Update
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (checkEdt()) {
-                            daoSanPham.updateSanPham(imageToByte(imgUpdate), strTenSP, strGiaban, maLoai, strMota, sanPham.getId());
-                            Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            loadFragment(new ProductFrgm());
-                            resetEdt();
+                if (checkTL){
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_confirm);
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                    EditText btnUpdate = dialog.findViewById(R.id.btnDialogXN);
+
+                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin sản phẩm đã chọn!");
+
+                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            adapter.notifyDataSetChanged();
                         }
-                    }
+                    });
 
-                });
-                dialog.show();
+                    //Update
+                    btnUpdate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (checkEdt()) {
+                            maLoai = listMaTL.get(index);
+                                daoSanPham.updateSanPham(imageToByte(imgUpdate), strTenSP, strGiaban, maLoai, strMota, sanPham.getId());
+                                Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                loadFragment(new ProductFrgm());
+                                resetEdt();
+                                dialog.dismiss();
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                    dialog.show();
+                }   else {
+                    edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
+                    edtLoaiSP.setText("");
+                }
             }
         });
-
         return view;
     }
-
 
     //Cấp quyền lấy ảnh
     private void LayAnh() {

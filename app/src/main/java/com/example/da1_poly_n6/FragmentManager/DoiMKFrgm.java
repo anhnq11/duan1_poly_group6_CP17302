@@ -2,9 +2,11 @@ package com.example.da1_poly_n6.FragmentManager;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,11 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.da1_poly_n6.DAOModel.DAOUser;
@@ -122,17 +126,46 @@ public class DoiMKFrgm extends Fragment {
                 confirmPass = edConfirmPass.getText().toString();
 
                 if (checkEdt()) {
-                    User user = daoUser.getUser(maUser);
-                    user.setPassword(newPass);
-                    boolean checkUpdate = daoUser.updateUser(user);
-                    if (checkUpdate) {
-                        Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                        remmemberUser(username, newPass, chkCheck);
-                        getDataSSR();
-                        loadFragment(new Account_Fragment());
-                    } else {
-                        Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
-                    }
+
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_confirm);
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                    EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+
+                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa đổi mật khẩu!");
+
+//                    Set Click Dialog Hủy
+                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+
+//                    Set Click Dialog Xác Nhận
+                    btnDialogXN.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            User user = daoUser.getUser(maUser);
+                            user.setPassword(newPass);
+                            boolean checkUpdate = daoUser.updateUser(user);
+                            if (checkUpdate) {
+                                Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                                remmemberUser(username, newPass, chkCheck);
+                                getDataSSR();
+                                loadFragment(new Account_Fragment());
+                            } else {
+                                Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 }
             }
         });

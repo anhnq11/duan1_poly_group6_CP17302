@@ -1,5 +1,7 @@
 package com.example.da1_poly_n6.FragmentManager;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,8 @@ import com.example.da1_poly_n6.Model.LuuHoaDon;
 import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class SuaNVFrgm extends Fragment {
@@ -198,6 +203,22 @@ public class SuaNVFrgm extends Fragment {
             edtSuaNamSinh.setError("Vui lòng nhập");
             checkForm = false;
         }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateAndTime = simpleDateFormat.format(new Date());
+        String curYear = currentDateAndTime.substring(6,10);
+        Log.d(TAG, "Current Year: " + curYear);
+        int mCurYear = Integer.parseInt(curYear);
+        int fromYear = mCurYear - 70;
+        int toYear = mCurYear - 18;
+        String strNamSinh = edtSuaNamSinh.getText().toString();
+        int namSinh = Integer.parseInt(strNamSinh);
+        if ((namSinh > toYear) || (namSinh < fromYear)){
+            edtSuaNamSinh.setError("Năm sinh không hợp lệ!");
+            edtSuaNamSinh.setText(null);
+            checkForm = false;
+        }
+
         return checkForm;
     }
 

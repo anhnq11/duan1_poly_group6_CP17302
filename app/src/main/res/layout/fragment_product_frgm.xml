@@ -55,7 +55,7 @@
                 style="@style/edt_Label"
                 android:text="Menu Sản Phẩm"
                 android:layout_width="match_parent"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:textColor="@color/red"
                 android:textStyle="bold" />
 

@@ -114,20 +114,34 @@ public class ThemSPFrgm extends Fragment {
                 strGiaban = edPrice.getText().toString();
                 strMota = edMoTa.getText().toString();
                 strLoaiSP = edtLoaiSP.getText().toString();
+                boolean checkTL = false;
 
+//                AutoComplete Text, Kiểm tra tồn tại loại sản phẩm.
                 int index = 0;
                 for (int i = 0; i < listTheLoaiSize; i++) {
                     String mTenLoai = listTenTL.get(i);
                     if (mTenLoai.equals(strLoaiSP)){
                         index = i;
+                        checkTL = true;
+                        break;
                     }
                 }
-                int maLSP = listMaTL.get(index);
+
+                int maLSP = 0;
+                if (checkTL){
+                    maLSP = listMaTL.get(index);
+                }
 
                 if (checkEdt()) {
-                    daoSanPham.insertData(imageToByte(AddImg), strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
-                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    resetEdt();
+                    if (checkTL){
+                        daoSanPham.insertData(imageToByte(AddImg), strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
+                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        resetEdt();
+                    }
+                    else {
+                        edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
+                        edtLoaiSP.setText("");
+                    }
                 }
             }
         });
