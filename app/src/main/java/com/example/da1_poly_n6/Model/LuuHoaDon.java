@@ -33,8 +33,9 @@ public class LuuHoaDon {
         this.thanhTien = thanhTien;
     }
 
-    public LuuHoaDon(int maLuu, String tenKhachHang, double thanhTien) {
+    public LuuHoaDon(int maLuu, int maHoaDon, String tenKhachHang, double thanhTien) {
         this.maLuu = maLuu;
+        this.maHoaDon = maHoaDon;
         this.tenKhachHang = tenKhachHang;
         this.thanhTien = thanhTien;
     }
@@ -61,6 +62,18 @@ public class LuuHoaDon {
         this.userSDT = userSDT;
         this.userNamSinh = userNamSinh;
         this.thanhTien = thanhTien;
+    }
+
+    public LuuHoaDon(int maLuu, int maHoaDon, String tenUser, String tenKhachHang, String ngayLapHD, String tenSP, int soLuong, String size, double donGia) {
+        this.maLuu = maLuu;
+        this.maHoaDon = maHoaDon;
+        this.tenUser = tenUser;
+        this.tenKhachHang = tenKhachHang;
+        NgayLapHD = ngayLapHD;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.size = size;
+        this.donGia = donGia;
     }
 
     public int getMaLuu() {

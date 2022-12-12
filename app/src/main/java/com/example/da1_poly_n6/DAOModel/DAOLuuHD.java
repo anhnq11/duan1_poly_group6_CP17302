@@ -109,16 +109,17 @@ public class DAOLuuHD {
     }
 
 //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
+//    Lấy doanh thu theo khoảng thời gian
     public ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd, int caseTk, int maUserInput){
         ArrayList<LuuHoaDon> listHD = new ArrayList<>();
         Cursor cursor = null;
         if (caseTk == 2){
-            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.mahoadon, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
                     "FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ? " +
                     "GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd});
         }
         else {
-            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.mahoadon, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
                     "FROM LuuHoaDon WHERE NgayLapHD BETWEEN ? AND ?  AND LuuHoaDon.maUser = ? " +
                     "GROUP BY LuuHoaDon.maHoaDon;", new String[]{dStart, dEnd, String.valueOf(maUserInput)});
         }
@@ -126,23 +127,24 @@ public class DAOLuuHD {
             cursor.moveToFirst();
             do {
                 int maLuu = cursor.getInt(0);
-                String tenKH = cursor.getString(1);
-                double thanhTien = cursor.getDouble(2);
-                listHD.add(new LuuHoaDon(maLuu, tenKH, thanhTien));
+                int maHoaDon = cursor.getInt(1);
+                String tenKH = cursor.getString(2);
+                double thanhTien = cursor.getDouble(3);
+                listHD.add(new LuuHoaDon(maLuu, maHoaDon, tenKH, thanhTien));
             }   while (cursor.moveToNext());
         }
         return listHD;
     }
 
-    //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
+    //    Lấy danh sách tất cả Hóa đơn + Doanh thu theo mã hóa đơn
     public ArrayList<LuuHoaDon> getAllHoaDon(int caseTk, int maUserInput){
         ArrayList<LuuHoaDon> listHD = new ArrayList<>();
         Cursor cursor = null;
         if (caseTk == 2){
-            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon GROUP BY LuuHoaDon.maHoaDon;", null);
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.mahoadon, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) FROM LuuHoaDon GROUP BY LuuHoaDon.maHoaDon;", null);
         }
         else {
-            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia) " +
+            cursor = database.rawQuery("SELECT LuuHoaDon.maLuu, LuuHoaDon.mahoadon, LuuHoaDon.tenkhachhang, sum(LuuHoaDon.soluong * LuuHoaDon.dongia)" +
                     "FROM LuuHoaDon WHERE LuuHoaDon.maUser = ? " +
                     "GROUP BY LuuHoaDon.maHoaDon;", new String[]{String.valueOf(maUserInput)});
         }
@@ -150,12 +152,46 @@ public class DAOLuuHD {
             cursor.moveToFirst();
             do {
                 int maLuu = cursor.getInt(0);
-                String tenKH = cursor.getString(1);
-                double thanhTien = cursor.getDouble(2);
-                listHD.add(new LuuHoaDon(maLuu, tenKH, thanhTien));
+                int maHoaDon = cursor.getInt(1);
+                String tenKH = cursor.getString(2);
+                double thanhTien = cursor.getDouble(3);
+                listHD.add(new LuuHoaDon(maLuu, maHoaDon, tenKH, thanhTien));
             }   while (cursor.moveToNext());
         }
         return listHD;
+    }
+
+//    Lấy hóa đơn theo mã hóa đơn
+    public ArrayList<LuuHoaDon> getHDofMaHD(int maHD){
+        ArrayList<LuuHoaDon> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT LuuHoaDon.maluu, LuuHoaDon.mahoadon, LuuHoaDon.tenuser, LuuHoaDon.tenkhachhang, LuuHoaDon.ngaylaphd, LuuHoaDon.tensp, LuuHoaDon.soluong, LuuHoaDon.size, LuuHoaDon.dongia from LuuHoaDon WHERE LuuHoaDon.mahoadon = ?", new String[]{String.valueOf(maHD)});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                int maLuu = cursor.getInt(0);
+                int maHoaDon = cursor.getInt(1);
+                String tenNv = cursor.getString(2);
+                String tenKH = cursor.getString(3);
+                String ngayBan = cursor.getString(4);
+                String tenSP = cursor.getString(5);
+                int soLuong = cursor.getInt(6);
+                String size = cursor.getString(7);
+                double donGia = cursor.getDouble(8);
+                list.add(new LuuHoaDon(maLuu, maHoaDon, tenNv, tenKH, ngayBan, tenSP, soLuong, size, donGia));
+            }   while (cursor.moveToNext());
+        }
+        return list;
+    }
+
+//    Lấy tổng thu hóa đơn theo mã hóa đơn
+    public double tongThuHD(int maHD){
+        double tongThu = 0;
+        Cursor cursor = database.rawQuery("SELECT sum(LuuHoaDon.soluong* LuuHoaDon.dongia) from LuuHoaDon WHERE LuuHoaDon.mahoadon = ?", new String[]{String.valueOf(maHD)});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            tongThu += cursor.getDouble(0);
+        }
+        return tongThu;
     }
 
 //    Get SP bán chạy

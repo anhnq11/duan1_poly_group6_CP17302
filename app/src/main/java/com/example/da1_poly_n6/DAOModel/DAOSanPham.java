@@ -77,6 +77,12 @@ public class DAOSanPham {
         return getData(sql);
     }
 
+    public SanPham getSPofMaSP(int maSp) {
+        String sql = "Select * FROM SanPham WHERE SanPham.MaSanPham = ?";
+        ArrayList<SanPham> list = getData(sql, String.valueOf(maSp));
+        return list.get(0);
+    }
+
     public ArrayList<SanPham> getSPofTL(int maLoai) {
         String sql = "Select * FROM SanPham WHERE SanPham.MaLoai = ?";
         ArrayList<SanPham> list = getData(sql, String.valueOf(maLoai));

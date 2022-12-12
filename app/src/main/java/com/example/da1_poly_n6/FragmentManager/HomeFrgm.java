@@ -3,6 +3,7 @@ package com.example.da1_poly_n6.FragmentManager;
 import static android.content.ContentValues.TAG;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.example.da1_poly_n6.DAOModel.DAOSanPham;
 import com.example.da1_poly_n6.DAOModel.DAOUser;
 import com.example.da1_poly_n6.Model.SanPham;
 import com.example.da1_poly_n6.Model.TheLoai;
+import com.example.da1_poly_n6.Model.User;
 import com.example.da1_poly_n6.R;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class HomeFrgm extends Fragment {
     DAOLuuHD daoLuuHD;
     DAOSanPham daoSanPham;
     LinearLayout layoutParent;
+    DAOUser daoUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +52,17 @@ public class HomeFrgm extends Fragment {
         ImageView imgNotifi = view.findViewById(R.id.imgNotifi);
         layoutParent = view.findViewById(R.id.layoutParent);
         recycler_SPBanChay = view.findViewById(R.id.recycler_SPBanChay);
+        TextView txtHello = view.findViewById(R.id.txtHello);
         daoLuuHD = new DAOLuuHD(getContext());
         daoSanPham = new DAOSanPham(getContext());
+        daoUser = new DAOUser(getContext());
+
+        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
+        int maUserNow = pref.getInt("MA", 0);
+        User user = daoUser.getUser(maUserNow);
+        String fullName = user.getFullName();
+
+        txtHello.setText("Xin chào, " + fullName + "!");
 
         ArrayList<SanPham> listSanPham = daoSanPham.getAllProduct(0);
         ArrayList<Integer> listMaSPTop = daoLuuHD.getTopSP();
@@ -64,13 +76,10 @@ public class HomeFrgm extends Fragment {
 
         ArrayList<TheLoai> listLoaiSP = daoSanPham.getDSLSP();
         for (int i = 0; i < listLoaiSP.size(); i++) {
-            Log.d(TAG, "onCreateView: " + i);
             ArrayList<SanPham> listSP = daoSanPham.getSPofTL(listLoaiSP.get(i).getMaLoai());
-            Log.d(TAG, "Ten Loai: " + listLoaiSP.get(i).getTenLoai());
             if (listSP.size() != 0){
                 View addLayout = inflater.inflate(R.layout.list_san_pham, null);
                 TextView tittle = addLayout.findViewById(R.id.txtSPHomeTittle);
-                Log.d(TAG, listLoaiSP.get(i).getTenLoai() + " - " + listSP.size());
                 tittle.setText(listLoaiSP.get(i).getTenLoai());
                 RecyclerView recyclerViewAdd = addLayout.findViewById(R.id.recycler_SPTheoLoai);
                 AdapterHome adapterHome1 = new AdapterHome(listSP, getContext());
@@ -81,7 +90,6 @@ public class HomeFrgm extends Fragment {
                 layoutParent.addView(addLayout);
             }
         }
-        Log.d(TAG, "Eddd: ");
 
         adapterHome = new AdapterHome(listSpTopOut ,getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
