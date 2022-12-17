@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ public class StoreFrgm extends Fragment {
     public static TextView txtGHTongTien;
     double tongTien = 0;
     EditText edtGHTenKH;
+    ImageView iconRefreshStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +70,53 @@ public class StoreFrgm extends Fragment {
         recycle_gioHang = view.findViewById(R.id.recycle_giohang);
         listGioHang = daoGioHang.getGioHang();
         txtGHTongTien = view.findViewById(R.id.txtGHTongTien);
+        iconRefreshStore = view.findViewById(R.id.iconRefreshStore);
         createData();
+        iconRefreshStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listGioHang = daoGioHang.getGioHang();
+                int listGHSize = listGioHang.size();
+                if (listGHSize != 0){
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_confirm);
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                    EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+
+                    dialog_confirm_content.setText("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng!");
+
+//                Set Click Button Dialog Hủy
+                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "Hủy", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    btnDialogXN.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (int i = 0; i < listGHSize; i++) {
+                                daoGioHang.deleteGiohang(listGioHang.get(i));
+                            }
+                            createData();
+                            txtGHTongTien.setText("0 VNĐ");
+                            Toast.makeText(getContext(), "Đã xóa giỏ hàng!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                    
+                    
+                }
+            }
+        });
+
 
         EditText btnGioHangTT = view.findViewById(R.id.btnGioHangTT);
         btnGioHangTT.setOnClickListener(new View.OnClickListener() {
